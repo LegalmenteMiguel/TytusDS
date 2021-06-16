@@ -15,6 +15,7 @@ class Ordenamiento extends React.Component {
           velocidad: 5,
           entrada: '',
           path: this.props.location.pathname,
+          carga: '',
         }
         this.lista = this.setLista(this.state.path)
       }
@@ -81,7 +82,11 @@ class Ordenamiento extends React.Component {
     handleFiles = f => {
         var txt = new FileReader();
         txt.onload = function(e) {
-        console.log(txt.result)
+            this.setState({
+                carga: JSON.parse(txt.result)
+            })
+            console.log(this.state.carga)
+            console.log(this.state.carga.repeticion)
         }
         txt.readAsText(f[0]);
     }
