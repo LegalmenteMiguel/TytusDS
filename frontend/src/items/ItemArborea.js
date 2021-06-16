@@ -9,31 +9,31 @@ const ItemArborea = [
         name: "Árbol Binario",
         logo: Binario,
         path: "Arboreas/ArbolBinario",
-        class: "Button_right"
+        class: "Button Button_right1"
     },
     {
         name: "AVL",
         logo: AVL,
         path: "Arboreas/AVL",
-        class: "Button"
+        class: "Button Button_1"
     },
     {
         name: "Árbol B",
         logo: B,
         path: "Arboreas/ArbolB",
-        class: "Button_left"
+        class: "Button Button_left1"
     },
     {
         name: "Árbol B+",
         logo: Bm,
         path: "Arboreas/ArbolB+",
-        class: "Top_right"
+        class: "Button Top_right1"
     },
     {
         name: "Árbol de Merkle",
         logo: Merkle,
         path: "Arboreas/ArboldeMerkle",
-        class: "Top_left"
+        class: "Button Top_left1"
     }
 ]
 

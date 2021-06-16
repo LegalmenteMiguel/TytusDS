@@ -10,38 +10,38 @@ const ItemLineal = [
     {
         name: "Enlazada Simple",
         logo: ListaS,
-        path: "EnlazadaSimple",
-        class: "Button_right"
+        path: "Lineales/EnlazadaSimple",
+        class: "Button Button_right1"
     },
     {
         name: "Enlazada Doble",
         logo: ListaD,
-        path: "EnlazadaDoble",
-        class: "Button"
+        path: "Lineales/EnlazadaDoble",
+        class: "Button Button_1"
     },
     {
         name: "Circular Simple",
         logo: CircularS,
-        path: "CircularSimple",
-        class: "Button_left"
+        path: "Lineales/CircularSimple",
+        class: "Button Button_left1"
     },
     {
         name: "Circular Doble",
         logo: CircularD,
-        path: "CircularDoble",
-        class: "Top_right"
+        path: "Lineales/CircularDoble",
+        class: "Button Top_right1"
     },
     {
         name: "Pila",
         logo: Pila,
-        path: "Pila",
-        class: "Top_button"
+        path: "Lineales/Pila",
+        class: "Button Top_button1"
     },
     {
         name: "Colas",
         logo: Cola,
-        path: "Colas",
-        class: "Top_left"
+        path: "Lineales/Colas",
+        class: "Button Top_left1"
     }
 ]
 
