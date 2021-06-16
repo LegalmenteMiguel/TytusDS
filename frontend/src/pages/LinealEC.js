@@ -137,7 +137,7 @@ class Ordenamiento extends React.Component {
                             </button>
                         </td>
                         <td>
-                            <ReactFileReader handleFiles={this.handleFiles} fileTypes={'.txt'}>
+                            <ReactFileReader handleFiles={this.handleFiles} fileTypes={'.JSON'}>
                                 <button className="btn Boton" id="Cargar"
                                     > Cargar
                                 </button>
