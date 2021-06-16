@@ -1,49 +1,31 @@
-.Button_right {
-  background-image: linear-gradient(to bottom right, #B5EAD7, #E2F0CB );
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.10);
+.Button{
   border-radius: 8px 8px 8px 8px;
   overflow: hidden;
   height: 380px;
 }
 
-.Button {
+.Button_right {
+  background-image: linear-gradient(to bottom right, #B5EAD7, #E2F0CB );
+}
+
+.Button_ {
   background-image: linear-gradient(to bottom, #B5EAD7, #E2F0CB );
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.10);
-  border-radius: 8px 8px 8px 8px;
-  overflow: hidden;
-  height: 380px;
 }
 
 .Button_left {
   background-image: linear-gradient(to bottom left, #B5EAD7, #E2F0CB );
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.10);
-  border-radius: 8px 8px 8px 8px;
-  overflow: hidden;
-  height: 380px;
 }
 
 .Top_right {
   background-image: linear-gradient(to top right, #B5EAD7, #E2F0CB );
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.10);
-  border-radius: 8px 8px 8px 8px;
-  overflow: hidden;
-  height: 380px;
 }
 
 .Top_button {
   background-image: linear-gradient(to top, #B5EAD7, #E2F0CB );
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.10);
-  border-radius: 8px 8px 8px 8px;
-  overflow: hidden;
-  height: 380px;
 }
 
 .Top_left {
   background-image: linear-gradient(to top left, #B5EAD7, #E2F0CB );
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.10);
-  border-radius: 8px 8px 8px 8px;
-  overflow: hidden;
-  height: 380px;
 }
 
 .Button_header {
@@ -71,4 +53,9 @@
 .Button_logo{
     width: 280px;
     height: 200px;
+}
+
+.Button:hover{
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.10);
 }

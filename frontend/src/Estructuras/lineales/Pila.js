@@ -19,18 +19,12 @@ class Pila {
         }
         else{
             if(this.repeticion || !(this.buscar(valor))){
-                this.agregar_P(nodo)
+               this.primero = agregar_P(nodo)
             }
             else{
                 alert("No se puede ingresar el valor")
             }
         }
-    }
-
-    agregar_P(nodo){
-        var aux = this.primero
-        this.primero = nodo
-        nodo.siguiente = aux
     }
 
     eliminar(){
@@ -77,6 +71,13 @@ class Pila {
     guardar(){
 
     }
+}
+
+function agregar_P(nodo){
+    var aux = this.primero
+    this.primero = nodo
+    nodo.siguiente = aux
+    return nodo
 }
 
 export default Pila

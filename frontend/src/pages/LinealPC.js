@@ -70,7 +70,7 @@ class LinealPC extends React.Component {
 
     setLista = path => {
         if(path.includes("Pila")){
-            const list = new Pila()
+            const list = new Pila(this.state.repeticion)
             return list
         }
     }

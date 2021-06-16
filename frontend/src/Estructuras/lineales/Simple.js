@@ -98,7 +98,7 @@ class Simple {
         }
     }
 
-    acutualizar(valor, nuevo){
+    actualizar(valor, nuevo){
         var aux = this.primero
         while(aux != null){
             if(aux.valor === valor){

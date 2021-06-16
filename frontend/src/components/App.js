@@ -9,15 +9,12 @@ import Arborea from '../pages/Arborea';
 import NotFound from '../pages/NotFound';
 import LinealEC from '../pages/LinealEC';
 import LinealPC from '../pages/LinealPC';
-import Navbar from './NavBar';
 
 function  App(){
     return (
       <BrowserRouter>
-      <>
-        <Navbar/>
-      </>
-      <Switch>
+        <Layout>
+          <Switch>
             <Route exact path="/TytusDS/frontend/build/" component={Home} />
             <Route exact path="/TytusDS/frontend/build/Lineales" component={Lineal} />
             <Route exact path="/TytusDS/frontend/build/Ordenamientos" component={Ordenamiento} />
@@ -26,7 +23,8 @@ function  App(){
             <Route exact path="/TytusDS/frontend/build/Lineales/CircularDoble" component={LinealEC} />
             <Route exact path="/TytusDS/frontend/build/Lineales/Pila" component={LinealPC} />
             <Route component={NotFound} />
-            </Switch>
+          </Switch>
+        </Layout>
       </BrowserRouter>
     )
   
