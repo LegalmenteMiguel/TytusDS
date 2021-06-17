@@ -13,19 +13,44 @@ class Binario {
     }
 
     agregar(valor){
-        this.raiz = _agregar(valor, this.raiz)
+        if(this.repeticion || !this.buscar(valor)){
+            this.raiz = _agregar(valor, this.raiz)
+        }
     }
 
     eliminar(valor){
-        this.raiz = _eliminar(valor, this.raiz)
+        if(this.buscar(valor)){
+            this.raiz = _eliminar(valor, this.raiz)
+        }
+    }
+
+    actualizar(valor, nuevo){
+        if(this.buscar(valor)){
+            this.eliminar(valor)
+            this.agregar(nuevo)
+        }
     }
 
     buscar(valor){
         return _buscar(valor, this.raiz)
     }
+
+    pre(){
+        _pre(this.raiz)
+    }
+
 }
 
 //export default Binario
+
+function _pre(nodo){
+    if(nodo === null){
+        return
+    }
+    _pre(nodo.izquierdo)
+    _pre(nodo.derecho)
+    console.log(nodo.valor)
+}
 
 function _agregar(valor, nodo){
     if(nodo === null){
@@ -34,10 +59,7 @@ function _agregar(valor, nodo){
     else if(valor < nodo.valor){
         nodo.izquierdo = _agregar(valor, nodo.izquierdo)
     }
-    else if(valor > nodo.valor){
-        nodo.derecho = _agregar(valor, nodo.derecho)
-    }
-    else if(!this.buscar(valor) || this.repeticion){
+    else if(valor >= nodo.valor){
         nodo.derecho = _agregar(valor, nodo.derecho)
     }
     return nodo
@@ -52,6 +74,9 @@ function _eliminar(valor, nodo){
             var aux = maximo(nodo.izquierdo)
             nodo.valor = aux.valor
             nodo.izquierdo = _eliminar(nodo.valor, nodo.izquierdo)
+        }
+        else if(nodo.izquierdo === null && nodo.derecho === null){
+            nodo = null
         }
         else if(nodo.izquierdo === null){
             nodo = nodo.derecho
@@ -69,15 +94,6 @@ function _eliminar(valor, nodo){
     return nodo
 }
 
-function maximo(nodo){
-    if(nodo.derecho === null){
-        return nodo
-    }
-    else{
-        return maximo(nodo.derecho)
-    }
-}
-
 function _buscar(valor, nodo){
     if(nodo === null){
         return false
@@ -93,11 +109,22 @@ function _buscar(valor, nodo){
     }
 }
 
-const bi = new Binario(true)
-bi.agregar(3)
-bi.agregar(4)
-bi.agregar(1)
-bi.agregar(2)
+function maximo(nodo){
+    if(nodo.derecho === null){
+        return nodo
+    }
+    else{
+        return maximo(nodo.derecho)
+    }
+}
 
-const userStr = JSON.stringify(bi, null, '   ');
-console.log(userStr)
+const bi = new Binario(true)
+
+bi.agregar(50)
+bi.agregar(15)
+bi.agregar(42)
+bi.agregar(78)
+bi.agregar(10)
+bi.actualizar(15, 5)
+bi.pre()
+//console.log()

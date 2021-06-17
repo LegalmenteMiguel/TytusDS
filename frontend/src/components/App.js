@@ -22,7 +22,7 @@ function  App(){
             <Route exact path="/TytusDS/frontend/build/Lineales/EnlazadaSimple" component={LinealEC} />
             <Route exact path="/TytusDS/frontend/build/Lineales/CircularDoble" component={LinealEC} />
             <Route exact path="/TytusDS/frontend/build/Lineales/Pila" component={LinealPC} />
-            <Route component={NotFound} />
+            <Route component={LinealEC} />
           </Switch>
         </Layout>
       </BrowserRouter>

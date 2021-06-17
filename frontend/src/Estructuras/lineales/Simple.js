@@ -122,10 +122,11 @@ class Simple {
         return false
     }
 
-    cargar(lista){
-        lista.map(i =>{
-            this.agregar(i.a)
-        })
+    cargar(text){
+        const json = JSON.parse(text)
+        for(var i in json.valores){
+            this.agregar(json.valores[i])
+        }
     }
 
     guardar(){

@@ -6,9 +6,13 @@ import CirlarD from '../Estructuras/lineales/CircularDoble'
 
 import './styles/Grafica.css'
 
-class Ordenamiento extends React.Component {
+var cont = ""
+
+class LinealEC extends React.Component {
     constructor(props) {
         super(props)
+        //this.handleSubmit = this.handleSubmit.bind(this)
+        this.fileInput = React.createRef()
         this.state = {
           repeticion: true,
           ingreso: "Final",
@@ -46,6 +50,7 @@ class Ordenamiento extends React.Component {
         else{
             if(id === "Agregar"){
                 this.lista.agregar(this.state.entrada)
+                console.log(this.lista.primero)
             }
             else if(id === "Eliminar"){
                 this.lista.eliminar(this.state.entrada)
@@ -63,6 +68,7 @@ class Ordenamiento extends React.Component {
                 this.lista = this.setLista(this.state.path)
             }
             else{
+                console.log(this.state.path)
                 console.log(this.lista)
             }
             document.getElementById("input").reset()
@@ -79,16 +85,14 @@ class Ordenamiento extends React.Component {
         })
     }
 
-    handleFiles = f => {
-        var txt = new FileReader();
-        txt.onload = function(e) {
-            this.setState({
-                carga: JSON.parse(txt.result)
-            })
-            console.log(this.state.carga)
-            console.log(this.state.carga.repeticion)
-        }
-        txt.readAsText(f[0]);
+    handleFiles = evt => {
+        const va = getFile(evt)
+        console.log(va)
+        //this.lista.cargar(cont)
+    }
+
+    cargar = txt => {
+        this.lista.cargar(txt)
     }
 
     setLista = path => {
@@ -137,11 +141,7 @@ class Ordenamiento extends React.Component {
                             </button>
                         </td>
                         <td>
-                            <ReactFileReader handleFiles={this.handleFiles} fileTypes={'.JSON'}>
-                                <button className="btn Boton" id="Cargar"
-                                    > Cargar
-                                </button>
-                            </ReactFileReader>
+                            <input type="file" multiple={false} accept=".json" id="myfile" onChange={this.handleFiles} />
                         </td>
                     </table>
                 </nav>
@@ -182,4 +182,31 @@ class Ordenamiento extends React.Component {
 
 }
 
-export default Ordenamiento
+async function getFile(evt){
+    let fileInputControl = evt.target
+    let files = fileInputControl.files[0]
+    let co
+    var myFile = new MyFileReader()
+    const promise = await myFile.readAsTextAsync(files)
+    
+    return promise
+}
+
+function MyFileReader() { }
+
+MyFileReader.prototype.readAsTextAsync = function(file){
+    return new Promise( (resolve, reject) => {
+        try{
+            var reader = new FileReader()
+            reader.onload = function(evt) {
+                const cont = evt.target.result
+                resolve(cont)
+            }
+            reader.readAsText(file)
+        }catch(error){
+            reject(error)
+        }
+    })
+}
+
+export default LinealEC
