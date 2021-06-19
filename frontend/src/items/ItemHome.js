@@ -1,6 +1,7 @@
 import Lineal from '../images/Lineal.png'
 import Ordenamiento from '../images/Ordenamiento.png'
 import Arborea from '../images/Arborea.png'
+import Working from '../images/Working.png'
 
 const ItemHome = [
     {
@@ -23,19 +24,19 @@ const ItemHome = [
     },
     {
         name: "No Lineales",
-        logo: Arborea,
+        logo: Working,
         path: "NoLineales",
         class: "Button Top_right"
     },
     {
         name: "Codificación",
-        logo: Arborea,
+        logo: Working,
         path: "Codificacion",
         class: "Button Top_button"
     },
     {
         name: "Compuestas",
-        logo: Arborea,
+        logo: Working,
         path: "Compuestas",
         class: "Button Top_left"
     }

@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/TytusDS/frontend/build/static/css/main.e6b0952b.chunk.css",
-    "main.js": "/TytusDS/frontend/build/static/js/main.4568b023.chunk.js",
-    "main.js.map": "/TytusDS/frontend/build/static/js/main.4568b023.chunk.js.map",
+    "main.css": "/TytusDS/frontend/build/static/css/main.d792c281.chunk.css",
+    "main.js": "/TytusDS/frontend/build/static/js/main.f4adac46.chunk.js",
+    "main.js.map": "/TytusDS/frontend/build/static/js/main.f4adac46.chunk.js.map",
     "runtime-main.js": "/TytusDS/frontend/build/static/js/runtime-main.fcb03de4.js",
     "runtime-main.js.map": "/TytusDS/frontend/build/static/js/runtime-main.fcb03de4.js.map",
     "static/css/2.4f8976c6.chunk.css": "/TytusDS/frontend/build/static/css/2.4f8976c6.chunk.css",
@@ -10,7 +10,7 @@
     "static/js/2.7a327c3c.chunk.js.map": "/TytusDS/frontend/build/static/js/2.7a327c3c.chunk.js.map",
     "index.html": "/TytusDS/frontend/build/index.html",
     "static/css/2.4f8976c6.chunk.css.map": "/TytusDS/frontend/build/static/css/2.4f8976c6.chunk.css.map",
-    "static/css/main.e6b0952b.chunk.css.map": "/TytusDS/frontend/build/static/css/main.e6b0952b.chunk.css.map",
+    "static/css/main.d792c281.chunk.css.map": "/TytusDS/frontend/build/static/css/main.d792c281.chunk.css.map",
     "static/js/2.7a327c3c.chunk.js.LICENSE.txt": "/TytusDS/frontend/build/static/js/2.7a327c3c.chunk.js.LICENSE.txt",
     "static/media/AVL.99f1f4e3.png": "/TytusDS/frontend/build/static/media/AVL.99f1f4e3.png",
     "static/media/Arborea.de42e94f.png": "/TytusDS/frontend/build/static/media/Arborea.de42e94f.png",
@@ -21,13 +21,14 @@
     "static/media/CircularS.ea478902.png": "/TytusDS/frontend/build/static/media/CircularS.ea478902.png",
     "static/media/Cola.9fd2a4a7.png": "/TytusDS/frontend/build/static/media/Cola.9fd2a4a7.png",
     "static/media/Lineal.9fd2a4a7.png": "/TytusDS/frontend/build/static/media/Lineal.9fd2a4a7.png",
-    "static/media/Merkle.8e66cd85.png": "/TytusDS/frontend/build/static/media/Merkle.8e66cd85.png"
+    "static/media/Merkle.8e66cd85.png": "/TytusDS/frontend/build/static/media/Merkle.8e66cd85.png",
+    "static/media/Working.7e992599.png": "/TytusDS/frontend/build/static/media/Working.7e992599.png"
   },
   "entrypoints": [
     "static/js/runtime-main.fcb03de4.js",
     "static/css/2.4f8976c6.chunk.css",
     "static/js/2.7a327c3c.chunk.js",
-    "static/css/main.e6b0952b.chunk.css",
-    "static/js/main.4568b023.chunk.js"
+    "static/css/main.d792c281.chunk.css",
+    "static/js/main.f4adac46.chunk.js"
   ]
 }

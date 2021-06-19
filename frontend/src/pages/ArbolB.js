@@ -4,6 +4,8 @@ import React from 'react'
 //import EnlazadaD from '../Estructuras/Arboreas/ArbolB'
 //import CircularS from '../Estructuras/Arboreas/ArbolBm'
 
+import Funciones from '../Estructuras/Funciones'
+
 import './styles/Grafica.css'
 
 class LinealEC extends React.Component {
@@ -14,8 +16,8 @@ class LinealEC extends React.Component {
           velocidad: 5,
           entrada: "",
           orden: 3,
+          tipo: "PreOrdne",
           nuevo: "",
-          fileType: "JSON",
           path: this.props.location.pathname,
         }
         this.arbol = this.setarbol(this.state.path)
@@ -29,27 +31,26 @@ class LinealEC extends React.Component {
         this.setState({ nuevo: e.target.value })
     }
 
-    handleCheck = () => {
+    handleRepeticion = () => {
         this.setState({ repeticion: !this.state.repeticion })
     }
 
-    handleOption = e => {
-        this.setState({ ingreso: e.target.value })
+    handleTipo = e => {
+        this.setState({ tipo: e.target.value })
+    }
+
+    handleOrden = e => {
+        this.setState({ orden: e.target.value })
     }
     
-    handleMove = e => {
+    handleVelocidad = e => {
         this.setState({ velocidad: e.target.value })
-    }
-
-    handleFiles = e => {
-
     }
 
     handleClick = e => {
         const id = e.target.id
-        if(this.state.entrada === "" && id !== "Nuevo" && id !== "Guardar"){
-            alert("Ingrese un valor")
-        }
+        if(this.state.entrada === "" && id !== "Nuevo" && id !== "Guardar") alert("Ingrese un valor")
+        
         else{
             if(id === "Agregar") this.arbol.agregar(this.state.entrada)
             
@@ -61,19 +62,17 @@ class LinealEC extends React.Component {
                 else alert("No se encontro el valor")
             }
             else if(id === "Actualizar"){
-                if(this.state.nuevo !== '') this.arbol.actualizar(this.state.entrada, this.state.nuevo)
-                
-                else alert("Ingrese el Nuevo valor")
+                if(this.state.nuevo !== "") alert("Ingrese el Nuevo valor")
+                else this.arbol.actualizar(this.state.entrada, this.state.nuevo)
             } 
                 
             else if(id === "Nuevo") this.arbol = this.setarbol(this.state.path)
             
             else if(id === "Guardar"){
-                
+                var output = this.arbol.guardar(this.state.tipo)
+                Funciones(output.nombre, output.text)
             }
-            else if(id === "Cargar"){
-                
-            }
+            
             document.getElementById("input").reset()
             document.getElementById("nuevo").reset()
             this.setState({
@@ -84,12 +83,8 @@ class LinealEC extends React.Component {
     }
 
     setarbol = path => {
-        if(path.includes("ArbolB")){
-            return 
-        }
-        else if(path.includes("ArbolB+")){
-            return 
-        }
+        if(path.includes("ArbolB+")) return 
+        else if(path.includes("ArbolB")) return
     }
 
     render(){
@@ -130,6 +125,14 @@ class LinealEC extends React.Component {
                             </button>
                         </td>
                         <td>
+                            <select multiple="" onChange={this.handleTipo} style={{height: "30px"}}>
+                                <option>PreOrden</option>
+                                <option>InOrden</option>
+                                <option>PostOrden</option>
+                                <option>Objeto</option>
+                            </select>
+                        </td>
+                        <td>
                             <button className="btn btn-success" id="Guardar"
                                 onClick={this.handleClick}> Guardar
                             </button>
@@ -146,12 +149,21 @@ class LinealEC extends React.Component {
                 <nav className="Sub_bar">
                     <table>
                         <td>
-                            <input type="range"  min="0" max="10" step="1"  onChange={this.handleMove}
+                            <input type="range"  min="0" max="10" step="1"  onChange={this.handleVelocidad}
                             defaultValue={this.state.velocidad} width="100"/>
                         </td>
                         <td>
+                            <select multiple="" onChange={this.handleOrden} style={{height: "30px"}}>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                                <option>6</option>
+                                <option>7</option>
+                            </select>
+                        </td>
+                        <td>
                             <label>
-                                <input type="checkbox" onChange={this.handleCheck}
+                                <input type="checkbox" onChange={this.handleRepeticion}
                                     defaultChecked={this.state.repeticion}/>
                                 Repeticiones
                             </label>
@@ -161,29 +173,12 @@ class LinealEC extends React.Component {
                                 onClick={this.handleClick}> Nuevo
                             </button>
                         </td>
-                        <td>
-                            <select multiple="" onChange={this.handleOption} >
-                                <option>PreOrden</option>
-                                <option>InOrden</option>
-                                <option>PostOrden</option>
-                                <option>Objeto</option>
-                            </select>
-                        </td>
                     </table>
                 </nav>
             </div>
         )
     }
 
-}
-
-function descarga(nombre, text) {
-    var element = document.createElement('a');
-    element.setAttribute('href','data:json;charset=utf-8, ' + encodeURIComponent(text));
-    element.setAttribute('download', nombre);
-    document.body.appendChild(element);
-    element.click();
-    document.body.removeChild(element);
 }
 
 export default LinealEC

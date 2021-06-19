@@ -1,32 +1,30 @@
-//Pagina para graficar Cola de Prioridad
-import React from 'react';
+//Pagina para graficar Enlazada Simple, Enlazada Doble, Circular Simple y Circular Doble
+import React from 'react'
 
-//import ColaP from '../Estructuras/lineales/ColaP'
+//import EnlazadaD from '../Estructuras/Arboreas/ArbolB'
+//import CircularS from '../Estructuras/Arboreas/ArbolBm'
 
-import Funciones from '../Estructuras/Funciones'
+import Funciones from '../Estructuras/Funciones.js'
 
 import './styles/Grafica.css'
 
-class LinealCP extends React.Component {
+class Arboles extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
           repeticion: true,
           velocidad: 5,
           entrada: "",
-          prioridad: 1,
+          orden: 3,
+          tipo: "PreOrdne",
           nuevo: "",
           path: this.props.location.pathname,
         }
-        this.lista = null
+        this.arbol = this.setarbol(this.state.path)
       }
     
     handleEntrada = e => {
         this.setState({ entrada: e.target.value })
-    }
-
-    handlePrioridad = e => {
-        this.setState({ prioridad: e.target.value })
     }
 
     handleNuevo = e => {
@@ -34,7 +32,11 @@ class LinealCP extends React.Component {
     }
 
     handleRepeticion = () => {
-        this.setState({ repeticion: !this.state.repeticion  })
+        this.setState({ repeticion: !this.state.repeticion })
+    }
+
+    handleTipo = e => {
+        this.setState({ tipo: e.target.value })
     }
     
     handleVelocidad = e => {
@@ -44,40 +46,43 @@ class LinealCP extends React.Component {
     handleClick = e => {
         const id = e.target.id
         if(this.state.entrada === "" && id !== "Nuevo" && id !== "Guardar") alert("Ingrese un valor")
-    
+
         else{
-            if(id === "Agregar"){
-                if(this.state.prioridad >= 1 || this.state.prioridad <= 5) this.lista.agregar(this.entrada)
-                else alert("Prioridad Fuera de Rango")
-            } 
-            else if(id === "Eliminar") this.lista.eliminar(this.entrada)
+            if(id === "Agregar") this.arbol.agregar(this.state.entrada)
+            
+            else if(id === "Eliminar") this.arbol.eliminar(this.state.entrada)
             
             else if(id === "Buscar"){
-                var aux = this.lista.buscar(this.state.entrada)
+                var aux = this.arbol.buscar(this.state.entrada)
                 if(aux) alert("Se encontro el valor")
                 else alert("No se encontro el valor")
             }
             else if(id === "Actualizar"){
-                if(this.state.nuevo === "") alert("Ingrese Nuevo Valor")
-
-                else this.lista.actualizar(this.state.entrada, this.state.nuevo)
-            }
-            else if(id === "Guardar"){
-                var output = this.lista.guardar()
-                Funciones(output.nombre, output.text)
+                if(this.state.nuevo === "") alert("Ingrese el Nuevo valor")
+                
+                else this.arbol.actualizar(this.state.entrada, this.state.nuevo)
             } 
-    
-            else if(id === "Nuevo") this.lista = this.setLista(this.state.path)
+                
+            else if(id === "Nuevo") this.arbol = this.setarbol(this.state.path)
+            
+            else if(id === "Guardar"){
+                var output = this.arbol.guardar(this.state.tipo)
+                Funciones(output.nombre, output.text)
+            }
 
             document.getElementById("input").reset()
-            document.getElementById("prioriddad").reset()
             document.getElementById("nuevo").reset()
             this.setState({
                 entrada: "",
-                nuevo: "",
-                prioridad: 0
+                nuevo: ""
             })
         }
+    }
+
+    setarbol = path => {
+        if(path.includes("ArbolBinario")) return 
+        
+        else if(path.includes("AVL")) return 
     }
 
     render(){
@@ -92,18 +97,9 @@ class LinealCP extends React.Component {
                             </form>
                         </td>
                         <td>
-                            <select multiple="" onChange={this.handlePrioridad} style={{height: "30px"}} >
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                                <option>5</option>
-                            </select>
-                        </td>
-                        <td>
-                        <button className="btn Boton" id="Agregar"
-                            onClick={this.handleClick}> Agregar
-                        </button> 
+                            <button className="btn Boton" id="Agregar" 
+                                onClick={this.handleClick}> Agregar
+                            </button> 
                         </td>
                         <td>
                             <button className="btn Boton" id="Eliminar"
@@ -127,12 +123,20 @@ class LinealCP extends React.Component {
                             </button>
                         </td>
                         <td>
+                            <select multiple="" onChange={this.handleTipo} style={{height: "30px"}}>
+                                <option>PreOrden</option>
+                                <option>InOrden</option>
+                                <option>PostOrden</option>
+                                <option>Objeto</option>
+                            </select>
+                        </td>
+                        <td>
                             <button className="btn btn-success" id="Guardar"
                                 onClick={this.handleClick}> Guardar
                             </button>
                         </td>
                         <td>
-                            <input type="file" multiple={false} accept=".json" 
+                            <input type="file" multiple={false} accept=".json"
                             onChange={this.handleFiles} />
                         </td>
                     </table>
@@ -165,4 +169,4 @@ class LinealCP extends React.Component {
     }
 }
 
-export default LinealCP
+export default Arboles

@@ -1,8 +1,10 @@
-//Pagina para graficar Pila y Cola
+//Pagina para graficar Pilas y Colas
 import React from 'react';
 
 import Pila from '../Estructuras/lineales/Pila'
 //import Cola from '../Estructuras/lineales/Cola'
+
+import Funciones from '../Estructuras/Funciones'
 
 import './styles/Grafica.css'
 
@@ -27,11 +29,11 @@ class LinealPC extends React.Component {
         this.setState({ nuevo: e.target.value })
     }
 
-    handleCheck = () => {
+    handleRepeticion = () => {
         this.setState({ repeticion: !this.state.repeticion  })
     }
     
-    handleMove = e => {
+    handleVelocidad = e => {
         this.setState({ velocidad: e.target.value })
     }
 
@@ -45,16 +47,19 @@ class LinealPC extends React.Component {
             
             else if(id === "Eliminar") this.lista.eliminar(this.entrada)
             
-        
             else if(id === "Buscar"){
                 var aux = this.lista.buscar(this.state.entrada)
                 if(aux) alert("Se encontro el valor")
-                
                 else alert("No se encontro el valor")
             }
-            else if(id === "Actualizar") this.lista.actualizar(this.state.entrada, this.state.nuevo)
-            
-            else if(id === "Guardar") console.log(this.lista)
+            else if(id === "Actualizar"){ 
+                if(this.state.nuevo === "") alert("Ingrese el Nuevo Valor")
+                else this.lista.actualizar(this.state.entrada, this.state.nuevo)
+            }
+            else if(id === "Guardar"){
+                var output = this.lista.guardar()
+                Funciones(output.nombre, output.text)
+            }
     
             else if(id === "Nuevo") this.lista = this.setLista(this.state.path)
 
@@ -68,10 +73,9 @@ class LinealPC extends React.Component {
     }
 
     setLista = path => {
-        if(path.includes("Pila")){
-            const list = new Pila(this.state.repeticion)
-            return list
-        }
+        if(path.includes("Pila")) return new Pila(this.state.repeticion)
+        
+        else if(path.includes("Cola")) return
     }
 
     render(){
@@ -128,12 +132,12 @@ class LinealPC extends React.Component {
                 <nav className="Sub_bar">
                     <table>
                         <td>
-                            <input type="range"  min="0" max="10" step="1"  onChange={this.handleMove}
+                            <input type="range"  min="0" max="10" step="1"  onChange={this.handleVelocidad}
                             defaultValue={this.state.velocidad} width="100"/>
                         </td>
                         <td>
                             <label>
-                                <input type="checkbox" onChange={this.handleCheck}
+                                <input type="checkbox" onChange={this.handleRepeticion}
                                     defaultChecked={this.state.repeticion}/>
                                 Repeticiones
                             </label>
@@ -148,7 +152,6 @@ class LinealPC extends React.Component {
             </div>
         )
     }
-
 }
 
 export default LinealPC

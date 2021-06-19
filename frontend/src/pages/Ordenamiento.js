@@ -1,9 +1,12 @@
+//Pagina para graficar Ordenamientos
 import React from 'react';
 
 import Rapido from '../Estructuras/Ordenamientos/Rapido'
 import Seleccion from '../Estructuras/Ordenamientos/Seleccion'
 //import Burbuja from '../Estructuras/Ordenamientos/Burbuja'
 //import Insercion from '../Estructuras/Ordenamientos/Insercion'
+
+import Funciones from '../Estructuras/Funciones'
 
 import './styles/Grafica.css'
 
@@ -17,21 +20,19 @@ class LinealesL extends React.Component {
         this.lista = this.setLista(this.state.tipo)
     }
 
-    handleOption = e => {
+    handleTipo = e => {
         this.setState({ tipo: e.target.value })
     }
 
-    handleMove = e => {
+    handleVelocidad = e => {
         this.setState({ velocidad: e.target.value })
-    }
-
-    handleFiles = e => {
     }
 
     handleClick = e => {
         const id = e.target.id
         if(id === "Guardar"){
-
+            var output = this.lista.guardar()
+            Funciones(output.nombre, output.text)
         }
         else if(id === "Cargar"){
 
@@ -43,6 +44,10 @@ class LinealesL extends React.Component {
         if(tipo === "Selección") return new Seleccion()
         
         else if(tipo === "Rápido") return new Rapido()
+
+        else if(tipo === "Burbuja") return 
+
+        else if(tipo === "Inserción") return 
     }
 
     render(){
@@ -67,12 +72,12 @@ class LinealesL extends React.Component {
                 <nav className="Sub_bar">
                     <table>
                         <td>
-                            <input type="range"  min="0" max="10" step="1" onChange={this.handleMove}
+                            <input type="range"  min="0" max="10" step="1" onChange={this.handleVelocidad}
                                 defaultValue={this.state.velocidad} width="100"/>
                         </td>
                         <td>
                             <select multiple=""
-                                onChange={this.handleOption}>
+                                onChange={this.handleTipo}>
                                 <option>Burbuja</option>
                                 <option>Selección</option>
                                 <option>Inserción</option>

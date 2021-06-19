@@ -1,10 +1,12 @@
-//Pagina para graficar Enlazada Simple, Enlazada Doble, Circular Simple y Circular Doble
+//Pagina para graficar Enlazadas Simples, Enlazadas Dobles, Circulares Simples y Circulares Dobles
 import React from 'react'
 
 import EnlazadaS from '../Estructuras/lineales/Simple'
 //import EnlazadaD from '../Estructuras/lineales/Doble'
 //import CircularS from '../Estructuras/lineales/CircularSimple'
 import CircularD from '../Estructuras/lineales/CircularDoble'
+
+import Funciones from '../Estructuras/Funciones.js'
 
 import './styles/Grafica.css'
 
@@ -30,27 +32,22 @@ class LinealEC extends React.Component {
         this.setState({ nuevo: e.target.value })
     }
 
-    handleCheck = () => {
+    handleRepeticion = () => {
         this.setState({ repeticion: !this.state.repeticion })
     }
 
-    handleOption = e => {
+    handleIngreso = e => {
         this.setState({ ingreso: e.target.value })
     }
 
-    handleMove = e => {
+    handleVelocidad = e => {
         this.setState({ velocidad: e.target.value })
-    }
-
-    handleFiles = e => {
-
     }
     
     handleClick = e => {
         const id = e.target.id
-        if(this.state.entrada === "" && id !== "Nuevo" && id !== "Guardar"){
-            alert("Ingrese un valor")
-        }
+        if(this.state.entrada === "" && id !== "Nuevo" && id !== "Guardar") alert("Ingrese un valor")
+        
         else{
             if(id === "Agregar") this.lista.agregar(this.state.entrada)
             
@@ -62,21 +59,17 @@ class LinealEC extends React.Component {
                 else alert("No se encontro el valor")
             }
             else if(id === "Actualizar"){
-                if(this.state.nuevo !== '') this.lista.actualizar(this.state.entrada, this.state.nuevo)
-                
-                else alert("Ingrese el Nuevo valor")
+                if(this.state.nuevo === "") alert("Ingrese el Nuevo valor")
+                else this.lista.actualizar(this.state.entrada, this.state.nuevo)
             } 
                 
             else if(id === "Nuevo") this.lista = this.setLista(this.state.path)
             
             else if(id === "Guardar"){
-                console.log("PASA")
                 var output = this.lista.guardar()
-                descarga(output.nombre, output.text)
+                Funciones(output.nombre, output.text)
             }
-            else if(id === "Cargar"){
-                
-            }
+            
             document.getElementById("input").reset()
             document.getElementById("nuevo").reset()
             this.setState({
@@ -87,12 +80,13 @@ class LinealEC extends React.Component {
     }
 
     setLista = path => {
-        if(path.includes("EnlazadaSimple")){
-            return new EnlazadaS(this.state.ingreso, this.state.repeticion)
-        }
-        else if(path.includes("CircularDoble")){
-            return new CircularD(this.state.ingreso, this.state.repeticion)
-        }
+        if(path.includes("EnlazadaSimple")) return new EnlazadaS(this.state.ingreso, this.state.repeticion)
+        
+        else if(path.includes("EnlazadaSoble")) return 
+        
+        else if(path.includes("CircularSimple")) return
+
+        else if(path.includes("CircularDoble")) return new CircularD(this.state.ingreso, this.state.repeticion)
     }
 
     render(){
@@ -149,11 +143,11 @@ class LinealEC extends React.Component {
                 <nav className="Sub_bar">
                     <table>
                         <td>
-                            <input type="range"  min="0" max="10" step="1"  onChange={this.handleMove}
+                            <input type="range"  min="0" max="10" step="1"  onChange={this.handleVelocidad}
                             defaultValue={this.state.velocidad} width="100"/>
                         </td>
                         <td>
-                            <select multiple="" onChange={this.handleOption} >
+                            <select multiple="" onChange={this.handleIngreso} >
                                 <option>Final</option>
                                 <option>Inicio</option>
                                 <option>Orden</option>
@@ -161,7 +155,7 @@ class LinealEC extends React.Component {
                         </td>
                         <td>
                             <label>
-                                <input type="checkbox" onChange={this.handleCheck}
+                                <input type="checkbox" onChange={this.handleRepeticion}
                                     defaultChecked={this.state.repeticion}/>
                                 Repeticiones
                             </label>
@@ -177,15 +171,6 @@ class LinealEC extends React.Component {
         )
     }
 
-}
-
-function descarga(nombre, text) {
-    var element = document.createElement('a');
-    element.setAttribute('href','data:json;charset=utf-8, ' + encodeURIComponent(text));
-    element.setAttribute('download', nombre);
-    document.body.appendChild(element);
-    element.click();
-    document.body.removeChild(element);
 }
 
 export default LinealEC

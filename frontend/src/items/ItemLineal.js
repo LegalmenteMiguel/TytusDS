@@ -47,7 +47,7 @@ const ItemLineal = [
         name: "Cola de Prioridad",
         logo: Cola,
         path: "Lineales/ColaPrioridad",
-        class: "Button Button_right1"
+        class: "Button Top_button1"
     }
 ]
 
