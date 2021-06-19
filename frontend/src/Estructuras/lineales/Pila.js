@@ -62,12 +62,23 @@ class Pila {
         return false
     }
 
-    cargar(lista){
+    cargar(){
        
     }
 
     guardar(){
-
+        const json = {
+            categoria: "Pila",
+            repeticion: this.repeticion,
+            valores: []
+        }
+        var nodo = this.primero
+        while(nodo !== null){
+            json.valores.push(nodo.valor)
+            nodo = nodo.siguiente
+        }
+        const txt = JSON.stringify(json, null, '   ')
+        return {nombre: "Pila.json", text: txt}
     }
     //Metodos sin uso fuera
     agregar_P(nodo){
@@ -76,7 +87,5 @@ class Pila {
         nodo.siguiente = aux
     }
 }
-
-
 
 export default Pila

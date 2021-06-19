@@ -16,9 +16,7 @@ class CircularDoble {
     agregar(valor){
         const nodo = new Nodo(valor)
         if(this.raiz === null){
-            this.raiz = nodo
-            nodo.siguiente = nodo
-            nodo.anterior = nodo
+            this.raiz = nodo.siguiente = nodo.anterior = nodo
         }
         else{
             if(this.repeticion || !(this.buscar(valor))){
@@ -124,7 +122,7 @@ class CircularDoble {
         var aux = this.raiz
         var pivote
         do{
-            if(nodo.valor <= aux.valor){
+            if(ascii(nodo.valor) <= ascii(aux.valor)){
                 pivote = aux.anterior
                 pivote.siguiente = aux.anterior = nodo
                 nodo.siguiente = aux
@@ -142,6 +140,17 @@ class CircularDoble {
             aux = aux.siguiente
         }while(aux !== this.raiz)
     }
+}
+
+function ascii(txt){
+    var sum = 0
+    if(/^[+-]?\d+$/.test(txt)) sum = parseInt(txt, 10)
+    else {
+        for(var i in txt){
+            sum += txt[i].charCodeAt(0)
+        }
+    }
+    return sum
 }
 
 export default CircularDoble

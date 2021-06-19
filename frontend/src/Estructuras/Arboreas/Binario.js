@@ -25,41 +25,41 @@ class Binario {
     }
 
     actualizar(valor, nuevo){
-        if(this.buscar(valor)){
+        if(this.repeticion || !this.buscar(nuevo)){
             this.eliminar(valor)
             this.agregar(nuevo)
         }
+        else alert("El Valor Nuevo ya existe")
     }
 
     buscar(valor){
         return _buscar(valor, this.raiz)
     }
 
-    pre(){
-        _pre(this.raiz)
+    guardar(tipo){
+        const json = {
+            categoria: "Binario",
+            repeticion: this.repeticion,
+            tipo: tipo,
+            valores: []
+        }
+        if(tipo === "PreOrden") json.valores = preorden(this.raiz, json.valores)
+        else if(tipo === "InOrden") json.valores = inorden(this.raiz, json.valores)
+        else if(tipo === "PostOrden") json.valores = postorden(this.raiz, json.valores)
+        const txt = JSON.stringify(json, null, '   ')
+        return {nombre: "Binario.json", text: txt}
     }
 
-}
-
-//export default Binario
-
-function _pre(nodo){
-    if(nodo === null){
-        return
-    }
-    _pre(nodo.izquierdo)
-    _pre(nodo.derecho)
-    console.log(nodo.valor)
 }
 
 function _agregar(valor, nodo){
     if(nodo === null){
         nodo = new Nodo(valor)
     }
-    else if(valor < nodo.valor){
+    else if(ascii(valor) < ascii(nodo.valor)){
         nodo.izquierdo = _agregar(valor, nodo.izquierdo)
     }
-    else if(valor >= nodo.valor){
+    else if(ascii(valor) >= ascii(nodo.valor)){
         nodo.derecho = _agregar(valor, nodo.derecho)
     }
     return nodo
@@ -85,10 +85,10 @@ function _eliminar(valor, nodo){
             nodo = nodo.izquierdo
         }
     }
-    else if(valor < nodo.valor){
+    else if(ascii(valor) < ascii(nodo.valor)){
         nodo.izquierdo = _eliminar(valor, nodo.izquierdo)
     }
-    else if(valor > nodo.valor){
+    else if(ascii(valor) > ascii(nodo.valor)){
         nodo.derecho = _eliminar(valor, nodo.derecho)
     }
     return nodo
@@ -98,13 +98,13 @@ function _buscar(valor, nodo){
     if(nodo === null){
         return false
     }
-    if(valor === nodo.valor){
+    if(ascii(valor) === ascii(nodo.valor)){
         return true
     }
-    else if(valor < nodo.valor){
+    else if(ascii(valor) < ascii(nodo.valor)){
         return _buscar(valor, nodo.izquierdo)
     }
-    else if(valor > nodo.valor){
+    else if(ascii(valor) > ascii(nodo.valor)){
         return _buscar(valor, nodo.derecho)
     }
 }
@@ -118,13 +118,45 @@ function maximo(nodo){
     }
 }
 
-const bi = new Binario(true)
+function preorden(nodo, vector){
+    if(nodo === null){
+        return
+    }
+    vector.push(nodo.valor)
+    preorden(nodo.izquierdo, vector)
+    preorden(nodo.derecho, vector)
+    return vector
+}
 
-bi.agregar(50)
-bi.agregar(15)
-bi.agregar(42)
-bi.agregar(78)
-bi.agregar(10)
-bi.actualizar(15, 5)
-bi.pre()
-//console.log()
+function inorden(nodo, vector){
+    if(nodo === null){
+        return
+    }
+    inorden(nodo.izquierdo, vector)
+    vector.push(nodo.valor)
+    inorden(nodo.derecho, vector)
+    return vector
+}
+
+function postorden(nodo, vector){
+    if(nodo === null){
+        return
+    }
+    postorden(nodo.izquierdo, vector)
+    postorden(nodo.derecho, vector)
+    vector.push(nodo.valor)
+    return vector
+}
+
+function ascii(txt){
+    var sum = 0
+    if(/^[+-]?\d+$/.test(txt)) sum = parseInt(txt, 10)
+    else {
+        for(var i in txt){
+            sum += txt[i].charCodeAt(0)
+        }
+    }
+    return sum
+}
+
+export default Binario

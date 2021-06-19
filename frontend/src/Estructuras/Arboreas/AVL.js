@@ -20,24 +20,33 @@ class AVL {
     }
 
     eliminar(valor){
-        if(this.buscar(valor)){
-            this.raiz = _eliminar(valor, this.raiz)
-        }
+        this.raiz = _eliminar(valor, this.raiz)
     }
 
     actualizar(valor, nuevo){
-        if(this.buscar(valor)){
+        if(this.repeticion || !this.buscar(nuevo)){
             this.eliminar(valor)
-            this.agregar(nuevo)
+            this.raiz = _agregar(nuevo, this.raiz)
         }
+        else alert("El Valor Nuevo ya existe")
     }
 
     buscar(valor){
         return _buscar(valor, this.raiz)
     }
 
-    pre(){
-        _pre(this.raiz)
+    guardar(tipo){
+        const json = {
+            categoria: "AVL",
+            repeticion: this.repeticion,
+            tipo: tipo,
+            valores: []
+        }
+        if(tipo === "PreOrden") json.valores = preorden(this.raiz, json.valores)
+        else if(tipo === "InOrden") json.valores = inorden(this.raiz, json.valores)
+        else if(tipo === "PostOrden") json.valores = postorden(this.raiz, json.valores)
+        const txt = JSON.stringify(json, null, '   ')
+        return {nombre: "AVL.json", text: txt}
     }
 }
 
@@ -45,10 +54,10 @@ function _agregar(valor, nodo){
     if(nodo === null){
         return new Nodo(valor)
     }
-    else if(valor < nodo.valor){
+    else if(ascii(valor) < ascii(nodo.valor)){
         nodo.izquierdo = _agregar(valor, nodo.izquierdo)
     }
-    else if(valor >= nodo.valor){
+    else if(ascii(valor) >= ascii(nodo.valor)){
         nodo.derecho = _agregar(valor, nodo.derecho)
     }
     nodo = balancear(nodo, valor)
@@ -77,10 +86,10 @@ function _eliminar(valor, nodo){
             nodo = nodo.izquierdo
         }
     }
-    else if(valor < nodo.valor){
+    else if(ascii(valor) < ascii(nodo.valor)){
         nodo.izquierdo = _eliminar(valor, nodo.izquierdo)
     }
-    else if(valor > nodo.valor){
+    else if(ascii(valor) > ascii(nodo.valor)){
         nodo.derecho = _eliminar(valor, nodo.derecho)
     }
     nodo = balancear(nodo, valor)
@@ -95,17 +104,17 @@ function _buscar(valor, nodo){
     if(valor === nodo.valor){
         return true
     }
-    else if(valor < nodo.valor){
+    else if(ascii(valor) < ascii(nodo.valor)){
         return _buscar(valor, nodo.izquierdo)
     }
-    else if(valor > nodo.valor){
+    else if(ascii(valor) > ascii(nodo.valor)){
         return _buscar(valor, nodo.derecho)
     }
 }
 
 function balancear(nodo, valor){
     if((altura(nodo.izquierdo)-altura(nodo.derecho)) == 2){
-        if(valor < nodo.izquierdo.valor){
+        if(ascii(valor) < ascii(nodo.izquierdo.valor)){
             nodo = rotacionSI(nodo)
         }
         else{
@@ -113,7 +122,7 @@ function balancear(nodo, valor){
         }
     }
     if((altura(nodo.derecho)-altura(nodo.izquierdo)) == 2){
-        if(valor >= nodo.derecho.valor){
+        if(ascii(valor) >= ascii(nodo.derecho.valor)){
             nodo = rotacionSD(nodo)
         }
         else{
@@ -167,25 +176,45 @@ function maximo(nodo){
     }
 }
 
-function _pre(nodo){
+function preorden(nodo, vector){
     if(nodo === null){
         return
     }
-    _pre(nodo.izquierdo)
-    _pre(nodo.derecho)
-    console.log(nodo.valor)
+    vector.push(nodo.valor)
+    preorden(nodo.izquierdo, vector)
+    preorden(nodo.derecho, vector)
+    return vector
 }
 
-const bi = new AVL(true)
+function inorden(nodo, vector){
+    if(nodo === null){
+        return
+    }
+    inorden(nodo.izquierdo, vector)
+    vector.push(nodo.valor)
+    inorden(nodo.derecho, vector)
+    return vector
+}
 
-bi.agregar(50)
-bi.agregar(42)
-bi.agregar(48)
-bi.agregar(58)
-bi.agregar(81)
-bi.agregar(25)
-bi.pre()
-bi.eliminar(58)
-console.log("")
-bi.pre()
-//console.log(bi)
+function postorden(nodo, vector){
+    if(nodo === null){
+        return
+    }
+    postorden(nodo.izquierdo, vector)
+    postorden(nodo.derecho, vector)
+    vector.push(nodo.valor)
+    return vector
+}
+
+function ascii(txt){
+    var sum = 0
+    if(/^[+-]?\d+$/.test(txt)) sum = parseInt(txt, 10)
+    else {
+        for(var i in txt){
+            sum += txt[i].charCodeAt(0)
+        }
+    }
+    return sum
+}
+
+export default AVL

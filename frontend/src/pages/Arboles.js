@@ -127,7 +127,6 @@ class Arboles extends React.Component {
                                 <option>PreOrden</option>
                                 <option>InOrden</option>
                                 <option>PostOrden</option>
-                                <option>Objeto</option>
                             </select>
                         </td>
                         <td>

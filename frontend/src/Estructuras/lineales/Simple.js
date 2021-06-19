@@ -106,7 +106,7 @@ class Simple {
             json.valores.push(nodo.valor)
             nodo = nodo.siguiente
         }
-        const txt = JSON.stringify(json, null, '   ');
+        const txt = JSON.stringify(json, null, '   ')
         return {nombre: "Enlazada Simple.json", text: txt}
     }
     //Metodos sin unos fuera
@@ -124,8 +124,8 @@ class Simple {
     agregar_O(nodo){
         var aux = this.primero
         var pivote = null
-        while (aux != null) {
-            if(nodo.valor <= aux.valor){
+        while (aux !== null) {
+            if(ascii(nodo.valor) <= ascii(aux.valor)){
                 if(aux === this.primero){
                     nodo.siguiente = aux
                     this.primero = nodo
@@ -146,8 +146,15 @@ class Simple {
     }
 }
 
-
-
-
+function ascii(txt){
+    var sum = 0
+    if(/^[+-]?\d+$/.test(txt)) sum = parseInt(txt, 10)
+    else {
+        for(var i in txt){
+            sum += txt[i].charCodeAt(0)
+        }
+    }
+    return sum
+}
 
 export default Simple
