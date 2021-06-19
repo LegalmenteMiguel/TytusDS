@@ -17,9 +17,6 @@ class Footer extends React.Component{
                             <a className="Link_text" href="https://github.com/tytusdb/tytusds/blob/main/LICENSE.md" target="_blank" rel="noreferrer">
                                 Terminos de Uso
                             </a>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;        
-                            <a className="Link_text" href="https://github.com/luisespino" target="_blank" rel="noreferrer">
-                                Luis Espino
-                            </a>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;        
                             <a className="Link_text" href="https://github.com/LegalmenteMiguel" target="_blank" rel="noreferrer">
                                 Miguel Guirola
                             </a>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;     

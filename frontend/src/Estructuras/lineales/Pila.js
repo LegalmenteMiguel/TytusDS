@@ -19,7 +19,7 @@ class Pila {
         }
         else{
             if(this.repeticion || !(this.buscar(valor))){
-               this.primero = agregar_P(nodo)
+               this.agregar_P(nodo)
             }
             else{
                 alert("No se puede ingresar el valor")
@@ -29,11 +29,11 @@ class Pila {
 
     eliminar(){
         if(this.ultimo != null){
-            var nodo = this.primero.siguiente
             if(this.primero === this.ultimo){
                 this.primero = this.ultimo = null
             }
             else{
+                var nodo = this.primero.siguiente
                 this.primero = nodo
             }
         }
@@ -63,21 +63,20 @@ class Pila {
     }
 
     cargar(lista){
-        lista.map(i =>{
-            this.agregar(i.a)
-        })
+       
     }
 
     guardar(){
 
     }
+    //Metodos sin uso fuera
+    agregar_P(nodo){
+        var aux = this.primero
+        this.primero = nodo
+        nodo.siguiente = aux
+    }
 }
 
-function agregar_P(nodo){
-    var aux = this.primero
-    this.primero = nodo
-    nodo.siguiente = aux
-    return nodo
-}
+
 
 export default Pila

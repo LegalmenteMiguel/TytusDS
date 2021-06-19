@@ -13,8 +13,6 @@ class CircularDoble {
         this.repeticion = repeticion
     }
 
-
-
     agregar(valor){
         const nodo = new Nodo(valor)
         if(this.raiz === null){
@@ -38,45 +36,6 @@ class CircularDoble {
                 alert("No se puede ingresar el valor")
             }
         }
-    }
-
-    agregar_F(nodo) {
-        var aux = this.raiz.anterior
-        aux.siguiente = this.raiz.anterior = nodo
-        nodo.anterior = aux
-        nodo.siguiente = this.raiz    
-    }
-
-    agregar_I(nodo){
-        var aux = this.raiz
-        this.raiz = nodo
-        nodo.siguiente = aux
-        nodo.anterior = aux.anterior
-        aux.anterior = nodo
-
-    }
-
-    agregar_O(nodo){
-        var aux = this.raiz
-        var pivote
-        do{
-            if(nodo.valor <= aux.valor){
-                pivote = aux.anterior
-                pivote.siguiente = aux.anterior = nodo
-                nodo.siguiente = aux
-                nodo.anterior = pivote
-                if(aux === this.raiz){
-                    this.raiz = nodo
-                }
-                break
-            }
-            else if(aux === this.raiz.anterior){
-                this.raiz.anterior = aux.siguiente = nodo
-                nodo.siguiente = this.raiz
-                nodo.anterior = aux
-            }
-            aux = aux.siguiente
-        }while(aux !== this.raiz)
     }
 
     eliminar(valor){
@@ -124,13 +83,64 @@ class CircularDoble {
             }
         }while(nodo !== this.raiz)
         return false
+    }
+
+    cargar(){
         
     }
 
-    cargar(lista){
-        lista.map(i =>{
-            this.agregar(i.a)
-        })
+    guardar(){
+        const json = {
+            categoria: "Circular Doble",
+            posicion: this.ingreso,
+            repeticion: this.repeticion,
+            valores: []
+        }
+        var nodo = this.raiz
+        do{
+            json.valores.push(nodo.valor)
+            nodo = nodo.siguiente
+        }while(nodo !== this.raiz)
+        const txt = JSON.stringify(json, null, '   ');
+        return {nombre: "Circular Doble.json", text: txt}
+    }
+    //Metodos sin uso fuera
+    agregar_F(nodo) {
+        var aux = this.raiz.anterior
+        aux.siguiente = this.raiz.anterior = nodo
+        nodo.anterior = aux
+        nodo.siguiente = this.raiz    
+    }
+
+    agregar_I(nodo){
+        var aux = this.raiz
+        this.raiz = nodo
+        nodo.siguiente = aux
+        nodo.anterior = aux.anterior
+        aux.anterior = nodo
+    }
+
+    agregar_O(nodo){
+        var aux = this.raiz
+        var pivote
+        do{
+            if(nodo.valor <= aux.valor){
+                pivote = aux.anterior
+                pivote.siguiente = aux.anterior = nodo
+                nodo.siguiente = aux
+                nodo.anterior = pivote
+                if(aux === this.raiz){
+                    this.raiz = nodo
+                }
+                break
+            }
+            else if(aux === this.raiz.anterior){
+                this.raiz.anterior = aux.siguiente = nodo
+                nodo.siguiente = this.raiz
+                nodo.anterior = aux
+            }
+            aux = aux.siguiente
+        }while(aux !== this.raiz)
     }
 }
 

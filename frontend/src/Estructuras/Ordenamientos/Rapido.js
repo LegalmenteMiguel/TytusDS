@@ -3,11 +3,7 @@ class Rapido{
         this.areglo = []
     }
 
-    cargar(lista){
-        lista.map(i =>{
-            this.areglo.push(i.a)
-        })
-        this.ordenar(0, this.areglo.length-1)
+    cargar(){
     }
 
     ordenar(min, max){

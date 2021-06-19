@@ -1,26 +1,30 @@
-//Pagina para graficar Pila y Cola
+//Pagina para graficar Cola de Prioridad
 import React from 'react';
 
-import Pila from '../Estructuras/lineales/Pila'
-//import Cola from '../Estructuras/lineales/Cola'
+//import ColaP from '../Estructuras/lineales/ColaP'
 
 import './styles/Grafica.css'
 
-class LinealPC extends React.Component {
+class LinealCP extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
           repeticion: true,
           velocidad: 5,
           entrada: "",
+          prioridad: 0,
           nuevo: "",
           path: this.props.location.pathname,
         }
-        this.lista = this.setLista(this.state.path)
+        this.lista = null
       }
     
     handleEntrada = e => {
         this.setState({ entrada: e.target.value })
+    }
+
+    handlePrioridad = e => {
+        this.setState({ prioridad: e.target.value })
     }
 
     handleNuevo = e => {
@@ -40,7 +44,7 @@ class LinealPC extends React.Component {
         if(this.state.entrada === "" && id !== "Nuevo" && id !== "Guardar"){
             alert("Ingrese un valor")
         }
-        else{
+        else if(this.state.prioridad >= 0 && this.state.prioridad <= 10){
             if(id === "Agregar") this.lista.agregar(this.entrada)
             
             else if(id === "Eliminar") this.lista.eliminar(this.entrada)
@@ -59,18 +63,16 @@ class LinealPC extends React.Component {
             else if(id === "Nuevo") this.lista = this.setLista(this.state.path)
 
             document.getElementById("input").reset()
+            document.getElementById("prioriddad").reset()
             document.getElementById("nuevo").reset()
             this.setState({
                 entrada: "",
-                nuevo: ""
+                nuevo: "",
+                prioridad: 0
             })
         }
-    }
-
-    setLista = path => {
-        if(path.includes("Pila")){
-            const list = new Pila(this.state.repeticion)
-            return list
+        else{
+            alert("Prioridad Fuera de Rango")
         }
     }
 
@@ -83,6 +85,12 @@ class LinealPC extends React.Component {
                             <form id="input">
                                 <input type="text" style={{width: "100px"}} placeholder="Valor"
                                 onChange={this.handleEntrada}/>
+                            </form>
+                        </td>
+                        <td>
+                            <form id="prioridad">
+                                <input type="number" style={{width: "100px"}} placeholder="Prioridad"
+                                step="1" min="0" max="10" onChange={this.handlePrioridad}/>
                             </form>
                         </td>
                         <td>
@@ -151,4 +159,4 @@ class LinealPC extends React.Component {
 
 }
 
-export default LinealPC
+export default LinealCP

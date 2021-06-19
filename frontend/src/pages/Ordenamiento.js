@@ -2,6 +2,8 @@ import React from 'react';
 
 import Rapido from '../Estructuras/Ordenamientos/Rapido'
 import Seleccion from '../Estructuras/Ordenamientos/Seleccion'
+//import Burbuja from '../Estructuras/Ordenamientos/Burbuja'
+//import Insercion from '../Estructuras/Ordenamientos/Insercion'
 
 import './styles/Grafica.css'
 
@@ -12,15 +14,20 @@ class LinealesL extends React.Component {
           tipo: "Burbuja",
           velocidad: 5,
         }
-        this.lista = this.setLista()
+        this.lista = this.setLista(this.state.tipo)
     }
 
     handleOption = e => {
-        this.setState({
-            tipo: e.target.value
-        })
+        this.setState({ tipo: e.target.value })
     }
-    
+
+    handleMove = e => {
+        this.setState({ velocidad: e.target.value })
+    }
+
+    handleFiles = e => {
+    }
+
     handleClick = e => {
         const id = e.target.id
         if(id === "Guardar"){
@@ -29,25 +36,13 @@ class LinealesL extends React.Component {
         else if(id === "Cargar"){
 
         }
-        
-    }
-
-    handleMove = e => {
-        console.log(e.target.value)
-        this.setState({
-            velocidad: e.target.value
-        })
+        else if(id === "Nuevo") this.lista = this.setLista(this.state.tipo)
     }
 
     setLista = tipo => {
-        if(tipo === "Selección"){
-            const list = new Seleccion()
-            return list
-        }
-        else if(tipo === "Rápido"){
-            const list = new Rapido()
-            return list
-        }
+        if(tipo === "Selección") return new Seleccion()
+        
+        else if(tipo === "Rápido") return new Rapido()
     }
 
     render(){
@@ -56,37 +51,38 @@ class LinealesL extends React.Component {
                 <nav className="Bar">
                     <table>
                         <td>
-                            <p>{this.nombre}</p>
-                        </td>
-                        <td>
-                            <button type="button" className="btn Boton" id="Guardar"
+                            <button className="btn btn-success" id="Guardar"
                                 onClick={this.handleClick}> Guardar
                             </button>
                         </td>
                         <td>
-                            <button type="button" className="btn Boton" id="Cargar"
-                                onClick={this.handleClick}> Cargar
-                            </button>
+                            <input type="file" multiple={false} accept=".json" 
+                                onChange={this.handleFiles} />
                         </td>
                     </table>
                 </nav>
                 <div>
-                    <canvas width="1000" height="700"></canvas>
+                    {/*Aqui va la grafica*/}
                 </div>
                 <nav className="Sub_bar">
                     <table>
                         <td>
-                            <input type="range"  min="0" max="10" step="1"  onChange={this.handleMove}
-                            defaultValue="5" width="100"/>
+                            <input type="range"  min="0" max="10" step="1" onChange={this.handleMove}
+                                defaultValue={this.state.velocidad} width="100"/>
                         </td>
                         <td>
-                            <select multiple="" class="form-select" id="exampleSelect2" 
+                            <select multiple=""
                                 onChange={this.handleOption}>
                                 <option>Burbuja</option>
                                 <option>Selección</option>
                                 <option>Inserción</option>
                                 <option>Rápido</option>
                             </select>
+                        </td>
+                        <td>
+                            <button className="btn btn-danger" id="Nuevo"
+                                onClick={this.handleClick}> Nuevo
+                            </button>
                         </td>
                     </table>
                 </nav>

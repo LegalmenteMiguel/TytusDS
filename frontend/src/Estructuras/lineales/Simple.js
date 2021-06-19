@@ -36,41 +36,6 @@ class Simple {
         }
     }
 
-    agregar_F(nodo){
-        var aux = this.ultimo
-        aux.siguiente = this.ultimo = nodo
-    }
-
-    agregar_I(nodo){
-        var aux = this.primero
-        this.primero = nodo
-        nodo.siguiente = aux
-    }
-
-    agregar_O(nodo){
-        var aux = this.primero
-        var pivote = null
-        while (aux != null) {
-            if(nodo.valor <= aux.valor){
-                if(aux === this.primero){
-                    nodo.siguiente = aux
-                    this.primero = nodo
-                }
-                else{
-                    pivote.siguiente = nodo
-                    nodo.siguiente = aux
-                }
-                break
-            }
-            else if(aux === this.ultimo){
-                aux.siguiente = this.ultimo = nodo
-                break
-            }
-            pivote = aux
-            aux = aux.siguiente
-        }
-    }
-
     eliminar(valor){
         var nodo = this.primero
         var aux = null
@@ -130,8 +95,59 @@ class Simple {
     }
 
     guardar(){
-
+        const json = {
+            categoria: "Enlazada Simple",
+            posicion: this.ingreso,
+            repeticion: this.repeticion,
+            valores: []
+        }
+        var nodo = this.primero
+        while(nodo !== null){
+            json.valores.push(nodo.valor)
+            nodo = nodo.siguiente
+        }
+        const txt = JSON.stringify(json, null, '   ');
+        return {nombre: "Enlazada Simple.json", text: txt}
+    }
+    //Metodos sin unos fuera
+    agregar_F(nodo){
+        var aux = this.ultimo
+        aux.siguiente = this.ultimo = nodo
+    }
+    
+    agregar_I(nodo){
+        var aux = this.primero
+        this.primero = nodo
+        nodo.siguiente = aux
+    }
+    
+    agregar_O(nodo){
+        var aux = this.primero
+        var pivote = null
+        while (aux != null) {
+            if(nodo.valor <= aux.valor){
+                if(aux === this.primero){
+                    nodo.siguiente = aux
+                    this.primero = nodo
+                }
+                else{
+                    pivote.siguiente = nodo
+                    nodo.siguiente = aux
+                }
+                break
+            }
+            else if(aux === this.ultimo){
+                aux.siguiente = this.ultimo = nodo
+                break
+            }
+            pivote = aux
+            aux = aux.siguiente
+        }
     }
 }
+
+
+
+
 
 export default Simple

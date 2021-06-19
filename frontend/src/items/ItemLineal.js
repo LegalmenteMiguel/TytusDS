@@ -38,10 +38,16 @@ const ItemLineal = [
         class: "Button Top_button1"
     },
     {
-        name: "Colas",
+        name: "Cola",
         logo: Cola,
-        path: "Lineales/Colas",
+        path: "Lineales/Cola",
         class: "Button Top_left1"
+    },
+    {
+        name: "Cola de Prioridad",
+        logo: Cola,
+        path: "Lineales/ColaPrioridad",
+        class: "Button Button_right1"
     }
 ]
 

@@ -1,22 +1,24 @@
-//Pagina para graficar Pila y Cola
-import React from 'react';
+//Pagina para graficar Enlazada Simple, Enlazada Doble, Circular Simple y Circular Doble
+import React from 'react'
 
-import Pila from '../Estructuras/lineales/Pila'
-//import Cola from '../Estructuras/lineales/Cola'
+//import EnlazadaD from '../Estructuras/Arboreas/ArbolB'
+//import CircularS from '../Estructuras/Arboreas/ArbolBm'
 
 import './styles/Grafica.css'
 
-class LinealPC extends React.Component {
+class LinealEC extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
           repeticion: true,
           velocidad: 5,
           entrada: "",
+          orden: 3,
           nuevo: "",
+          fileType: "JSON",
           path: this.props.location.pathname,
         }
-        this.lista = this.setLista(this.state.path)
+        this.arbol = this.setarbol(this.state.path)
       }
     
     handleEntrada = e => {
@@ -28,11 +30,19 @@ class LinealPC extends React.Component {
     }
 
     handleCheck = () => {
-        this.setState({ repeticion: !this.state.repeticion  })
+        this.setState({ repeticion: !this.state.repeticion })
+    }
+
+    handleOption = e => {
+        this.setState({ ingreso: e.target.value })
     }
     
     handleMove = e => {
         this.setState({ velocidad: e.target.value })
+    }
+
+    handleFiles = e => {
+
     }
 
     handleClick = e => {
@@ -41,23 +51,29 @@ class LinealPC extends React.Component {
             alert("Ingrese un valor")
         }
         else{
-            if(id === "Agregar") this.lista.agregar(this.entrada)
+            if(id === "Agregar") this.arbol.agregar(this.state.entrada)
             
-            else if(id === "Eliminar") this.lista.eliminar(this.entrada)
+            else if(id === "Eliminar") this.arbol.eliminar(this.state.entrada)
             
-        
             else if(id === "Buscar"){
-                var aux = this.lista.buscar(this.state.entrada)
+                var aux = this.arbol.buscar(this.state.entrada)
                 if(aux) alert("Se encontro el valor")
-                
                 else alert("No se encontro el valor")
             }
-            else if(id === "Actualizar") this.lista.actualizar(this.state.entrada, this.state.nuevo)
+            else if(id === "Actualizar"){
+                if(this.state.nuevo !== '') this.arbol.actualizar(this.state.entrada, this.state.nuevo)
+                
+                else alert("Ingrese el Nuevo valor")
+            } 
+                
+            else if(id === "Nuevo") this.arbol = this.setarbol(this.state.path)
             
-            else if(id === "Guardar") console.log(this.lista)
-    
-            else if(id === "Nuevo") this.lista = this.setLista(this.state.path)
-
+            else if(id === "Guardar"){
+                
+            }
+            else if(id === "Cargar"){
+                
+            }
             document.getElementById("input").reset()
             document.getElementById("nuevo").reset()
             this.setState({
@@ -67,10 +83,12 @@ class LinealPC extends React.Component {
         }
     }
 
-    setLista = path => {
-        if(path.includes("Pila")){
-            const list = new Pila(this.state.repeticion)
-            return list
+    setarbol = path => {
+        if(path.includes("ArbolB")){
+            return 
+        }
+        else if(path.includes("ArbolB+")){
+            return 
         }
     }
 
@@ -86,9 +104,9 @@ class LinealPC extends React.Component {
                             </form>
                         </td>
                         <td>
-                        <button className="btn Boton" id="Agregar"
-                            onClick={this.handleClick}> Agregar
-                        </button> 
+                            <button className="btn Boton" id="Agregar" 
+                                onClick={this.handleClick}> Agregar
+                            </button> 
                         </td>
                         <td>
                             <button className="btn Boton" id="Eliminar"
@@ -117,7 +135,7 @@ class LinealPC extends React.Component {
                             </button>
                         </td>
                         <td>
-                            <input type="file" multiple={false} accept=".json" 
+                            <input type="file" multiple={false} accept=".json"
                             onChange={this.handleFiles} />
                         </td>
                     </table>
@@ -143,6 +161,14 @@ class LinealPC extends React.Component {
                                 onClick={this.handleClick}> Nuevo
                             </button>
                         </td>
+                        <td>
+                            <select multiple="" onChange={this.handleOption} >
+                                <option>PreOrden</option>
+                                <option>InOrden</option>
+                                <option>PostOrden</option>
+                                <option>Objeto</option>
+                            </select>
+                        </td>
                     </table>
                 </nav>
             </div>
@@ -151,4 +177,13 @@ class LinealPC extends React.Component {
 
 }
 
-export default LinealPC
+function descarga(nombre, text) {
+    var element = document.createElement('a');
+    element.setAttribute('href','data:json;charset=utf-8, ' + encodeURIComponent(text));
+    element.setAttribute('download', nombre);
+    document.body.appendChild(element);
+    element.click();
+    document.body.removeChild(element);
+}
+
+export default LinealEC

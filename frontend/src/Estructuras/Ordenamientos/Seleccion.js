@@ -3,10 +3,10 @@ class Seleccion{
         this.arreglo = []
     }
 
-    cargar(lista){
-        lista.map(i =>{
-            this.arreglo.push(i.a)
-        })
+    cargar(){
+    }
+    
+    guardar(){
     }
 
     ordenar(){
@@ -24,9 +24,7 @@ class Seleccion{
         }
     }
 
-    guardar(){
-
-    }
+    
 }
 
 export default Seleccion
