@@ -7,7 +7,6 @@ import AVL from '../Estructuras/Arboreas/AVL'
 import Funciones from '../Estructuras/Funciones.js'
 
 import './styles/Grafica.css'
-import Binario from '../Estructuras/Arboreas/Binario'
 
 class Arboles extends React.Component {
     constructor(props) {

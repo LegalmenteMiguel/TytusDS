@@ -7,7 +7,7 @@ class Insercion{
         for(var i in vec){
             this.vector.push(vec[i])
         }
-        ordenar()
+        this.ordenar()
     }
 
     guardar(){
@@ -33,6 +33,17 @@ class Insercion{
             this.vector[pos] = aux;
         }
     }
+}
+
+function ascii(txt){
+    var sum = 0
+    if(/^[+-]?\d+$/.test(txt)) sum = parseInt(txt, 10)
+    else {
+        for(var i in txt){
+            sum += txt[i].charCodeAt(0)
+        }
+    }
+    return sum
 }
 
 export default Insercion

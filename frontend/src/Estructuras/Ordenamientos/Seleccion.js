@@ -7,7 +7,7 @@ class Seleccion{
         for(var i in vec){
             this.vector.push(vec[i])
         }
-        ordenar()
+        this.ordenar()
     }
     
     guardar(){

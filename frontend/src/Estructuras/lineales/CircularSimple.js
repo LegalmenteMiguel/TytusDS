@@ -101,7 +101,7 @@ class CircularSimple{
                         this.raiz = null
                     }
                     else{
-                        aux = getUltimo()
+                        aux = this.getUltimo()
                         this.raiz = aux.siguiente = nodo.siguiente
                     }
                 }

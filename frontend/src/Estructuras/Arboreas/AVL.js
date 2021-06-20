@@ -132,7 +132,7 @@ function balancear(nodo, valor){
     return nodo
 }
 
-function rotacionSRL(nodo) {
+function rotacionSI(nodo) {
     var aux = nodo.izquierdo
     nodo.izquierdo = aux.derecho
     aux.derecho = nodo
@@ -143,7 +143,7 @@ function rotacionSRL(nodo) {
 
 function rotacionDI(nodo) {
     nodo.izquierdo = rotacionSD(nodo.izquierdo)		
-    return rotacionSRL(nodo)
+    return rotacionSI(nodo)
 }
 
 function rotacionSD(nodo) {
@@ -156,7 +156,7 @@ function rotacionSD(nodo) {
 }
 
 function rotacionDD(nodo) {
-    nodo.derecho = rotacionSRL(nodo.derecho)
+    nodo.derecho = rotacionSI(nodo.derecho)
     return rotacionSD(nodo)
 }
 
