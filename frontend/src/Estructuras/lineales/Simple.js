@@ -64,34 +64,35 @@ class Simple {
     }
 
     actualizar(valor, nuevo){
-        var aux = this.primero
-        while(aux != null){
-            if(aux.valor === valor){
-                aux.valor = nuevo
+        if(this.repeticion || !(this.buscar(nuevo))){
+            var aux = this.primero
+            while(aux != null){
+                if(aux.valor === valor){
+                    aux.valor = nuevo
+                }
+                aux = aux.siguiente
             }
-            aux = aux.siguiente
         }
-
+        else alert("El Nuevo Valor ya existe")
     }
 
     buscar(valor){
-        var aux = this.primero
-        while(aux != null){
-            if(aux.valor === valor){
-                //Se encontro valor
-                return true
+        if(this.primero === null){
+            var aux = this.primero
+            while(aux != null){
+                if(aux.valor === valor){
+                    //Se encontro valor
+                    return true
+                }
+                aux = aux.siguiente
             }
-            aux = aux.siguiente
         }
         //No se encontro valor
         return false
     }
 
-    cargar(text){
-        const json = JSON.parse(text)
-        for(var i in json.valores){
-            this.agregar(json.valores[i])
-        }
+    cargar(){
+        
     }
 
     guardar(){

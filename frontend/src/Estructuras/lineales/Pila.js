@@ -19,7 +19,9 @@ class Pila {
         }
         else{
             if(this.repeticion || !(this.buscar(valor))){
-               this.agregar_P(nodo)
+                var aux = this.primero
+                this.primero = nodo
+                nodo.siguiente = aux
             }
             else{
                 alert("No se puede ingresar el valor")
@@ -40,23 +42,28 @@ class Pila {
     }
     
     actualizar(valor, nuevo){
-        var nodo = this.primero
-        while(nodo != null){
-            if(nodo.valor === valor){
-                nodo.valor = nuevo
+        if(this.repeticion || !(this.buscar(valor))){
+            var nodo = this.primero
+            while(nodo != null){
+                if(nodo.valor === valor){
+                    nodo.valor = nuevo
+                }
+                nodo = nodo.siguiente
             }
-            nodo = nodo.siguiente
         }
+        else alert("El Valor Nuevo ya existe")
     }
 
     buscar(valor){
-        var aux = this.primero
-        while(aux != null){
-            if(aux.valor === valor){
-                //Se encotro valor
-                return true
+        if(this.primero === null){
+            var aux = this.primero
+            while(aux != null){
+                if(aux.valor === valor){
+                    //Se encotro valor
+                    return true
+                }
+                aux = aux.siguiente
             }
-            aux = aux.siguiente
         }
         //No se encontro valor
         return false
@@ -79,12 +86,6 @@ class Pila {
         }
         const txt = JSON.stringify(json, null, '   ')
         return {nombre: "Pila.json", text: txt}
-    }
-    //Metodos sin uso fuera
-    agregar_P(nodo){
-        var aux = this.primero
-        this.primero = nodo
-        nodo.siguiente = aux
     }
 }
 

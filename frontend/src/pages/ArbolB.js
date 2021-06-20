@@ -1,14 +1,14 @@
 //Pagina para graficar Enlazada Simple, Enlazada Doble, Circular Simple y Circular Doble
 import React from 'react'
 
-//import EnlazadaD from '../Estructuras/Arboreas/ArbolB'
-//import CircularS from '../Estructuras/Arboreas/ArbolBm'
+//import Arbolb from '../Estructuras/Arboreas/ArbolB'
+//import Arbolbm from '../Estructuras/Arboreas/ArbolBm'
 
 import Funciones from '../Estructuras/Funciones'
 
 import './styles/Grafica.css'
 
-class LinealEC extends React.Component {
+class ArbolB extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -181,4 +181,4 @@ class LinealEC extends React.Component {
 
 }
 
-export default LinealEC
+export default ArbolB

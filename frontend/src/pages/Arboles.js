@@ -1,12 +1,13 @@
-//Pagina para graficar Enlazada Simple, Enlazada Doble, Circular Simple y Circular Doble
+//Pagina para graficar Arbol Binario y AVL
 import React from 'react'
 
-//import EnlazadaD from '../Estructuras/Arboreas/ArbolB'
-//import CircularS from '../Estructuras/Arboreas/ArbolBm'
+import Binario from '../Estructuras/Arboreas/Binario'
+import AVL from '../Estructuras/Arboreas/AVL'
 
 import Funciones from '../Estructuras/Funciones.js'
 
 import './styles/Grafica.css'
+import Binario from '../Estructuras/Arboreas/Binario'
 
 class Arboles extends React.Component {
     constructor(props) {
@@ -80,9 +81,9 @@ class Arboles extends React.Component {
     }
 
     setarbol = path => {
-        if(path.includes("ArbolBinario")) return 
+        if(path.includes("ArbolBinario")) return new Binario(this.state.repeticion)
         
-        else if(path.includes("AVL")) return 
+        else if(path.includes("AVL")) return new AVL(this.state.repeticion)
     }
 
     render(){

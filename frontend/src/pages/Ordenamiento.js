@@ -3,8 +3,8 @@ import React from 'react';
 
 import Rapido from '../Estructuras/Ordenamientos/Rapido'
 import Seleccion from '../Estructuras/Ordenamientos/Seleccion'
-//import Burbuja from '../Estructuras/Ordenamientos/Burbuja'
-//import Insercion from '../Estructuras/Ordenamientos/Insercion'
+import Burbuja from '../Estructuras/Ordenamientos/Burbuja'
+import Insercion from '../Estructuras/Ordenamientos/Insercion'
 
 import Funciones from '../Estructuras/Funciones'
 
@@ -17,7 +17,7 @@ class LinealesL extends React.Component {
           tipo: "Burbuja",
           velocidad: 5,
         }
-        this.lista = this.setLista(this.state.tipo)
+        this.vector = this.setvector(this.state.tipo)
     }
 
     handleTipo = e => {
@@ -31,23 +31,23 @@ class LinealesL extends React.Component {
     handleClick = e => {
         const id = e.target.id
         if(id === "Guardar"){
-            var output = this.lista.guardar()
+            var output = this.vector.guardar()
             Funciones(output.nombre, output.text)
         }
         else if(id === "Cargar"){
 
         }
-        else if(id === "Nuevo") this.lista = this.setLista(this.state.tipo)
+        else if(id === "Nuevo") this.vector = this.setvector(this.state.tipo)
     }
 
-    setLista = tipo => {
+    setvector = tipo => {
         if(tipo === "Selección") return new Seleccion()
         
         else if(tipo === "Rápido") return new Rapido()
 
-        else if(tipo === "Burbuja") return 
+        else if(tipo === "Burbuja") return new Burbuja()
 
-        else if(tipo === "Inserción") return 
+        else if(tipo === "Inserción") return new Insercion()
     }
 
     render(){

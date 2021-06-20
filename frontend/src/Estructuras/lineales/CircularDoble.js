@@ -63,23 +63,28 @@ class CircularDoble {
     }
 
     actualizar(valor, nuevo){
-        var nodo = this.raiz
-        do{
-            if(nodo.valor === valor){
-                nodo.valor = nuevo
-                break
-            }
-            nodo = nodo.siguiente
-        }while(nodo !== this.raiz)
+        if(this.repeticion || !(this.buscar(nuevo))){
+            var nodo = this.raiz
+            do{
+                if(nodo.valor === valor){
+                    nodo.valor = nuevo
+                    break
+                }
+                nodo = nodo.siguiente
+            }while(nodo !== this.raiz)
+        }
+        else alert("El Nuevo Valor ya existe")
     }
 
     buscar(valor){
-        var nodo = this.raiz
-        do{
-            if(nodo.valor === valor){
-                return true
-            }
-        }while(nodo !== this.raiz)
+        if(this.raiz === null){
+            var nodo = this.raiz
+            do{
+                if(nodo.valor === valor){
+                    return true
+                }
+            }while(nodo !== this.raiz)
+        }
         return false
     }
 

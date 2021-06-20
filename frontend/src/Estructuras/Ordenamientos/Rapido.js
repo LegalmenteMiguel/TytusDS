@@ -3,7 +3,11 @@ class Rapido{
         this.areglo = []
     }
 
-    cargar(){
+    cargar(vec){
+        for(var i in vec){
+            this.vector.push(vec[i])
+        }
+        ordenar()
     }
 
     guardar(){
@@ -44,8 +48,11 @@ class Rapido{
 
 function ascii(txt){
     var sum = 0
-    for(var i in txt){
-        sum += txt[i].charCodeAt(0)
+    if(/^[+-]?\d+$/.test(txt)) sum = parseInt(txt, 10)
+    else {
+        for(var i in txt){
+            sum += txt[i].charCodeAt(0)
+        }
     }
     return sum
 }

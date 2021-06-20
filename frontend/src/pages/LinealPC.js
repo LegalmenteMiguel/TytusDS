@@ -2,7 +2,7 @@
 import React from 'react';
 
 import Pila from '../Estructuras/lineales/Pila'
-//import Cola from '../Estructuras/lineales/Cola'
+import Cola from '../Estructuras/lineales/Cola'
 
 import Funciones from '../Estructuras/Funciones'
 
@@ -45,7 +45,7 @@ class LinealPC extends React.Component {
         else{
             if(id === "Agregar") this.lista.agregar(this.entrada)
             
-            else if(id === "Eliminar") this.lista.eliminar(this.entrada)
+            else if(id === "Eliminar") this.lista.eliminar()
             
             else if(id === "Buscar"){
                 var aux = this.lista.buscar(this.state.entrada)
@@ -75,7 +75,7 @@ class LinealPC extends React.Component {
     setLista = path => {
         if(path.includes("Pila")) return new Pila(this.state.repeticion)
         
-        else if(path.includes("Cola")) return
+        else if(path.includes("Cola")) return new Cola(this.state.repeticion)
     }
 
     render(){

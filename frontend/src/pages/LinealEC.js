@@ -2,8 +2,8 @@
 import React from 'react'
 
 import EnlazadaS from '../Estructuras/lineales/Simple'
-//import EnlazadaD from '../Estructuras/lineales/Doble'
-//import CircularS from '../Estructuras/lineales/CircularSimple'
+import EnlazadaD from '../Estructuras/lineales/Doble'
+import CircularS from '../Estructuras/lineales/CircularSimple'
 import CircularD from '../Estructuras/lineales/CircularDoble'
 
 import Funciones from '../Estructuras/Funciones.js'
@@ -82,9 +82,9 @@ class LinealEC extends React.Component {
     setLista = path => {
         if(path.includes("EnlazadaSimple")) return new EnlazadaS(this.state.ingreso, this.state.repeticion)
         
-        else if(path.includes("EnlazadaSoble")) return 
+        else if(path.includes("EnlazadaSoble")) return new EnlazadaD(this.state.ingreso, this.state.repeticion)
         
-        else if(path.includes("CircularSimple")) return
+        else if(path.includes("CircularSimple")) return new CircularS(this.state.ingreso, this.state.repeticion)
 
         else if(path.includes("CircularDoble")) return new CircularD(this.state.ingreso, this.state.repeticion)
     }

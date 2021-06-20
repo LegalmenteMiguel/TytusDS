@@ -1,7 +1,7 @@
 //Pagina para graficar Cola de Prioridad
 import React from 'react';
 
-//import ColaP from '../Estructuras/lineales/ColaP'
+import ColaP from '../Estructuras/lineales/ColaPrioridad'
 
 import Funciones from '../Estructuras/Funciones'
 
@@ -18,7 +18,7 @@ class LinealCP extends React.Component {
           nuevo: "",
           path: this.props.location.pathname,
         }
-        this.lista = null
+        this.cola = new ColaP(this.state.repeticion)
       }
     
     handleEntrada = e => {
@@ -46,28 +46,26 @@ class LinealCP extends React.Component {
         if(this.state.entrada === "" && id !== "Nuevo" && id !== "Guardar") alert("Ingrese un valor")
     
         else{
-            if(id === "Agregar"){
-                if(this.state.prioridad >= 1 || this.state.prioridad <= 5) this.lista.agregar(this.entrada)
-                else alert("Prioridad Fuera de Rango")
-            } 
-            else if(id === "Eliminar") this.lista.eliminar(this.entrada)
+            if(id === "Agregar") this.cola.agregar(this.state.entrada, this.state.prioridad)
+               
+            else if(id === "Eliminar") this.cola.eliminar()
             
             else if(id === "Buscar"){
-                var aux = this.lista.buscar(this.state.entrada)
+                var aux = this.cola.buscar(this.state.entrada)
                 if(aux) alert("Se encontro el valor")
                 else alert("No se encontro el valor")
             }
             else if(id === "Actualizar"){
                 if(this.state.nuevo === "") alert("Ingrese Nuevo Valor")
 
-                else this.lista.actualizar(this.state.entrada, this.state.nuevo)
+                else this.cola.actualizar(this.state.entrada, this.state.nuevo)
             }
             else if(id === "Guardar"){
-                var output = this.lista.guardar()
+                var output = this.cola.guardar()
                 Funciones(output.nombre, output.text)
             } 
     
-            else if(id === "Nuevo") this.lista = this.setLista(this.state.path)
+            else if(id === "Nuevo") this.cola = new ColaP(this.state.repeticion)
 
             document.getElementById("input").reset()
             document.getElementById("prioriddad").reset()
