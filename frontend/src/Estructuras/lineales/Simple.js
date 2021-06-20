@@ -20,13 +20,13 @@ class Simple {
         }
         else{
             if(this.repeticion || !(this.buscar(valor))){
-                if(this.ingreso === "Final"){
+                if(this.ingreso === "Final" || this.ingreso === "Fin"){
                     this.agregar_F(nodo)
                 }
                 else if(this.ingreso === "Inicio"){
                     this.agregar_I(nodo)
                 }
-                else if(this.ingreso === "Orden"){
+                else if(this.ingreso === "Orden" || this.ingreso === "Ordenado"){
                     this.agregar_O(nodo)
                 }
             }
@@ -91,8 +91,10 @@ class Simple {
         return false
     }
 
-    cargar(){
-        
+    cargar(vec){
+        for(var i in vec){
+            this.agregar(vec[i])
+        }
     }
 
     guardar(){

@@ -41,6 +41,18 @@ class LinealCP extends React.Component {
         this.setState({ velocidad: e.target.value })
     }
 
+    handleFiles = e => {
+        let files = e.target.files
+        let reader = new FileReader()
+        reader.readAsText(files[0])
+        reader.onload = e =>{
+            const json = JSON.parse(e.target.result)
+            this.setState({ velocidad: json.animaicon })
+            this.cola = new ColaP(json.repeticion)
+            this.cola.cargar(json.valores)
+        }
+    }
+
     handleClick = e => {
         const id = e.target.id
         if(this.state.entrada === "" && id !== "Nuevo" && id !== "Guardar") alert("Ingrese un valor")
@@ -68,7 +80,6 @@ class LinealCP extends React.Component {
             else if(id === "Nuevo") this.cola = new ColaP(this.state.repeticion)
 
             document.getElementById("input").reset()
-            document.getElementById("prioriddad").reset()
             document.getElementById("nuevo").reset()
             this.setState({
                 entrada: "",

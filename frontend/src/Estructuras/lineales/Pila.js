@@ -69,8 +69,10 @@ class Pila {
         return false
     }
 
-    cargar(){
-       
+    cargar(vec){
+        for(var i in vec){
+            this.agregar(vec[i])
+        }
     }
 
     guardar(){

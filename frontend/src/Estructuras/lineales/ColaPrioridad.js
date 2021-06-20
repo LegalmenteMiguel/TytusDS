@@ -14,7 +14,7 @@ class ColaPrioridad{
     }
     // Agregar item
     agregar(valor, prioridad){
-        if(prioridad > 5 || prioridad < 1){
+        if(parseInt(prioridad) < 5 || parseInt(prioridad) > 1){
             const nodo = new Nodo(valor, prioridad)
             if(this.primero === null){
                 this.primero = this.ultimo = nodo
@@ -104,8 +104,10 @@ class ColaPrioridad{
         return {nombre: "Cola Prioridad.json", text: txt}
     }
     //Cargar JSON
-    cargar(){
-        
+    cargar(vec){
+        for(var i in vec){
+            this.agregar(vec[i].valor, vec[i].prioridad)
+        }
     }
 }
 

@@ -37,6 +37,18 @@ class LinealPC extends React.Component {
         this.setState({ velocidad: e.target.value })
     }
 
+    handleFiles = e => {
+        let files = e.target.files
+        let reader = new FileReader()
+        reader.readAsText(files[0])
+        reader.onload = e =>{
+            const json = JSON.parse(e.target.result)
+            this.setState({ velocidad: json.animaicon })
+            this.lista = this.setLista(this.state.path, json.repeticion)
+            this.lista.cargar(json.valores)
+        }
+    }
+
     handleClick = e => {
         const id = e.target.id
         if(this.state.entrada === "" && id !== "Nuevo" && id !== "Guardar"){
@@ -61,7 +73,7 @@ class LinealPC extends React.Component {
                 Funciones(output.nombre, output.text)
             }
     
-            else if(id === "Nuevo") this.lista = this.setLista(this.state.path)
+            else if(id === "Nuevo") this.lista = this.setLista(this.state.path, this.state.repeticion)
 
             document.getElementById("input").reset()
             document.getElementById("nuevo").reset()
@@ -72,10 +84,10 @@ class LinealPC extends React.Component {
         }
     }
 
-    setLista = path => {
-        if(path.includes("Pila")) return new Pila(this.state.repeticion)
+    setLista = (path, repeticion) => {
+        if(path.includes("Pila")) return new Pila(repeticion)
         
-        else if(path.includes("Cola")) return new Cola(this.state.repeticion)
+        else if(path.includes("Cola")) return new Cola(repeticion)
     }
 
     render(){

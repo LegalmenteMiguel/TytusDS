@@ -20,13 +20,13 @@ class CircularDoble {
         }
         else{
             if(this.repeticion || !(this.buscar(valor))){
-                if(this.ingreso === "Final"){
+                if(this.ingreso === "Final" || this.ingreso === "Fin"){
                     this.agregar_F(nodo)
                 }
                 else if(this.ingreso === "Inicio"){
                     this.agregar_I(nodo)
                 }
-                else if(this.ingreso === "Orden"){
+                else if(this.ingreso === "Orden" || this.ingreso === "Ordenado"){
                     this.agregar_O(nodo)
                 }
             }
@@ -88,8 +88,10 @@ class CircularDoble {
         return false
     }
 
-    cargar(){
-        
+    cargar(vec){
+        for(var i in vec){
+            this.agregar(vec[i])
+        }
     }
 
     guardar(){
@@ -117,30 +119,34 @@ class CircularDoble {
 
     agregar_I(nodo){
         var aux = this.raiz
+        var temp = this.raiz.anterior
         this.raiz = nodo
         nodo.siguiente = aux
-        nodo.anterior = aux.anterior
-        aux.anterior = nodo
+        nodo.anterior = temp
+        aux.anterior = temp.siguiente = nodo
     }
 
-    agregar_O(nodo){
+    agregar_O(nodo){//ERORR
         var aux = this.raiz
         var pivote
         do{
             if(ascii(nodo.valor) <= ascii(aux.valor)){
-                pivote = aux.anterior
-                pivote.siguiente = aux.anterior = nodo
-                nodo.siguiente = aux
-                nodo.anterior = pivote
                 if(aux === this.raiz){
-                    this.raiz = nodo
+                    this.agregar_I(nodo)
+                }
+                else{
+                    pivote = aux.anterior
+                    pivote.siguiente = aux.anterior = nodo
+                    nodo.siguiente = aux
+                    nodo.anterior = pivote
                 }
                 break
             }
-            else if(aux === this.raiz.anterior){
+            else if(aux.siguiente === this.raiz){
                 this.raiz.anterior = aux.siguiente = nodo
                 nodo.siguiente = this.raiz
                 nodo.anterior = aux
+                break
             }
             aux = aux.siguiente
         }while(aux !== this.raiz)

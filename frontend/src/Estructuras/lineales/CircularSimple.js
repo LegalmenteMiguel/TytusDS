@@ -19,13 +19,13 @@ class CircularSimple{
         }
         else{
             if(this.repeticion || !(this.buscar(valor))){
-                if(this.ingreso === "Final"){
+                if(this.ingreso === "Final" || this.ingreso === "Fin"){
                     this.nuevoUltimo(nodo)
                 }
                 else if(this.ingreso === "Inicio"){
                     this.nuevoPrimero(nodo)
                 }
-                else if(this.ingreso === "Orden"){
+                else if(this.ingreso === "Orden" || this.ingreso === "Ordenado"){
                     this.nuevoOrdenado(nodo)
                 }
             }
@@ -72,13 +72,22 @@ class CircularSimple{
         }while(aux !== this.raiz)
     }
     //Agregar ordenado   
-    nuevoOrdenado(nodo){
+    nuevoOrdenado(nodo){ 
         var aux = this.raiz
         var temp = null
         do{
+            console.log(aux)
             if(ascii(nodo.valor) <= ascii(aux.valor)){
-                temp.siguiente = nodo
-                nodo.siguiente = aux
+                if(aux === this.raiz){
+                    temp = this.getUltimo()
+                    this.raiz = temp.siguiente = nodo
+                    nodo.siguiente = aux
+                    
+                }
+                else{
+                    temp.siguiente = nodo
+                    nodo.siguiente = aux
+                }
                 break
             }
             else if(aux.siguiente === this.raiz){
@@ -141,8 +150,10 @@ class CircularSimple{
         return false
     }
     //Cargar JSON
-    cargar(){
-        
+    cargar(vec){
+        for(var i in vec){
+            this.agregar(vec[i])
+        }
     }
     //Guardar JSON
     guardar(){
@@ -154,7 +165,6 @@ class CircularSimple{
         }
         var nodo = this.raiz
         do{
-            console.log(json.valores)
             json.valores.push(nodo.valor)
             nodo = nodo.siguiente
         }while(nodo !== this.raiz)
@@ -168,6 +178,7 @@ class CircularSimple{
             if(aux.siguiente === this.raiz){
                 break
             }
+            aux = aux.siguiente
         }while(aux !== this.siguiente)
         return aux
     }

@@ -21,7 +21,7 @@ class LinealEC extends React.Component {
           nuevo: "",
           path: this.props.location.pathname,
         }
-        this.lista = this.setLista(this.state.path)
+        this.lista = this.setLista(this.state.path, this.state.repeticion, this.state.ingreso)
       }
     
     handleEntrada = e => {
@@ -43,6 +43,18 @@ class LinealEC extends React.Component {
     handleVelocidad = e => {
         this.setState({ velocidad: e.target.value })
     }
+
+    handleFiles = e => {
+        let files = e.target.files
+        let reader = new FileReader()
+        reader.readAsText(files[0])
+        reader.onload = e =>{
+            const json = JSON.parse(e.target.result)
+            this.setState({ velocidad: json.animaicon })
+            this.lista = this.setLista(this.state.path, json.repeticion, json.posicion)
+            this.lista.cargar(json.valores)
+        }
+    }
     
     handleClick = e => {
         const id = e.target.id
@@ -63,7 +75,7 @@ class LinealEC extends React.Component {
                 else this.lista.actualizar(this.state.entrada, this.state.nuevo)
             } 
                 
-            else if(id === "Nuevo") this.lista = this.setLista(this.state.path)
+            else if(id === "Nuevo") this.lista = this.setLista(this.state.path,this.state.repeticion, this.state.ingreso)
             
             else if(id === "Guardar"){
                 var output = this.lista.guardar()
@@ -79,14 +91,14 @@ class LinealEC extends React.Component {
         }
     }
 
-    setLista = path => {
-        if(path.includes("EnlazadaSimple")) return new EnlazadaS(this.state.ingreso, this.state.repeticion)
+    setLista = (path, repeticion, ingreso) => {
+        if(path.includes("EnlazadaSimple")) return new EnlazadaS(ingreso, repeticion)
         
-        else if(path.includes("EnlazadaSoble")) return new EnlazadaD(this.state.ingreso, this.state.repeticion)
+        else if(path.includes("EnlazadaDoble")) return new EnlazadaD(ingreso, repeticion)
         
-        else if(path.includes("CircularSimple")) return new CircularS(this.state.ingreso, this.state.repeticion)
+        else if(path.includes("CircularSimple")) return new CircularS(ingreso, repeticion)
 
-        else if(path.includes("CircularDoble")) return new CircularD(this.state.ingreso, this.state.repeticion)
+        else if(path.includes("CircularDoble")) return new CircularD(ingreso, repeticion)
     }
 
     render(){

@@ -84,8 +84,10 @@ class Cola{
         return {nombre: "Cola.json", text: txt}
     }
     //Cargar JSON
-    cargar(){
-    
+    cargar(vec){
+        for(var i in vec){
+            this.agregar(vec[i])
+        }
     }
 }
 

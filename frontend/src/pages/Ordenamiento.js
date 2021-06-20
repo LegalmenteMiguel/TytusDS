@@ -28,6 +28,17 @@ class LinealesL extends React.Component {
         this.setState({ velocidad: e.target.value })
     }
 
+    handleFiles = e => {
+        let files = e.target.files
+        let reader = new FileReader()
+        reader.readAsText(files[0])
+        reader.onload = e =>{
+            const json = JSON.parse(e.target.result)
+            this.setState({ velocidad: json.animaicon })
+            this.vector.cargar(json.valores)
+        }
+    }
+
     handleClick = e => {
         const id = e.target.id
         if(id === "Guardar"){

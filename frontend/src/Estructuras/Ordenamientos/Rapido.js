@@ -1,13 +1,13 @@
 class Rapido{
     constructor(){
-        this.areglo = []
+        this.vector = []
     }
 
     cargar(vec){
         for(var i in vec){
             this.vector.push(vec[i])
         }
-        this.ordenar()
+        this.ordenar(0, this.vector.length-1)
     }
 
     guardar(){
@@ -15,7 +15,7 @@ class Rapido{
             categoria: "Rapido",
             valores: []
         }
-        json.valores = this.areglo
+        json.valores = this.vector
         const txt = JSON.stringify(json, null, '   ');
         return {nombre: "Rapido.json", text: txt}
     }
@@ -29,19 +29,19 @@ class Rapido{
     }
 
     _ordenar(min, max){
-        var aux = this.areglo[max];  
+        var aux = this.vector[max];  
         var i = (min - 1) 
         for (var j = min; j <= max- 1; j++){
-            if (ascii(this.areglo[j]) < ascii(aux)){
+            if (ascii(this.vector[j]) < ascii(aux)){
                 i++;
-                var temp = this.areglo[i]
-                this.areglo[i] = this.areglo[j]
-                this.areglo[j] = temp
+                var temp = this.vector[i]
+                this.vector[i] = this.vector[j]
+                this.vector[j] = temp
             }
         }
-        var pivote = this.areglo[i + 1]
-        this.areglo[i + 1] = this.areglo[max]
-        this.areglo[max] = pivote
+        var pivote = this.vector[i + 1]
+        this.vector[i + 1] = this.vector[max]
+        this.vector[max] = pivote
         return (i + 1)
     }
 }

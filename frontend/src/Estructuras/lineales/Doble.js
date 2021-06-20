@@ -21,13 +21,13 @@ class Doble{
         }
         else{
             if(this.repeticion || !(this.buscar(valor))){
-                if(this.ingreso === "Final"){
+                if(this.ingreso === "Final" || this.ingreso === "Fin"){
                     this.nuevoUltimo(nodo)
                 }
                 else if(this.ingreso === "Inicio"){
                     this.nuevoPrimero(nodo)
                 }
-                else if(this.ingreso === "Orden"){
+                else if(this.ingreso === "Orden" || this.ingreso === "Ordenado"){
                     this.nuevoOrdenado(nodo)
                 }
             }
@@ -131,8 +131,10 @@ class Doble{
         return false
     }
     // Cargar JSON
-    cargar(){
-     
+    cargar(vec){
+        for(var i in vec){
+            this.agregar(vec[i])
+        }
     }
     // Exportar JSON
     guardar(){

@@ -5,7 +5,7 @@ class Seleccion{
 
     cargar(vec){
         for(var i in vec){
-            this.vector.push(vec[i])
+            this.arreglo.push(vec[i])
         }
         this.ordenar()
     }
@@ -15,7 +15,8 @@ class Seleccion{
             categoria: "Selección",
             valores: []
         }
-        json.valores = this.areglo
+        json.valores = this.arreglo
+        console.log(json.valores)
         const txt = JSON.stringify(json, null, '   ');
         return {nombre: "Selección.json", text: txt}
     }
