@@ -50,6 +50,11 @@ class Binario {
         return {nombre: "Binario.json", text: txt}
     }
 
+    cargar(vec){
+        for(var i in vec){
+            this.agregar(vec[i])
+        }
+    }
 }
 
 function _agregar(valor, nodo){

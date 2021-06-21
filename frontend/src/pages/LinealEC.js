@@ -55,7 +55,7 @@ class LinealEC extends React.Component {
             this.lista.cargar(json.valores)
         }
     }
-    
+
     handleClick = e => {
         const id = e.target.id
         if(this.state.entrada === "" && id !== "Nuevo" && id !== "Guardar") alert("Ingrese un valor")

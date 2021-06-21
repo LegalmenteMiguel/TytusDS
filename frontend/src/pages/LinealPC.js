@@ -51,7 +51,7 @@ class LinealPC extends React.Component {
 
     handleClick = e => {
         const id = e.target.id
-        if(this.state.entrada === "" && id !== "Nuevo" && id !== "Guardar"){
+        if(this.state.entrada === "" && id === "Agregar" && id === "Buscar" && id === "Actualizar"){
             alert("Ingrese un valor")
         }
         else{

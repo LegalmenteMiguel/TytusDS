@@ -16,7 +16,7 @@ class Arboles extends React.Component {
           velocidad: 5,
           entrada: "",
           orden: 3,
-          tipo: "PreOrdne",
+          tipo: "PreOrden",
           nuevo: "",
           path: this.props.location.pathname,
         }
@@ -43,6 +43,18 @@ class Arboles extends React.Component {
         this.setState({ velocidad: e.target.value })
     }
 
+    handleFiles = e => {
+        let files = e.target.files
+        let reader = new FileReader()
+        reader.readAsText(files[0])
+        reader.onload = e =>{
+            const json = JSON.parse(e.target.result)
+            this.setState({ velocidad: json.animaicon })
+            this.arbol = this.setarbol(this.state.path, json.repeticion)
+            this.arbol.cargar(json.valores)
+        }
+    }
+
     handleClick = e => {
         const id = e.target.id
         if(this.state.entrada === "" && id !== "Nuevo" && id !== "Guardar") alert("Ingrese un valor")
@@ -63,7 +75,7 @@ class Arboles extends React.Component {
                 else this.arbol.actualizar(this.state.entrada, this.state.nuevo)
             } 
                 
-            else if(id === "Nuevo") this.arbol = this.setarbol(this.state.path)
+            else if(id === "Nuevo") this.arbol = this.setarbol(this.state.path, this.state.repeticion)
             
             else if(id === "Guardar"){
                 var output = this.arbol.guardar(this.state.tipo)
@@ -79,10 +91,10 @@ class Arboles extends React.Component {
         }
     }
 
-    setarbol = path => {
-        if(path.includes("ArbolBinario")) return new Binario(this.state.repeticion)
+    setarbol = (path, repeticion) => {
+        if(path.includes("ArbolBinario")) return new Binario(repeticion)
         
-        else if(path.includes("AVL")) return new AVL(this.state.repeticion)
+        else if(path.includes("AVL")) return new AVL(repeticion)
     }
 
     render(){

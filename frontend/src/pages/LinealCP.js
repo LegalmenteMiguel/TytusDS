@@ -55,8 +55,9 @@ class LinealCP extends React.Component {
 
     handleClick = e => {
         const id = e.target.id
-        if(this.state.entrada === "" && id !== "Nuevo" && id !== "Guardar") alert("Ingrese un valor")
-    
+        if(this.state.entrada === "" && id === "Agregar" && id === "Buscar" && id === "Actualizar"){
+            alert("Ingrese un valor")
+        } 
         else{
             if(id === "Agregar") this.cola.agregar(this.state.entrada, this.state.prioridad)
                

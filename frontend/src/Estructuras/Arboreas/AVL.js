@@ -48,6 +48,12 @@ class AVL {
         const txt = JSON.stringify(json, null, '   ')
         return {nombre: "AVL.json", text: txt}
     }
+
+    cargar(vec){
+        for(var i in vec){
+            this.agregar(vec[i])
+        }
+    }
 }
 
 function _agregar(valor, nodo){
@@ -113,7 +119,7 @@ function _buscar(valor, nodo){
 }
 
 function balancear(nodo, valor){
-    if((altura(nodo.izquierdo)-altura(nodo.derecho)) == 2){
+    if((altura(nodo.izquierdo)-altura(nodo.derecho)) === 2){
         if(ascii(valor) < ascii(nodo.izquierdo.valor)){
             nodo = rotacionSI(nodo)
         }
@@ -121,7 +127,7 @@ function balancear(nodo, valor){
             nodo = rotacionDI(nodo)
         }
     }
-    if((altura(nodo.derecho)-altura(nodo.izquierdo)) == 2){
+    if((altura(nodo.derecho)-altura(nodo.izquierdo)) === 2){
         if(ascii(valor) >= ascii(nodo.derecho.valor)){
             nodo = rotacionSD(nodo)
         }
