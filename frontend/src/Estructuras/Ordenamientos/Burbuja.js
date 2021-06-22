@@ -7,7 +7,6 @@ class Burbuja{
         for(var i in vec){
             this.vector.push(vec[i])
         }
-        this.ordenar()
     }
 
     guardar(){

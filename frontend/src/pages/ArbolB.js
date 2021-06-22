@@ -47,6 +47,18 @@ class ArbolB extends React.Component {
         this.setState({ velocidad: e.target.value })
     }
 
+    handleFiles = e => {
+        let files = e.target.files
+        let reader = new FileReader()
+        reader.onload = e =>{
+            const json = JSON.parse(e.target.result)
+            this.setState({ velocidad: json.animaicon })
+            this.arbol = this.setarbol(this.state.path, json.repeticion)
+            this.arbol.cargar(json.valores)
+        }
+        reader.readAsText(files[0])
+    }
+
     handleClick = e => {
         const id = e.target.id
         if(this.state.entrada === "" && id !== "Nuevo" && id !== "Guardar") alert("Ingrese un valor")

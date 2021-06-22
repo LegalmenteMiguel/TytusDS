@@ -31,12 +31,12 @@ class LinealesL extends React.Component {
     handleFiles = e => {
         let files = e.target.files
         let reader = new FileReader()
-        reader.readAsText(files[0])
         reader.onload = e =>{
             const json = JSON.parse(e.target.result)
             this.setState({ velocidad: json.animaicon })
             this.vector.cargar(json.valores)
         }
+        reader.readAsText(files[0])
     }
 
     handleClick = e => {
@@ -45,9 +45,7 @@ class LinealesL extends React.Component {
             var output = this.vector.guardar()
             Funciones(output.nombre, output.text)
         }
-        else if(id === "Cargar"){
-
-        }
+        else if(id == "Ordenar") this.vector.ordenar()
         else if(id === "Nuevo") this.vector = this.setvector(this.state.tipo)
     }
 
@@ -66,6 +64,11 @@ class LinealesL extends React.Component {
             <div>
                 <nav className="Bar">
                     <table>
+                        <td>
+                            <button className="btn Boton" id="Ordenar"
+                                onClick={this.handleClick}> Ordenar
+                            </button>
+                        </td>
                         <td>
                             <button className="btn btn-success" id="Guardar"
                                 onClick={this.handleClick}> Guardar

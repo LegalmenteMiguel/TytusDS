@@ -48,13 +48,13 @@ class Arboles extends React.Component {
     handleFiles = e => {
         let files = e.target.files
         let reader = new FileReader()
-        reader.readAsText(files[0])
         reader.onload = e =>{
             const json = JSON.parse(e.target.result)
             this.setState({ velocidad: json.animaicon })
             this.arbol = this.setarbol(this.state.path, json.repeticion)
             this.arbol.cargar(json.valores)
         }
+        reader.readAsText(files[0])
     }
 
     handleClick = e => {
@@ -102,6 +102,7 @@ class Arboles extends React.Component {
     render(){
         return (
             <div>
+                {console.log(this.arbol.dotG().nodes)}
                 <nav className="Bar">
                     <table>
                         <td>
@@ -155,7 +156,7 @@ class Arboles extends React.Component {
                     </table>
                 </nav>
                 <div>
-                    {three()}
+                    {three(this.arbol.dotG())}
                 </div>
                 <nav className="Sub_bar">
                     <table>

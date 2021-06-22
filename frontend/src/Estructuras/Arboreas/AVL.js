@@ -54,6 +54,42 @@ class AVL {
             this.agregar(vec[i])
         }
     }
+
+    // AVL
+    dotG(){
+        var nodos = [
+           {id:0, label: "ÁRBOL AVL"}
+       ]
+       var relaciones = [ ]
+       if(this.raiz !== null){
+           var nodo = this.raiz
+           var aux = []
+           aux = this.llenarN(aux, nodo, "Raiz", 1)
+           nodos = aux
+           relaciones = this.llenarR(relaciones, nodo, "Raiz")
+       }
+       return { nodes: nodos, edges: relaciones }
+   }
+   llenarN(vector, nodo, indice,nivel){
+       if(nodo === null){
+           vector.push({id: indice, level: nivel, label: "< >"})
+           return vector
+       }
+       vector.push({id: indice, level: nivel, label: (nodo.valor).toString()})
+       this.llenarN(vector, nodo.izquierdo, indice+"I", nivel+1)
+       this.llenarN(vector, nodo.derecho, indice+"D", nivel+1)
+       return vector
+   }
+   llenarR(vector, nodo, indice){
+    if(nodo === null){
+            return
+        }
+        vector.push({from: indice, to: indice+"I"})
+        vector.push({from: indice, to: indice+"D"})
+        this.llenarR(vector, nodo.izquierdo, indice+"I")
+        this.llenarR(vector, nodo.derecho, indice+"D")
+        return vector
+    }
 }
 
 function _agregar(valor, nodo){

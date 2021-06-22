@@ -7,7 +7,7 @@ class Rapido{
         for(var i in vec){
             this.vector.push(vec[i])
         }
-        this.ordenar(0, this.vector.length-1)
+        
     }
 
     guardar(){
@@ -20,7 +20,11 @@ class Rapido{
         return {nombre: "Rapido.json", text: txt}
     }
 
-    ordenar(min, max){
+    ordenar(){
+        this.ordenar_(0, this.vector.length-1)
+    }
+
+    ordenar_(min, max){
         if(min < max){
             var aux = this._ordenar(min, max)
             this.ordenar(min, aux-1)

@@ -7,7 +7,6 @@ class Seleccion{
         for(var i in vec){
             this.arreglo.push(vec[i])
         }
-        this.ordenar()
     }
     
     guardar(){

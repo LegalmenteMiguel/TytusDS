@@ -42,13 +42,13 @@ class LinealPC extends React.Component {
     handleFiles = e => {
         let files = e.target.files
         let reader = new FileReader()
-        reader.readAsText(files[0])
         reader.onload = e =>{
             const json = JSON.parse(e.target.result)
             this.setState({ velocidad: json.animaicon })
             this.lista = this.setLista(this.state.path, json.repeticion)
             this.lista.cargar(json.valores)
         }
+        reader.readAsText(files[0])
     }
 
     handleClick = e => {

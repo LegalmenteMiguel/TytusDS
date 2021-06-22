@@ -54,9 +54,7 @@ class LinealECD extends React.Component {
             this.lista = this.setLista(this.state.path, json.repeticion, json.posicion)
             this.lista.cargar(json.valores)
         }
-        console.log('paso')
         reader.readAsText(files[0])
-        this.render()
     }
 
     handleClick = e => {
