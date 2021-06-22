@@ -22,7 +22,7 @@ class Arboles extends React.Component {
           nuevo: "",
           path: this.props.location.pathname,
         }
-        this.arbol = this.setarbol(this.state.path)
+        this.arbol = this.setarbol(this.state.path, this.state.repeticion)
       }
     
     handleEntrada = e => {

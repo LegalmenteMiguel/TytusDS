@@ -24,7 +24,7 @@ const options = {
         border: 2
     },
     interaction: {
-        dragNodes :false
+        dragNodes :true
     },
     physics: {
         enabled: true

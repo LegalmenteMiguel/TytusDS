@@ -31,6 +31,17 @@ class Burbuja{
             }
         }
     }
+    //Burbuja
+    dotG(){
+        var aux = []
+        var fecha = new Date()
+        for(let i in this.vector){
+            var temp = "2021-"+(fecha.getMonth()+1).toString()+"-"+(fecha.getDate()).toString()
+            aux.push({x: temp, y: this.vector[i]})
+            fecha.setDate(fecha.getDate() + 1)
+        }
+       return aux
+    }
 }
 
 function ascii(txt){

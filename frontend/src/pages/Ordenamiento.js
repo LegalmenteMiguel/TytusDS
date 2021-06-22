@@ -5,6 +5,7 @@ import Rapido from '../Estructuras/Ordenamientos/Rapido'
 import Seleccion from '../Estructuras/Ordenamientos/Seleccion'
 import Burbuja from '../Estructuras/Ordenamientos/Burbuja'
 import Insercion from '../Estructuras/Ordenamientos/Insercion'
+import ordena from '../animaciones/gOrder'
 
 import Funciones from '../Estructuras/Funciones'
 
@@ -81,7 +82,7 @@ class LinealesL extends React.Component {
                     </table>
                 </nav>
                 <div>
-                    {/*Aqui va la grafica*/}
+                    {ordena()}
                 </div>
                 <nav className="Sub_bar">
                     <table>

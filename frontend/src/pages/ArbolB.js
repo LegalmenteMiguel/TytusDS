@@ -1,4 +1,4 @@
-//Pagina para graficar Enlazada Simple, Enlazada Doble, Circular Simple y Circular Doble
+//Pagina para graficar Arbol B+ y B
 import React from 'react'
 import threeB from '../animaciones/arbolB'
 //import Arbolb from '../Estructuras/Arboreas/ArbolB'

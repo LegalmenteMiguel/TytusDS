@@ -72,7 +72,7 @@ class Binario {
    }
    llenarN(vector, nodo, indice,nivel){
        if(nodo === null){
-           vector.push({id: indice, level: nivel, label: "-"})
+           vector.push({id: indice, level: nivel, label: "< >"})
            return vector
        }
        vector.push({id: indice, level: nivel, label: (nodo.valor).toString()})

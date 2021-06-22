@@ -132,7 +132,7 @@ class ColaPrioridad{
     llenarN(nodos,indice){
         var nodo = this.primero
         while(nodo !== null){
-            nodos.push({id: indice, label:(nodo.valor).toString()})
+            nodos.push({id: indice, label:(nodo.valor+" [ "+nodo.prioridad+" ]").toString()})
             nodo = nodo.siguiente
             indice++
         }
