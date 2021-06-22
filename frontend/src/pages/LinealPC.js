@@ -6,6 +6,8 @@ import Cola from '../Estructuras/lineales/Cola'
 
 import Funciones from '../Estructuras/Funciones'
 
+import lineal from '../animaciones/gLineal'
+
 import './styles/Grafica.css'
 
 class LinealPC extends React.Component {
@@ -55,7 +57,7 @@ class LinealPC extends React.Component {
             alert("Ingrese un valor")
         }
         else{
-            if(id === "Agregar") this.lista.agregar(this.entrada)
+            if(id === "Agregar") this.lista.agregar(this.state.entrada)
             
             else if(id === "Eliminar") this.lista.eliminar()
             
@@ -139,7 +141,7 @@ class LinealPC extends React.Component {
                     </table>
                 </nav>
                 <div>
-                    {/*Aqui va la grafica*/}
+                    {lineal(this.lista.dotG())}
                 </div>
                 <nav className="Sub_bar">
                     <table>

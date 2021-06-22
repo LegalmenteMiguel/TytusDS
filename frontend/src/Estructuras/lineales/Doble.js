@@ -77,7 +77,7 @@ class Doble{
     eliminar(valor){
         var nodo = this.primero
         var aux = null
-        while(nodo != null){
+        while(nodo !== null){
             if(nodo.valor === valor){
                 if(nodo === this.primero){
                     if(this.primero === this.ultimo){
@@ -85,7 +85,7 @@ class Doble{
                     }
                     else{
                         this.primero = nodo.siguiente
-                        nodo.anterior = null
+                        this.primero.anterior = null
                     }                    
                 }
                 else if(nodo === this.ultimo){
@@ -117,7 +117,7 @@ class Doble{
     }
     // Buscar
     buscar(valor){
-        if(this.primero === null){
+        if(this.primero !== null){
             var aux = this.primero
             while(aux != null){
                 if(aux.valor === valor){
@@ -151,6 +151,46 @@ class Doble{
         }
         const txt = JSON.stringify(json, null, '   ')
         return {nombre: "Enlazada Doble.json", text: txt}
+    }
+    // Lineales
+    dotG(){
+        var nodos = [
+            {id:0, label: "PRIMERO"},
+            {id:1, label: "ULTIMO"}
+        ]
+        var indice = nodos.length
+        nodos = this.llenarN(nodos,indice)
+        var relaciones = [ ]
+        var rel = relaciones.length+2
+        relaciones = this.llenarR(relaciones,rel)
+        if(this.primero!==null){
+            relaciones.push({from: 0, to: 2})
+            relaciones.push({from: 1, to: nodos.length-1})
+        }
+        return { nodes: nodos, edges: relaciones} 
+    }
+    llenarN(nodos,indice){
+        var nodo = this.primero
+        if(nodo!==null){
+            do{
+                nodos.push({id: indice, label: (nodo.valor).toString()})
+                nodo = nodo.siguiente
+                indice++
+            }
+            while(nodo !== this.primero.anterior)
+        }
+        return nodos
+    }
+    llenarR(relaciones,rel){
+        var nodo = this.primero
+        if(nodo !== null){
+            do{
+                relaciones.push({from: rel, to: rel+1})
+                nodo = nodo.siguiente
+                rel ++
+            }while(nodo !== null)
+        }
+        return relaciones
     }
 }
 

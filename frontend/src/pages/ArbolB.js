@@ -1,6 +1,6 @@
 //Pagina para graficar Enlazada Simple, Enlazada Doble, Circular Simple y Circular Doble
 import React from 'react'
-
+import threeB from '../animaciones/arbolB'
 //import Arbolb from '../Estructuras/Arboreas/ArbolB'
 //import Arbolbm from '../Estructuras/Arboreas/ArbolBm'
 
@@ -144,7 +144,7 @@ class ArbolB extends React.Component {
                     </table>
                 </nav>
                 <div>
-                    {/*Aqui va la grafica*/}
+                    {threeB()}
                 </div>
                 <nav className="Sub_bar">
                     <table>

@@ -11,6 +11,7 @@ import Lineal from '../pages/Lineal'
 import LinealEC from '../pages/LinealEC'
 import LinealPC from '../pages/LinealPC'
 import LinealCP from '../pages/LinealCP'
+import LinealECD from '../pages/LinealECD'
 //Ordenamientos
 import Ordenamiento from '../pages/Ordenamiento'
 //Arboreas
@@ -28,9 +29,9 @@ function  App(){
             <Route exact path="/TytusDS/frontend/build/Ordenamientos" component={Ordenamiento} />
             <Route exact path="/TytusDS/frontend/build/Arboreas" component={Arborea} />
             <Route exact path="/TytusDS/frontend/build/Lineales/EnlazadaSimple" component={LinealEC} />
-            <Route exact path="/TytusDS/frontend/build/Lineales/EnlazadaDoble" component={LinealEC} />
+            <Route exact path="/TytusDS/frontend/build/Lineales/EnlazadaDoble" component={LinealECD} />
             <Route exact path="/TytusDS/frontend/build/Lineales/CircularSimple" component={LinealEC} />
-            <Route exact path="/TytusDS/frontend/build/Lineales/CircularDoble" component={LinealEC} />
+            <Route exact path="/TytusDS/frontend/build/Lineales/CircularDoble" component={LinealECD} />
             <Route exact path="/TytusDS/frontend/build/Lineales/Pila" component={LinealPC} />
             <Route exact path="/TytusDS/frontend/build/Lineales/Cola" component={LinealPC} />
             <Route exact path="/TytusDS/frontend/build/Lineales/ColaPrioridad" component={LinealCP} />

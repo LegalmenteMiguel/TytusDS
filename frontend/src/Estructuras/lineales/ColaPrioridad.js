@@ -36,7 +36,7 @@ class ColaPrioridad{
     //Eliminar item
     eliminar(){
     	var temp = false
-        for(let i = 1; i < 6; i--){
+        for(let i = 1; i < 6; i++){
         	var nodo = this.primero
         	var aux = null
         	while(nodo !== null){
@@ -46,6 +46,7 @@ class ColaPrioridad{
         			}
         			else if(nodo === this.ultimo){
         				this.ultimo = aux
+                        this.ultimo.siguiente = null
         			}
         			else{
         				aux.siguiente = nodo.siguiente
@@ -63,13 +64,15 @@ class ColaPrioridad{
     }
     //Busca primer aparición
     buscar(valor){
-        var aux = this.primero
-        while(aux != null){
-            if(aux.valor === valor){
-                //Se encotro valor
-                return true
+        if(this.primero !== null){
+            var aux = this.primero
+            while(aux != null){
+                if(aux.valor === valor){
+                    //Se encontro valor
+                    return true
+                }
+                aux = aux.siguiente
             }
-            aux = aux.siguiente
         }
         //No se encontro valor
         return false
@@ -108,6 +111,43 @@ class ColaPrioridad{
         for(var i in vec){
             this.agregar(vec[i].valor, vec[i].prioridad)
         }
+    }
+    // Cola Prioridad
+    dotG(){
+        var nodos = [
+            {id:0, label: "PRIMERO"},
+            {id:1, label: "ULTIMO"}
+        ]
+        var indice = nodos.length
+        nodos = this.llenarN(nodos,indice)
+        var relaciones = [ ]
+        var rel = relaciones.length+2
+        relaciones = this.llenarR(relaciones,rel)
+        if(this.primero!==null){
+            relaciones.push({from: 0, to: 2})
+            relaciones.push({from: 1, to: nodos.length-1})
+        }
+        return { nodes: nodos, edges: relaciones }
+    }
+    llenarN(nodos,indice){
+        var nodo = this.primero
+        while(nodo !== null){
+            nodos.push({id: indice, label:(nodo.valor).toString()})
+            nodo = nodo.siguiente
+            indice++
+        }
+        return nodos
+    }
+    llenarR(relaciones,rel){
+        var nodo = this.primero
+        if(nodo !== null){
+            do{
+                relaciones.push({from: rel, to: rel+1})
+                nodo = nodo.siguiente
+                rel ++
+            }while(nodo !== null)
+        }
+        return relaciones
     }
 }
 

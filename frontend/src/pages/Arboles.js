@@ -6,6 +6,8 @@ import AVL from '../Estructuras/Arboreas/AVL'
 
 import Funciones from '../Estructuras/Funciones.js'
 
+import three from '../animaciones/gArbol'
+
 import './styles/Grafica.css'
 
 class Arboles extends React.Component {
@@ -153,7 +155,7 @@ class Arboles extends React.Component {
                     </table>
                 </nav>
                 <div>
-                    {/*Aqui va la grafica*/}
+                    {three()}
                 </div>
                 <nav className="Sub_bar">
                     <table>

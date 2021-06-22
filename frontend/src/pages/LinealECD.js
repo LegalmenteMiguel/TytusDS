@@ -1,17 +1,17 @@
-//Pagina para graficar Enlazadas Simples, Circulares Simples 
+//Pagina para graficar  Enlazadas Dobles y Circulares Dobles
 import React from 'react'
 
-import EnlazadaS from '../Estructuras/lineales/Simple'
-import CircularS from '../Estructuras/lineales/CircularSimple'
+import EnlazadaD from '../Estructuras/lineales/Doble'
+import CircularD from '../Estructuras/lineales/CircularDoble'
 
 import Funciones from '../Estructuras/Funciones.js'
 
-import lineal from '../animaciones/gLineal'
-
+import doble from '../animaciones/dobles'
 
 import './styles/Grafica.css'
 
-class LinealEC extends React.Component {
+
+class LinealECD extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -48,13 +48,15 @@ class LinealEC extends React.Component {
     handleFiles = e => {
         let files = e.target.files
         let reader = new FileReader()
-        reader.readAsText(files[0])
         reader.onload = e =>{
             const json = JSON.parse(e.target.result)
             this.setState({ velocidad: json.animaicon })
             this.lista = this.setLista(this.state.path, json.repeticion, json.posicion)
             this.lista.cargar(json.valores)
         }
+        console.log('paso')
+        reader.readAsText(files[0])
+        this.render()
     }
 
     handleClick = e => {
@@ -93,13 +95,9 @@ class LinealEC extends React.Component {
     }
 
     setLista = (path, repeticion, ingreso) => {
-        if(path.includes("EnlazadaSimple")) return new EnlazadaS(ingreso, repeticion)
+        if(path.includes("EnlazadaDoble")) return new EnlazadaD(ingreso, repeticion)
         
-       
-        
-        else if(path.includes("CircularSimple")) return new CircularS(ingreso, repeticion)
-
-        
+        else if(path.includes("CircularDoble")) return new CircularD(ingreso, repeticion)
     }
 
     render(){
@@ -151,7 +149,7 @@ class LinealEC extends React.Component {
                     </table>
                 </nav>
                 <div>
-                    {lineal(this.lista.dotG())}
+                    {doble(this.lista.dotG())}
                 </div>
                 <nav className="Sub_bar">
                     <table>
@@ -186,4 +184,4 @@ class LinealEC extends React.Component {
 
 }
 
-export default LinealEC
+export default LinealECD

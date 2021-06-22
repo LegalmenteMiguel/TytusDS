@@ -139,7 +139,7 @@ class CircularSimple{
     }
     //Buscar
     buscar(valor){
-        if(this.raiz === null){
+        if(this.raiz !== null){
             var nodo = this.raiz
             do{
                 if(nodo.valor === valor){
@@ -181,6 +181,46 @@ class CircularSimple{
             aux = aux.siguiente
         }while(aux !== this.siguiente)
         return aux
+    }
+    // Circular
+    dotG(){
+        var nodos = [
+            {id:0, label: "RAIZ"},
+        ]
+        var indice = nodos.length
+        nodos = this.llenarN(nodos,indice)
+        var relaciones = [ ]
+        var rel = relaciones.length+1
+        relaciones = this.llenarR(relaciones,rel)
+        return { nodes: nodos, edges: relaciones} 
+    }
+    llenarN(nodos,indice){
+        var nodo = this.raiz
+        if(nodo!==null){
+            do{
+                nodos.push({id: indice, label: (nodo.valor).toString()})
+                nodo = nodo.siguiente
+                indice++
+            }
+            while(nodo !== this.raiz)
+        }
+        return nodos
+    }
+    llenarR(relaciones,rel){
+        var nodo = this.raiz
+        if(this.raiz !==  null){
+            relaciones.push({from: 0, to: rel})
+        }
+        if(nodo !== null){
+            do{
+                relaciones.push({from: rel, to: rel+1})
+                nodo = nodo.siguiente
+                rel ++
+            }while(nodo.siguiente !== this.raiz)
+            relaciones.push({from: rel, to: rel+1})
+        }
+        relaciones.push({from: rel, to: 1})
+        return relaciones
     }
 }
 //Obtner Ascii

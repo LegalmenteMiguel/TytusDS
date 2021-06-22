@@ -5,6 +5,9 @@ import ColaP from '../Estructuras/lineales/ColaPrioridad'
 
 import Funciones from '../Estructuras/Funciones'
 
+import lineal from '../animaciones/gLineal'
+import VisNetwork from 'vis-network-react'
+
 import './styles/Grafica.css'
 
 class LinealCP extends React.Component {
@@ -92,6 +95,7 @@ class LinealCP extends React.Component {
 
     render(){
         return (
+        
             <div>
                 <nav className="Bar">
                     <table>
@@ -148,7 +152,8 @@ class LinealCP extends React.Component {
                     </table>
                 </nav>
                 <div>
-                    {/*Aqui va la grafica*/}
+                    {lineal(this.cola.dotG())}
+                   
                 </div>
                 <nav className="Sub_bar">
                     <table>
