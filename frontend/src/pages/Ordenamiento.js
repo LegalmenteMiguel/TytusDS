@@ -11,7 +11,7 @@ import Funciones from '../Estructuras/Funciones'
 
 import './styles/Grafica.css'
 
-class LinealesL extends React.Component {
+class Ordenamiento extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -46,7 +46,7 @@ class LinealesL extends React.Component {
             var output = this.vector.guardar()
             Funciones(output.nombre, output.text)
         }
-        else if(id == "Ordenar") this.vector.ordenar()
+        else if(id === "Ordenar") this.vector.ordenar()
         else if(id === "Nuevo") this.vector = this.setvector(this.state.tipo)
     }
 
@@ -112,4 +112,4 @@ class LinealesL extends React.Component {
 
 }
 
-export default LinealesL
+export default Ordenamiento

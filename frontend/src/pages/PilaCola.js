@@ -1,35 +1,30 @@
-//Pagina para graficar Cola de Prioridad
+//Pagina para graficar Pilas y Colas
 import React from 'react';
 
-import ColaP from '../Estructuras/lineales/ColaPrioridad'
+import Pila from '../Estructuras/lineales/Pila'
+import Cola from '../Estructuras/lineales/Cola'
 
 import Funciones from '../Estructuras/Funciones'
 
 import lineal from '../animaciones/gLineal'
-import VisNetwork from 'vis-network-react'
 
 import './styles/Grafica.css'
 
-class LinealCP extends React.Component {
+class PilaCola extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
           repeticion: true,
           velocidad: 5,
           entrada: "",
-          prioridad: 1,
           nuevo: "",
           path: this.props.location.pathname,
         }
-        this.cola = new ColaP(this.state.repeticion)
+        this.lista = this.setLista(this.state.path)
       }
     
     handleEntrada = e => {
         this.setState({ entrada: e.target.value })
-    }
-
-    handlePrioridad = e => {
-        this.setState({ prioridad: e.target.value })
     }
 
     handleNuevo = e => {
@@ -50,8 +45,8 @@ class LinealCP extends React.Component {
         reader.onload = e =>{
             const json = JSON.parse(e.target.result)
             this.setState({ velocidad: json.animaicon })
-            this.cola = new ColaP(json.repeticion)
-            this.cola.cargar(json.valores)
+            this.lista = this.setLista(this.state.path, json.repeticion)
+            this.lista.cargar(json.valores)
         }
         reader.readAsText(files[0])
     }
@@ -60,42 +55,45 @@ class LinealCP extends React.Component {
         const id = e.target.id
         if(this.state.entrada === "" && id === "Agregar" && id === "Buscar" && id === "Actualizar"){
             alert("Ingrese un valor")
-        } 
+        }
         else{
-            if(id === "Agregar") this.cola.agregar(this.state.entrada, this.state.prioridad)
-               
-            else if(id === "Eliminar") this.cola.eliminar()
+            if(id === "Agregar") this.lista.agregar(this.state.entrada)
+            
+            else if(id === "Eliminar") this.lista.eliminar()
             
             else if(id === "Buscar"){
-                var aux = this.cola.buscar(this.state.entrada)
+                var aux = this.lista.buscar(this.state.entrada)
                 if(aux) alert("Se encontro el valor")
                 else alert("No se encontro el valor")
             }
-            else if(id === "Actualizar"){
-                if(this.state.nuevo === "") alert("Ingrese Nuevo Valor")
-
-                else this.cola.actualizar(this.state.entrada, this.state.nuevo)
+            else if(id === "Actualizar"){ 
+                if(this.state.nuevo === "") alert("Ingrese el Nuevo Valor")
+                else this.lista.actualizar(this.state.entrada, this.state.nuevo)
             }
             else if(id === "Guardar"){
-                var output = this.cola.guardar()
+                var output = this.lista.guardar()
                 Funciones(output.nombre, output.text)
-            } 
+            }
     
-            else if(id === "Nuevo") this.cola = new ColaP(this.state.repeticion)
+            else if(id === "Nuevo") this.lista = this.setLista(this.state.path, this.state.repeticion)
 
             document.getElementById("input").reset()
             document.getElementById("nuevo").reset()
             this.setState({
                 entrada: "",
-                nuevo: "",
-                prioridad: 0
+                nuevo: ""
             })
         }
     }
 
+    setLista = (path, repeticion) => {
+        if(path.includes("Pila")) return new Pila(repeticion)
+        
+        else if(path.includes("Cola")) return new Cola(repeticion)
+    }
+
     render(){
         return (
-        
             <div>
                 <nav className="Bar">
                     <table>
@@ -104,15 +102,6 @@ class LinealCP extends React.Component {
                                 <input type="text" style={{width: "100px"}} placeholder="Valor"
                                 onChange={this.handleEntrada}/>
                             </form>
-                        </td>
-                        <td>
-                            <select multiple="" onChange={this.handlePrioridad} style={{height: "30px"}} >
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                                <option>5</option>
-                            </select>
                         </td>
                         <td>
                         <button className="btn Boton" id="Agregar"
@@ -152,8 +141,7 @@ class LinealCP extends React.Component {
                     </table>
                 </nav>
                 <div>
-                    {lineal(this.cola.dotG())}
-                   
+                    {lineal(this.lista.dotG())}
                 </div>
                 <nav className="Sub_bar">
                     <table>
@@ -180,4 +168,4 @@ class LinealCP extends React.Component {
     }
 }
 
-export default LinealCP
+export default PilaCola

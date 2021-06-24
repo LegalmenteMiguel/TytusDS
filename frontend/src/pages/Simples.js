@@ -11,7 +11,7 @@ import lineal from '../animaciones/gLineal'
 
 import './styles/Grafica.css'
 
-class LinealEC extends React.Component {
+class Simple extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -186,4 +186,4 @@ class LinealEC extends React.Component {
 
 }
 
-export default LinealEC
+export default Simple
