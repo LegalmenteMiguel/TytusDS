@@ -5,7 +5,7 @@ const ItemNoLineal = [
         title: "Tabla Hash",
         name: "Abierta",
         logo: Working,
-        path: "HashAbierta",
+        path: "NoLineales/HashAbierta",
         header: "",
         class: "Button Button_right1"
     },
@@ -13,7 +13,7 @@ const ItemNoLineal = [
         title: "Tabla Hash",
         name: "Cerrada",
         logo: Working,
-        path: "HashCerrada",
+        path: "NoLineales/HashCerrada",
         header: "",
         class: "Button Button_1"
     },
@@ -21,7 +21,7 @@ const ItemNoLineal = [
         title: "Recorrido y Búsqueda",
         name: "Por Anchura",
         logo: Working,
-        path: "AnchuraDeGrafos",
+        path: "NoLineales/AnchuraDeGrafos",
         header: "",
         class: "Button Button_left1"
     },
@@ -29,7 +29,7 @@ const ItemNoLineal = [
         title: "Recorrido y Búsqueda",
         name: "Por Profundidad",
         logo: Working,
-        path: "ProfundidadDeGrafos",
+        path: "NoLineales/ProfundidadDeGrafos",
         header: "",
         class: "Button Top_right1"
     },
@@ -37,7 +37,7 @@ const ItemNoLineal = [
         title: "Algoritmo de",
         name: "Costo Uniforme",
         logo: Working,
-        path: "CostoUniforme",
+        path: "NoLineales/CostoUniforme",
         header: "",
         class: "Button Top_button1"
     },
@@ -45,7 +45,7 @@ const ItemNoLineal = [
         title: "Árbol de",
         name: "Recubrimiento Mínimo",
         logo: Working,
-        path: "RecubrimientoMinimo",
+        path: "NoLineales/RecubrimientoMinimo",
         header: "",
         class: "Button Top_left1"
     }

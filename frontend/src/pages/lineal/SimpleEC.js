@@ -1,34 +1,32 @@
-//Pagina para graficar Cola de Prioridad
-import React from 'react';
+//Pagina para graficar Enlazadas Simples, Circulares Simples 
+import React from 'react'
 
-import ColaP from '../Estructuras/lineales/ColaPrioridad'
+import EnlazadaS from '../../Estructuras/lineales/Simple'
+import CircularS from '../../Estructuras/lineales/CircularSimple'
 
-import Funciones from '../Estructuras/Funciones'
+import Funciones from '../../Estructuras/Funciones.js'
 
-import lineal from '../animaciones/gLineal'
+import lineal from '../../animaciones/gLineal'
 
-import './styles/Grafica.css'
 
-class ColaPrioridad extends React.Component {
+import '../styles/Grafica.css'
+
+class Simple extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
           repeticion: true,
+          ingreso: "Final",
           velocidad: 5,
           entrada: "",
-          prioridad: 1,
           nuevo: "",
           path: this.props.location.pathname,
         }
-        this.cola = new ColaP(this.state.repeticion)
+        this.lista = this.setLista(this.state.path, this.state.repeticion, this.state.ingreso)
       }
     
     handleEntrada = e => {
         this.setState({ entrada: e.target.value })
-    }
-
-    handlePrioridad = e => {
-        this.setState({ prioridad: e.target.value })
     }
 
     handleNuevo = e => {
@@ -36,9 +34,13 @@ class ColaPrioridad extends React.Component {
     }
 
     handleRepeticion = () => {
-        this.setState({ repeticion: !this.state.repeticion  })
+        this.setState({ repeticion: !this.state.repeticion })
     }
-    
+
+    handleIngreso = e => {
+        this.setState({ ingreso: e.target.value })
+    }
+
     handleVelocidad = e => {
         this.setState({ velocidad: e.target.value })
     }
@@ -49,52 +51,59 @@ class ColaPrioridad extends React.Component {
         reader.onload = e =>{
             const json = JSON.parse(e.target.result)
             this.setState({ velocidad: json.animaicon })
-            this.cola = new ColaP(json.repeticion)
-            this.cola.cargar(json.valores)
+            this.lista = this.setLista(this.state.path, json.repeticion, json.posicion)
+            this.lista.cargar(json.valores)
         }
         reader.readAsText(files[0])
     }
 
     handleClick = e => {
         const id = e.target.id
-        if(this.state.entrada === "" && id === "Agregar" && id === "Buscar" && id === "Actualizar"){
-            alert("Ingrese un valor")
-        } 
+        if(this.state.entrada === "" && id !== "Nuevo" && id !== "Guardar") alert("Ingrese un valor")
+        
         else{
-            if(id === "Agregar") this.cola.agregar(this.state.entrada, this.state.prioridad)
-               
-            else if(id === "Eliminar") this.cola.eliminar()
+            if(id === "Agregar") this.lista.agregar(this.state.entrada)
+            
+            else if(id === "Eliminar") this.lista.eliminar(this.state.entrada)
             
             else if(id === "Buscar"){
-                var aux = this.cola.buscar(this.state.entrada)
+                var aux = this.lista.buscar(this.state.entrada)
                 if(aux) alert("Se encontro el valor")
                 else alert("No se encontro el valor")
             }
             else if(id === "Actualizar"){
-                if(this.state.nuevo === "") alert("Ingrese Nuevo Valor")
-
-                else this.cola.actualizar(this.state.entrada, this.state.nuevo)
-            }
-            else if(id === "Guardar"){
-                var output = this.cola.guardar()
-                Funciones(output.nombre, output.text)
+                if(this.state.nuevo === "") alert("Ingrese el Nuevo valor")
+                else this.lista.actualizar(this.state.entrada, this.state.nuevo)
             } 
-    
-            else if(id === "Nuevo") this.cola = new ColaP(this.state.repeticion)
-
+                
+            else if(id === "Nuevo") this.lista = this.setLista(this.state.path,this.state.repeticion, this.state.ingreso)
+            
+            else if(id === "Guardar"){
+                var output = this.lista.guardar()
+                Funciones(output.nombre, output.text)
+            }
+            
             document.getElementById("input").reset()
             document.getElementById("nuevo").reset()
             this.setState({
                 entrada: "",
-                nuevo: "",
-                prioridad: 0
+                nuevo: ""
             })
         }
     }
 
+    setLista = (path, repeticion, ingreso) => {
+        if(path.includes("EnlazadaSimple")) return new EnlazadaS(ingreso, repeticion)
+        
+       
+        
+        else if(path.includes("CircularSimple")) return new CircularS(ingreso, repeticion)
+
+        
+    }
+
     render(){
         return (
-        
             <div>
                 <nav className="Bar">
                     <table>
@@ -105,18 +114,9 @@ class ColaPrioridad extends React.Component {
                             </form>
                         </td>
                         <td>
-                            <select multiple="" onChange={this.handlePrioridad} style={{height: "30px"}} >
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                                <option>5</option>
-                            </select>
-                        </td>
-                        <td>
-                        <button className="btn Boton" id="Agregar"
-                            onClick={this.handleClick}> Agregar
-                        </button> 
+                            <button className="btn Boton" id="Agregar" 
+                                onClick={this.handleClick}> Agregar
+                            </button> 
                         </td>
                         <td>
                             <button className="btn Boton" id="Eliminar"
@@ -145,20 +145,26 @@ class ColaPrioridad extends React.Component {
                             </button>
                         </td>
                         <td>
-                            <input type="file" multiple={false} accept=".json" 
+                            <input type="file" multiple={false} accept=".json"
                             onChange={this.handleFiles} />
                         </td>
                     </table>
                 </nav>
                 <div>
-                    {lineal(this.cola.dotG())}
-                   
+                    {lineal(this.lista.dotG())}
                 </div>
                 <nav className="Sub_bar">
                     <table>
                         <td>
                             <input type="range"  min="0" max="10" step="1"  onChange={this.handleVelocidad}
                             defaultValue={this.state.velocidad} width="100"/>
+                        </td>
+                        <td>
+                            <select multiple="" onChange={this.handleIngreso} >
+                                <option>Final</option>
+                                <option>Inicio</option>
+                                <option>Orden</option>
+                            </select>
                         </td>
                         <td>
                             <label>
@@ -177,6 +183,7 @@ class ColaPrioridad extends React.Component {
             </div>
         )
     }
+
 }
 
-export default ColaPrioridad
+export default Simple

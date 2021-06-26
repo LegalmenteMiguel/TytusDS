@@ -1,14 +1,16 @@
-//Pagina para graficar Arbol B+ y B
+//Pagina para graficar Arbol Binario y AVL
 import React from 'react'
-import threeB from '../animaciones/arbolB'
-//import Arbolb from '../Estructuras/Arboreas/ArbolB'
-//import Arbolbm from '../Estructuras/Arboreas/ArbolBm'
 
-import Funciones from '../Estructuras/Funciones'
+import Binario from '../../Estructuras/Arboreas/Binario'
+import AVL from '../../Estructuras/Arboreas/AVL'
 
-import './styles/Grafica.css'
+import Funciones from '../../Estructuras/Funciones.js'
 
-class ArbolB extends React.Component {
+import three from '../../animaciones/gArbol'
+
+import '../styles/Grafica.css'
+
+class Arboles extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -16,11 +18,11 @@ class ArbolB extends React.Component {
           velocidad: 5,
           entrada: "",
           orden: 3,
-          tipo: "PreOrdne",
+          tipo: "PreOrden",
           nuevo: "",
           path: this.props.location.pathname,
         }
-        this.arbol = this.setarbol(this.state.path)
+        this.arbol = this.setarbol(this.state.path, this.state.repeticion)
       }
     
     handleEntrada = e => {
@@ -37,10 +39,6 @@ class ArbolB extends React.Component {
 
     handleTipo = e => {
         this.setState({ tipo: e.target.value })
-    }
-
-    handleOrden = e => {
-        this.setState({ orden: e.target.value })
     }
     
     handleVelocidad = e => {
@@ -62,7 +60,7 @@ class ArbolB extends React.Component {
     handleClick = e => {
         const id = e.target.id
         if(this.state.entrada === "" && id !== "Nuevo" && id !== "Guardar") alert("Ingrese un valor")
-        
+
         else{
             if(id === "Agregar") this.arbol.agregar(this.state.entrada)
             
@@ -74,17 +72,18 @@ class ArbolB extends React.Component {
                 else alert("No se encontro el valor")
             }
             else if(id === "Actualizar"){
-                if(this.state.nuevo !== "") alert("Ingrese el Nuevo valor")
+                if(this.state.nuevo === "") alert("Ingrese el Nuevo valor")
+                
                 else this.arbol.actualizar(this.state.entrada, this.state.nuevo)
             } 
                 
-            else if(id === "Nuevo") this.arbol = this.setarbol(this.state.path)
+            else if(id === "Nuevo") this.arbol = this.setarbol(this.state.path, this.state.repeticion)
             
             else if(id === "Guardar"){
                 var output = this.arbol.guardar(this.state.tipo)
                 Funciones(output.nombre, output.text)
             }
-            
+
             document.getElementById("input").reset()
             document.getElementById("nuevo").reset()
             this.setState({
@@ -94,14 +93,16 @@ class ArbolB extends React.Component {
         }
     }
 
-    setarbol = path => {
-        if(path.includes("ArbolB+")) return 
-        else if(path.includes("ArbolB")) return
+    setarbol = (path, repeticion) => {
+        if(path.includes("ArbolBinario")) return new Binario(repeticion)
+        
+        else if(path.includes("AVL")) return new AVL(repeticion)
     }
 
     render(){
         return (
             <div>
+                {console.log(this.arbol.dotG().nodes)}
                 <nav className="Bar">
                     <table>
                         <td>
@@ -141,7 +142,6 @@ class ArbolB extends React.Component {
                                 <option>PreOrden</option>
                                 <option>InOrden</option>
                                 <option>PostOrden</option>
-                                <option>Objeto</option>
                             </select>
                         </td>
                         <td>
@@ -156,22 +156,13 @@ class ArbolB extends React.Component {
                     </table>
                 </nav>
                 <div>
-                    {threeB()}
+                    {three(this.arbol.dotG())}
                 </div>
                 <nav className="Sub_bar">
                     <table>
                         <td>
                             <input type="range"  min="0" max="10" step="1"  onChange={this.handleVelocidad}
                             defaultValue={this.state.velocidad} width="100"/>
-                        </td>
-                        <td>
-                            <select multiple="" onChange={this.handleOrden} style={{height: "30px"}}>
-                                <option>3</option>
-                                <option>4</option>
-                                <option>5</option>
-                                <option>6</option>
-                                <option>7</option>
-                            </select>
                         </td>
                         <td>
                             <label>
@@ -190,7 +181,6 @@ class ArbolB extends React.Component {
             </div>
         )
     }
-
 }
 
-export default ArbolB
+export default Arboles

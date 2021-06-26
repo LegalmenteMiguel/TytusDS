@@ -11,15 +11,18 @@ import NoLineal from '../pages/Menus/NoLineal'
 import Codificacion from '../pages/Menus/Codificacion'
 import Compuesta from '../pages/Menus/Compuesta'
 //Lineales
-import Simple from '../pages/Simples'
-import PilaCola from '../pages/PilaCola'
-import ColaPrioridad from '../pages/ColaPrioridad'
-import Dobles from '../pages/Dobles'
+import Simple from '../pages/lineal/SimpleEC'
+import PilaCola from '../pages/lineal/PilaCola'
+import ColaPrioridad from '../pages/lineal/ColaPrioridad'
+import Dobles from '../pages/lineal/DobleEC'
 //Ordenamientos
 import Ordenamiento from '../pages/Ordenamiento'
 //Arboreas
-import Arboles from '../pages/Arboles'
-import ArbolB from '../pages/ArbolB'
+import Arboles from '../pages/arborea/Arboles'
+import ArbolB from '../pages/arborea/ArbolB'
+//No Lineales
+import HashC from '../pages/noLineal/HashC'
+import HashA from '../pages/noLineal/HashA'
 
 function  App(){
     return (
@@ -49,6 +52,8 @@ function  App(){
             <Route exact path="/TytusDS/frontend/build/Arboreas/ArbolB" component={ArbolB} />
             <Route exact path="/TytusDS/frontend/build/Arboreas/ArbolB+" component={ArbolB} />
             {/*No Lineales*/}
+            <Route exact path="/TytusDS/frontend/build/NoLineales/HashCerrada" component={HashC} />
+            <Route exact path="/TytusDS/frontend/build/NoLineales/HashAbierta" component={HashA} />
             <Route component={NotFound} />
           </Switch>
         </Layout>

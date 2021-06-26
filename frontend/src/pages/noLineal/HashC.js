@@ -1,28 +1,29 @@
-//Pagina para graficar Arbol Binario y AVL
+//Pagina para graficar Hash Cerrado
 import React from 'react'
 
-import Binario from '../Estructuras/Arboreas/Binario'
-import AVL from '../Estructuras/Arboreas/AVL'
+import HashC from '../../Estructuras/noLineal/HashC'
 
-import Funciones from '../Estructuras/Funciones.js'
+import Funciones from '../../Estructuras/Funciones.js'
 
-import three from '../animaciones/gArbol'
+import hash from '../../animaciones/gHashC'
 
-import './styles/Grafica.css'
+import '../styles/Grafica.css'
 
-class Arboles extends React.Component {
+class hashC extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-          repeticion: true,
-          velocidad: 5,
-          entrada: "",
-          orden: 3,
-          tipo: "PreOrden",
-          nuevo: "",
-          path: this.props.location.pathname,
+            entrada: "",
+            nuevo: "",
+            tamaño: 29,
+            minimo: 20,
+            maximo: 80,
+            metodo: "Division",
+            resolucion: "Lineal",
+            tipo: "Integer",
+            velocidad: 5
         }
-        this.arbol = this.setarbol(this.state.path, this.state.repeticion)
+        this.hash = new HashC(this.state.tamaño, this.state.min, this.state.maximo, this.state.metodo, this.state.resolucion, this.state.tipo)
       }
     
     handleEntrada = e => {
@@ -33,26 +34,39 @@ class Arboles extends React.Component {
         this.setState({ nuevo: e.target.value })
     }
 
-    handleRepeticion = () => {
-        this.setState({ repeticion: !this.state.repeticion })
+    handleVelocidad = e => {
+        this.setState({ velocidad: e.target.value })
+    }
+
+    handleTamaño = e => {
+        this.setState({ tamaño: parseInt(e.target.value)})
+    }
+
+    handleMinimo = e => {
+        this.setState({ minimo: parseInt(e.target.value)})
+    }
+
+    handleMaximo = e => {
+        this.setState({ maximo: parseInt(e.target.value)})
     }
 
     handleTipo = e => {
         this.setState({ tipo: e.target.value })
     }
-    
-    handleVelocidad = e => {
-        this.setState({ velocidad: e.target.value })
+
+    handleMetodo = e => {
+        this.setState({ metodo: e.target.value })
+    }
+
+    handleResolucion = e => {
+        this.setState({ resolucion: e.target.value })
     }
 
     handleFiles = e => {
         let files = e.target.files
         let reader = new FileReader()
         reader.onload = e =>{
-            const json = JSON.parse(e.target.result)
-            this.setState({ velocidad: json.animaicon })
-            this.arbol = this.setarbol(this.state.path, json.repeticion)
-            this.arbol.cargar(json.valores)
+            
         }
         reader.readAsText(files[0])
     }
@@ -62,25 +76,25 @@ class Arboles extends React.Component {
         if(this.state.entrada === "" && id !== "Nuevo" && id !== "Guardar") alert("Ingrese un valor")
 
         else{
-            if(id === "Agregar") this.arbol.agregar(this.state.entrada)
+            if(id === "Agregar") this.hash.agregar(this.state.entrada)
             
-            else if(id === "Eliminar") this.arbol.eliminar(this.state.entrada)
+            else if(id === "Eliminar") this.hash.eliminar(this.state.entrada)
             
             else if(id === "Buscar"){
-                var aux = this.arbol.buscar(this.state.entrada)
+                var aux = this.hash.buscar(this.state.entrada)
                 if(aux) alert("Se encontro el valor")
                 else alert("No se encontro el valor")
             }
             else if(id === "Actualizar"){
                 if(this.state.nuevo === "") alert("Ingrese el Nuevo valor")
                 
-                else this.arbol.actualizar(this.state.entrada, this.state.nuevo)
+                else this.hash.actualizar(this.state.entrada, this.state.nuevo)
             } 
                 
-            else if(id === "Nuevo") this.arbol = this.setarbol(this.state.path, this.state.repeticion)
-            
+            else if(id === "Nuevo") this.hash = new HashC(this.state.tamaño, this.state.min, this.state.maximo, this.state.metodo, this.state.resolucion, this.state.tipo)
+
             else if(id === "Guardar"){
-                var output = this.arbol.guardar(this.state.tipo)
+                var output = this.hash.guardar(this.state.tipo)
                 Funciones(output.nombre, output.text)
             }
 
@@ -93,16 +107,9 @@ class Arboles extends React.Component {
         }
     }
 
-    setarbol = (path, repeticion) => {
-        if(path.includes("ArbolBinario")) return new Binario(repeticion)
-        
-        else if(path.includes("AVL")) return new AVL(repeticion)
-    }
-
     render(){
         return (
             <div>
-                {console.log(this.arbol.dotG().nodes)}
                 <nav className="Bar">
                     <table>
                         <td>
@@ -138,13 +145,6 @@ class Arboles extends React.Component {
                             </button>
                         </td>
                         <td>
-                            <select multiple="" onChange={this.handleTipo} style={{height: "30px"}}>
-                                <option>PreOrden</option>
-                                <option>InOrden</option>
-                                <option>PostOrden</option>
-                            </select>
-                        </td>
-                        <td>
                             <button className="btn btn-success" id="Guardar"
                                 onClick={this.handleClick}> Guardar
                             </button>
@@ -156,7 +156,7 @@ class Arboles extends React.Component {
                     </table>
                 </nav>
                 <div>
-                    {three(this.arbol.dotG())}
+                    {hash(this.hash.dotG())}
                 </div>
                 <nav className="Sub_bar">
                     <table>
@@ -165,11 +165,42 @@ class Arboles extends React.Component {
                             defaultValue={this.state.velocidad} width="100"/>
                         </td>
                         <td>
-                            <label>
-                                <input type="checkbox" onChange={this.handleRepeticion}
-                                    defaultChecked={this.state.repeticion}/>
-                                Repeticiones
-                            </label>
+                            <form id="input">
+                                <input type="number" min="2" style={{width: "55px"}} placeholder="Tam"
+                                onChange={this.handleMinimo}/>
+                            </form>
+                        </td>
+                        <td>
+                            <form id="input">
+                                <input type="number" min="1" style={{width: "55px"}} placeholder="Min"
+                                onChange={this.handleMaximo}/>
+                            </form>
+                        </td>
+                        <td>
+                            <form id="input">
+                                <input type="number" min="2" style={{width: "55px"}} placeholder="Max"
+                                onChange={this.handleTamaño}/>
+                            </form>
+                        </td>
+                        <td>
+                            <select multiple="" onChange={this.handleMetodo} style={{height: "30px"}} >
+                                <option>Simple</option>
+                                <option>Division</option>
+                                <option>Multiplicacion</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select multiple="" onChange={this.handleResolucion} style={{height: "30px"}} >
+                                <option>Lineal</option>
+                                <option>Cuadratica</option>
+                                <option>Doble</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select multiple="" onChange={this.handleTipo} style={{height: "30px"}} >
+                                <option>Integer</option>
+                                <option>String</option>
+                            </select>
                         </td>
                         <td>
                             <button className="btn btn-danger" id="Nuevo"
@@ -183,4 +214,4 @@ class Arboles extends React.Component {
     }
 }
 
-export default Arboles
+export default hashC
