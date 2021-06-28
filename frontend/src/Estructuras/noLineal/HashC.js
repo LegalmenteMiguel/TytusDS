@@ -25,7 +25,6 @@ class HashCerrado{
 
     eliminar(valor){
         if(this.buscar(valor)){
-            console.log("ENTRA")
             var i = this._metodo(ascii(valor))
             var aux = i
             var j = 1
@@ -35,7 +34,6 @@ class HashCerrado{
             }
             this.vector[aux] = "< >"
             this.contador--
-            console.log("SALE")
         }
     }
 

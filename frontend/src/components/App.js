@@ -3,26 +3,29 @@ import {Switch, Route, BrowserRouter} from 'react-router-dom'
 
 import Layout from './Layout'
 //Menus
-import Home from '../pages/Menus/Home'
+import Home from '../pages/Menus/mHome'
 import NotFound from '../pages/Menus/NotFound'
-import Lineal from '../pages/Menus/Lineal'
-import Arborea from '../pages/Menus/Arborea'
-import NoLineal from '../pages/Menus/NoLineal'
-import Codificacion from '../pages/Menus/Codificacion'
-import Compuesta from '../pages/Menus/Compuesta'
+import Lineal from '../pages/Menus/mLineal'
+import Arborea from '../pages/Menus/mArborea'
+import NoLineal from '../pages/Menus/mNoLineal'
+import Codificacion from '../pages/Menus/mCodificacion'
+import Compuesta from '../pages/Menus/mCompuesta'
 //Lineales
-import Simple from '../pages/lineal/SimpleEC'
-import PilaCola from '../pages/lineal/PilaCola'
-import ColaPrioridad from '../pages/lineal/ColaPrioridad'
-import Dobles from '../pages/lineal/DobleEC'
+import Simple from '../pages/lineal/pSimpleEC'
+import PilaCola from '../pages/lineal/pPilaCola'
+import ColaPrioridad from '../pages/lineal/pColaPrioridad'
+import Dobles from '../pages/lineal/pDobleEC'
 //Ordenamientos
-import Ordenamiento from '../pages/Ordenamiento'
+import Ordenamiento from '../pages/pOrdenamiento'
 //Arboreas
-import Arboles from '../pages/arborea/Arboles'
-import ArbolB from '../pages/arborea/ArbolB'
+import Arboles from '../pages/arborea/pArbol'
+import ArbolB from '../pages/arborea/pArbolB'
 //No Lineales
-import HashC from '../pages/noLineal/HashC'
-import HashA from '../pages/noLineal/HashA'
+import HashC from '../pages/noLineal/pHashC'
+import HashA from '../pages/noLineal/pHashA'
+//Codificacion
+import Hamming from '../pages/cadificacion/pHamming'
+import Huffman from '../pages/cadificacion/pHuffman'
 
 function  App(){
     return (
@@ -54,6 +57,9 @@ function  App(){
             {/*No Lineales*/}
             <Route exact path="/TytusDS/frontend/build/NoLineales/HashCerrada" component={HashC} />
             <Route exact path="/TytusDS/frontend/build/NoLineales/HashAbierta" component={HashA} />
+            {/*Codificacion*/}
+            <Route exact path="/TytusDS/frontend/build/Codificacion/Hamming" component={Hamming} />
+            <Route exact path="/TytusDS/frontend/build/Codificacion/Huffman" component={Huffman} />
             <Route component={NotFound} />
           </Switch>
         </Layout>

@@ -1,17 +1,17 @@
 //Pagina para graficar Ordenamientos
 import React from 'react';
 
-import Rapido from '../Estructuras/Ordenamientos/Rapido'
-import Seleccion from '../Estructuras/Ordenamientos/Seleccion'
-import Burbuja from '../Estructuras/Ordenamientos/Burbuja'
-import Insercion from '../Estructuras/Ordenamientos/Insercion'
+import Rapido from '../Estructuras/ordenamiento/Rapido'
+import Seleccion from '../Estructuras/ordenamiento/Seleccion'
+import Burbuja from '../Estructuras/ordenamiento/Burbuja'
+import Insercion from '../Estructuras/ordenamiento/Insercion'
 import ordena from '../animaciones/gOrder'
 
 import Funciones from '../Estructuras/Funciones'
 
 import './styles/Grafica.css'
 
-class Ordenamiento extends React.Component {
+class pOrdenamiento extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -112,4 +112,4 @@ class Ordenamiento extends React.Component {
 
 }
 
-export default Ordenamiento
+export default pOrdenamiento

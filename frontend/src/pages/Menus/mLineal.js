@@ -2,16 +2,16 @@ import React from 'react';
 import {Link} from 'react-router-dom'
 
 import Button from '../../components/Button'
-import ItemNoLineal from '../../items/NoLineal'
+import ItemLineal from '../../items/iLineal'
 
 import '../../Global.css'
 
-class NoLineal extends React.Component{
+class Lineal extends React.Component{
     render() {
         return (
             <div className="container">
                 <div className="row Center ">
-                    {ItemNoLineal.map((item, index) =>{
+                    {ItemLineal.map((item, index) =>{
                         return (
                             <div className="col Center2">
                                 <Link className="Link_text" to={item.path}>
@@ -32,4 +32,4 @@ class NoLineal extends React.Component{
     }
 }
 
-export default NoLineal;
+export default Lineal;

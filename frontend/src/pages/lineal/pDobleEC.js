@@ -1,26 +1,28 @@
-//Pagina para graficar Arbol B+ y B
+//Pagina para graficar  Enlazadas Dobles y Circulares Dobles
 import React from 'react'
-import threeB from '../../animaciones/arbolB'
-//import Arbolb from '../Estructuras/Arboreas/ArbolB'
-//import Arbolbm from '../Estructuras/Arboreas/ArbolBm'
 
-import Funciones from '../../Estructuras/Funciones'
+import EnlazadaD from '../../Estructuras/lineal/Doble'
+import CircularD from '../../Estructuras/lineal/CircularDoble'
+
+import Funciones from '../../Estructuras/Funciones.js'
+
+import doble from '../../animaciones/lineal/gDobles'
 
 import '../styles/Grafica.css'
 
-class ArbolB extends React.Component {
+
+class pDobleEC extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
           repeticion: true,
+          ingreso: "Final",
           velocidad: 5,
           entrada: "",
-          orden: 3,
-          tipo: "PreOrdne",
           nuevo: "",
           path: this.props.location.pathname,
         }
-        this.arbol = this.setarbol(this.state.path)
+        this.lista = this.setLista(this.state.path, this.state.repeticion, this.state.ingreso)
       }
     
     handleEntrada = e => {
@@ -35,14 +37,10 @@ class ArbolB extends React.Component {
         this.setState({ repeticion: !this.state.repeticion })
     }
 
-    handleTipo = e => {
-        this.setState({ tipo: e.target.value })
+    handleIngreso = e => {
+        this.setState({ ingreso: e.target.value })
     }
 
-    handleOrden = e => {
-        this.setState({ orden: e.target.value })
-    }
-    
     handleVelocidad = e => {
         this.setState({ velocidad: e.target.value })
     }
@@ -53,8 +51,8 @@ class ArbolB extends React.Component {
         reader.onload = e =>{
             const json = JSON.parse(e.target.result)
             this.setState({ velocidad: json.animaicon })
-            this.arbol = this.setarbol(this.state.path, json.repeticion)
-            this.arbol.cargar(json.valores)
+            this.lista = this.setLista(this.state.path, json.repeticion, json.posicion)
+            this.lista.cargar(json.valores)
         }
         reader.readAsText(files[0])
     }
@@ -64,24 +62,24 @@ class ArbolB extends React.Component {
         if(this.state.entrada === "" && id !== "Nuevo" && id !== "Guardar") alert("Ingrese un valor")
         
         else{
-            if(id === "Agregar") this.arbol.agregar(this.state.entrada)
+            if(id === "Agregar") this.lista.agregar(this.state.entrada)
             
-            else if(id === "Eliminar") this.arbol.eliminar(this.state.entrada)
+            else if(id === "Eliminar") this.lista.eliminar(this.state.entrada)
             
             else if(id === "Buscar"){
-                var aux = this.arbol.buscar(this.state.entrada)
+                var aux = this.lista.buscar(this.state.entrada)
                 if(aux) alert("Se encontro el valor")
                 else alert("No se encontro el valor")
             }
             else if(id === "Actualizar"){
-                if(this.state.nuevo !== "") alert("Ingrese el Nuevo valor")
-                else this.arbol.actualizar(this.state.entrada, this.state.nuevo)
+                if(this.state.nuevo === "") alert("Ingrese el Nuevo valor")
+                else this.lista.actualizar(this.state.entrada, this.state.nuevo)
             } 
                 
-            else if(id === "Nuevo") this.arbol = this.setarbol(this.state.path)
+            else if(id === "Nuevo") this.lista = this.setLista(this.state.path,this.state.repeticion, this.state.ingreso)
             
             else if(id === "Guardar"){
-                var output = this.arbol.guardar(this.state.tipo)
+                var output = this.lista.guardar()
                 Funciones(output.nombre, output.text)
             }
             
@@ -94,9 +92,10 @@ class ArbolB extends React.Component {
         }
     }
 
-    setarbol = path => {
-        if(path.includes("ArbolB+")) return 
-        else if(path.includes("ArbolB")) return
+    setLista = (path, repeticion, ingreso) => {
+        if(path.includes("EnlazadaDoble")) return new EnlazadaD(ingreso, repeticion)
+        
+        else if(path.includes("CircularDoble")) return new CircularD(ingreso, repeticion)
     }
 
     render(){
@@ -137,14 +136,6 @@ class ArbolB extends React.Component {
                             </button>
                         </td>
                         <td>
-                            <select multiple="" onChange={this.handleTipo} style={{height: "30px"}}>
-                                <option>PreOrden</option>
-                                <option>InOrden</option>
-                                <option>PostOrden</option>
-                                <option>Objeto</option>
-                            </select>
-                        </td>
-                        <td>
                             <button className="btn btn-success" id="Guardar"
                                 onClick={this.handleClick}> Guardar
                             </button>
@@ -156,7 +147,7 @@ class ArbolB extends React.Component {
                     </table>
                 </nav>
                 <div>
-                    {threeB()}
+                    {doble(this.lista.dotG())}
                 </div>
                 <nav className="Sub_bar">
                     <table>
@@ -165,12 +156,10 @@ class ArbolB extends React.Component {
                             defaultValue={this.state.velocidad} width="100"/>
                         </td>
                         <td>
-                            <select multiple="" onChange={this.handleOrden} style={{height: "30px"}}>
-                                <option>3</option>
-                                <option>4</option>
-                                <option>5</option>
-                                <option>6</option>
-                                <option>7</option>
+                            <select multiple="" onChange={this.handleIngreso} >
+                                <option>Final</option>
+                                <option>Inicio</option>
+                                <option>Orden</option>
                             </select>
                         </td>
                         <td>
@@ -193,4 +182,4 @@ class ArbolB extends React.Component {
 
 }
 
-export default ArbolB
+export default pDobleEC

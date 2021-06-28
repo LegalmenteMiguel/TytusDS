@@ -5,11 +5,11 @@ import HashC from '../../Estructuras/noLineal/HashC'
 
 import Funciones from '../../Estructuras/Funciones.js'
 
-import hash from '../../animaciones/gHashC'
+import hash from '../../animaciones/noLineal/gHashC'
 
 import '../styles/Grafica.css'
 
-class hashC extends React.Component {
+class pHashC extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -214,4 +214,4 @@ class hashC extends React.Component {
     }
 }
 
-export default hashC
+export default pHashC

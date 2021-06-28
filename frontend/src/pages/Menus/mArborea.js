@@ -2,7 +2,7 @@ import React from 'react';
 import {Link} from 'react-router-dom'
 
 import Button from '../../components/Button'
-import ItemArborea from '../../items/Arborea'
+import ItemArborea from '../../items/iArborea'
 
 import '../../Global.css'
 

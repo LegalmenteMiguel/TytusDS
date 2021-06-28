@@ -2,7 +2,7 @@ import React from 'react';
 import {Link} from 'react-router-dom'
 
 import Button from '../../components/Button'
-import ItemCompuesta from '../../items/Compuesta'
+import ItemCompuesta from '../../items/iCompuesta'
 
 import '../../Global.css'
 

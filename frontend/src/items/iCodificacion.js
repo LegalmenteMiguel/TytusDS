@@ -5,7 +5,7 @@ const ItemCodificacion = [
         title: "Código",
         name: "De Hamming",
         logo: Working,
-        path: "CodigoHamming",
+        path: "Codificacion/Hamming",
         header: "",
         class: "Button Button_right1"
     },
@@ -13,13 +13,13 @@ const ItemCodificacion = [
         title: "Algoritmo",
         name: "De Huffman",
         logo: Working,
-        path: "CodigoHuffman",
+        path: "Codificacion/Huffman",
         header: "",
         class: "Button Button_1"
     },
     {
         title: "Algoritmo",
-        name: "LZW",
+        name: "Codificacion/LZW",
         logo: Working,
         path: "AlgoritmoLZW",
         header: "",
@@ -29,7 +29,7 @@ const ItemCodificacion = [
         title: "Cifrado",
         name: "Feistel",
         logo: Working,
-        path: "CifradoFeistel",
+        path: "Codificacion/Feistel",
         header: "",
         class: "Button Top_right1"
     },
@@ -37,7 +37,7 @@ const ItemCodificacion = [
         title: "Cifrado",
         name: "RSA",
         logo: Working,
-        path: "CifradoRSA",
+        path: "Codificacion/RSA",
         header: "",
         class: "Button Top_left1"
     }

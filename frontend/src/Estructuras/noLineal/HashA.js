@@ -103,15 +103,15 @@ function llenarRelaciones(relaciones, vector){
     for(var i = 0; i < vector.length-1; i++){
         relaciones.push({from: i, to: parseInt(i)+1})
     }
-    for(var i in vector){
-        var a = "l" + i.toString() + "0"
-        relaciones.push({from: i, to: a})
+    for(var j in vector){
+        var a = "l" + j.toString() + "0"
+        relaciones.push({from: j, to: a})
     }
     for(var k in vector){
-        for(var j = 0; j < vector[k].length-1; j++){
-            var a = "l" + k.toString() + j.toString()
-            var b = "l" + k.toString() + (j+1).toString()
-            relaciones.push({from: a, to: b})
+        for(var x = 0; x < vector[k].length-1; x++){
+            var b = "l" + k.toString() + x.toString()
+            var c = "l" + k.toString() + (x+1).toString()
+            relaciones.push({from: b, to: c})
         }
     }
     return relaciones

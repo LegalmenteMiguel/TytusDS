@@ -1,28 +1,26 @@
-//Pagina para graficar Enlazadas Simples, Circulares Simples 
-import React from 'react'
+//Pagina para graficar Pilas y Colas
+import React from 'react';
 
-import EnlazadaS from '../../Estructuras/lineales/Simple'
-import CircularS from '../../Estructuras/lineales/CircularSimple'
+import Pila from '../../Estructuras/lineal/Pila'
+import Cola from '../../Estructuras/lineal/Cola'
 
-import Funciones from '../../Estructuras/Funciones.js'
+import Funciones from '../../Estructuras/Funciones'
 
-import lineal from '../../animaciones/gLineal'
-
+import lineal from '../../animaciones/lineal/gLineal'
 
 import '../styles/Grafica.css'
 
-class Simple extends React.Component {
+class pPilaCola extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
           repeticion: true,
-          ingreso: "Final",
           velocidad: 5,
           entrada: "",
           nuevo: "",
           path: this.props.location.pathname,
         }
-        this.lista = this.setLista(this.state.path, this.state.repeticion, this.state.ingreso)
+        this.lista = this.setLista(this.state.path)
       }
     
     handleEntrada = e => {
@@ -34,13 +32,9 @@ class Simple extends React.Component {
     }
 
     handleRepeticion = () => {
-        this.setState({ repeticion: !this.state.repeticion })
+        this.setState({ repeticion: !this.state.repeticion  })
     }
-
-    handleIngreso = e => {
-        this.setState({ ingreso: e.target.value })
-    }
-
+    
     handleVelocidad = e => {
         this.setState({ velocidad: e.target.value })
     }
@@ -51,7 +45,7 @@ class Simple extends React.Component {
         reader.onload = e =>{
             const json = JSON.parse(e.target.result)
             this.setState({ velocidad: json.animaicon })
-            this.lista = this.setLista(this.state.path, json.repeticion, json.posicion)
+            this.lista = this.setLista(this.state.path, json.repeticion)
             this.lista.cargar(json.valores)
         }
         reader.readAsText(files[0])
@@ -59,30 +53,30 @@ class Simple extends React.Component {
 
     handleClick = e => {
         const id = e.target.id
-        if(this.state.entrada === "" && id !== "Nuevo" && id !== "Guardar") alert("Ingrese un valor")
-        
+        if(this.state.entrada === "" && id === "Agregar" && id === "Buscar" && id === "Actualizar"){
+            alert("Ingrese un valor")
+        }
         else{
             if(id === "Agregar") this.lista.agregar(this.state.entrada)
             
-            else if(id === "Eliminar") this.lista.eliminar(this.state.entrada)
+            else if(id === "Eliminar") this.lista.eliminar()
             
             else if(id === "Buscar"){
                 var aux = this.lista.buscar(this.state.entrada)
                 if(aux) alert("Se encontro el valor")
                 else alert("No se encontro el valor")
             }
-            else if(id === "Actualizar"){
-                if(this.state.nuevo === "") alert("Ingrese el Nuevo valor")
+            else if(id === "Actualizar"){ 
+                if(this.state.nuevo === "") alert("Ingrese el Nuevo Valor")
                 else this.lista.actualizar(this.state.entrada, this.state.nuevo)
-            } 
-                
-            else if(id === "Nuevo") this.lista = this.setLista(this.state.path,this.state.repeticion, this.state.ingreso)
-            
+            }
             else if(id === "Guardar"){
                 var output = this.lista.guardar()
                 Funciones(output.nombre, output.text)
             }
-            
+    
+            else if(id === "Nuevo") this.lista = this.setLista(this.state.path, this.state.repeticion)
+
             document.getElementById("input").reset()
             document.getElementById("nuevo").reset()
             this.setState({
@@ -92,14 +86,10 @@ class Simple extends React.Component {
         }
     }
 
-    setLista = (path, repeticion, ingreso) => {
-        if(path.includes("EnlazadaSimple")) return new EnlazadaS(ingreso, repeticion)
+    setLista = (path, repeticion) => {
+        if(path.includes("Pila")) return new Pila(repeticion)
         
-       
-        
-        else if(path.includes("CircularSimple")) return new CircularS(ingreso, repeticion)
-
-        
+        else if(path.includes("Cola")) return new Cola(repeticion)
     }
 
     render(){
@@ -114,9 +104,9 @@ class Simple extends React.Component {
                             </form>
                         </td>
                         <td>
-                            <button className="btn Boton" id="Agregar" 
-                                onClick={this.handleClick}> Agregar
-                            </button> 
+                        <button className="btn Boton" id="Agregar"
+                            onClick={this.handleClick}> Agregar
+                        </button> 
                         </td>
                         <td>
                             <button className="btn Boton" id="Eliminar"
@@ -145,7 +135,7 @@ class Simple extends React.Component {
                             </button>
                         </td>
                         <td>
-                            <input type="file" multiple={false} accept=".json"
+                            <input type="file" multiple={false} accept=".json" 
                             onChange={this.handleFiles} />
                         </td>
                     </table>
@@ -158,13 +148,6 @@ class Simple extends React.Component {
                         <td>
                             <input type="range"  min="0" max="10" step="1"  onChange={this.handleVelocidad}
                             defaultValue={this.state.velocidad} width="100"/>
-                        </td>
-                        <td>
-                            <select multiple="" onChange={this.handleIngreso} >
-                                <option>Final</option>
-                                <option>Inicio</option>
-                                <option>Orden</option>
-                            </select>
                         </td>
                         <td>
                             <label>
@@ -183,7 +166,6 @@ class Simple extends React.Component {
             </div>
         )
     }
-
 }
 
-export default Simple
+export default pPilaCola

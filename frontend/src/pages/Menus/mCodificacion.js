@@ -2,21 +2,21 @@ import React from 'react';
 import {Link} from 'react-router-dom'
 
 import Button from '../../components/Button'
-import ItemHome from '../../items/Home'
+import ItemCodificacion from '../../items/iCodificacion'
 
 import '../../Global.css'
 
-class Home extends React.Component{
+class Codificacion extends React.Component{
     render() {
         return (
             <div className="container">
-                <div className="row Center">
-                    {ItemHome.map((item) =>{
+                <div className="row Center ">
+                    {ItemCodificacion.map((item, index) =>{
                         return (
                             <div className="col Center2">
                                 <Link className="Link_text" to={item.path}>
-                                    <Button
-                                        header={item.header} 
+                                    <Button 
+                                        header={item.header}
                                         title={item.title}
                                         name={item.name}
                                         logo={item.logo}
@@ -32,4 +32,4 @@ class Home extends React.Component{
     }
 }
 
-export default Home;
+export default Codificacion;

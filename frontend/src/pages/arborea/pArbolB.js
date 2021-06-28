@@ -1,26 +1,29 @@
-//Pagina para graficar Hash Cerrado
+//Pagina para graficar Arbol B+ y B
 import React from 'react'
 
-import HashA from '../../Estructuras/noLineal/HashA'
+//import Arbolb from '../Estructuras/arborea/ArbolB'
+//import Arbolbm from '../Estructuras/arborea/ArbolBm'
 
-import Funciones from '../../Estructuras/Funciones.js'
+import Funciones from '../../Estructuras/Funciones'
 
-import hash from '../../animaciones/gHashA'
+
+import arbolB from '../../animaciones/arborea/gArbolB'
 
 import '../styles/Grafica.css'
 
-class hashA extends React.Component {
+class pArbolB extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            entrada: "",
-            nuevo: "",
-            tamaño: 13,
-            metodo: "Division",
-            tipo: "Integer",
-            velocidad: 5
+          repeticion: true,
+          velocidad: 5,
+          entrada: "",
+          orden: 3,
+          tipo: "PreOrdne",
+          nuevo: "",
+          path: this.props.location.pathname,
         }
-        this.hash = new HashA(this.state.tamaño, this.state.metodo, this.state.tipo)
+        this.arbol = this.setarbol(this.state.path)
       }
     
     handleEntrada = e => {
@@ -31,27 +34,30 @@ class hashA extends React.Component {
         this.setState({ nuevo: e.target.value })
     }
 
-    handleVelocidad = e => {
-        this.setState({ velocidad: e.target.value })
-    }
-
-    handleTamaño = e => {
-        this.setState({ tamaño: parseInt(e.target.value)})
+    handleRepeticion = () => {
+        this.setState({ repeticion: !this.state.repeticion })
     }
 
     handleTipo = e => {
         this.setState({ tipo: e.target.value })
     }
 
-    handleMetodo = e => {
-        this.setState({ metodo: e.target.value })
+    handleOrden = e => {
+        this.setState({ orden: e.target.value })
+    }
+    
+    handleVelocidad = e => {
+        this.setState({ velocidad: e.target.value })
     }
 
     handleFiles = e => {
         let files = e.target.files
         let reader = new FileReader()
         reader.onload = e =>{
-            
+            const json = JSON.parse(e.target.result)
+            this.setState({ velocidad: json.animaicon })
+            this.arbol = this.setarbol(this.state.path, json.repeticion)
+            this.arbol.cargar(json.valores)
         }
         reader.readAsText(files[0])
     }
@@ -59,30 +65,29 @@ class hashA extends React.Component {
     handleClick = e => {
         const id = e.target.id
         if(this.state.entrada === "" && id !== "Nuevo" && id !== "Guardar") alert("Ingrese un valor")
-
+        
         else{
-            if(id === "Agregar") this.hash.agregar(this.state.entrada)
+            if(id === "Agregar") this.arbol.agregar(this.state.entrada)
             
-            else if(id === "Eliminar") this.hash.eliminar(this.state.entrada)
+            else if(id === "Eliminar") this.arbol.eliminar(this.state.entrada)
             
             else if(id === "Buscar"){
-                var aux = this.hash.buscar(this.state.entrada)
+                var aux = this.arbol.buscar(this.state.entrada)
                 if(aux) alert("Se encontro el valor")
                 else alert("No se encontro el valor")
             }
             else if(id === "Actualizar"){
-                if(this.state.nuevo === "") alert("Ingrese el Nuevo valor")
-                
-                else this.hash.actualizar(this.state.entrada, this.state.nuevo)
+                if(this.state.nuevo !== "") alert("Ingrese el Nuevo valor")
+                else this.arbol.actualizar(this.state.entrada, this.state.nuevo)
             } 
                 
-            else if(id === "Nuevo") this.hash = new HashA(this.state.tamaño, this.state.metodo, this.state.tipo)
-
+            else if(id === "Nuevo") this.arbol = this.setarbol(this.state.path)
+            
             else if(id === "Guardar"){
-                var output = this.hash.guardar(this.state.tipo)
+                var output = this.arbol.guardar(this.state.tipo)
                 Funciones(output.nombre, output.text)
             }
-
+            
             document.getElementById("input").reset()
             document.getElementById("nuevo").reset()
             this.setState({
@@ -90,6 +95,11 @@ class hashA extends React.Component {
                 nuevo: ""
             })
         }
+    }
+
+    setarbol = path => {
+        if(path.includes("ArbolB+")) return 
+        else if(path.includes("ArbolB")) return
     }
 
     render(){
@@ -130,6 +140,14 @@ class hashA extends React.Component {
                             </button>
                         </td>
                         <td>
+                            <select multiple="" onChange={this.handleTipo} style={{height: "30px"}}>
+                                <option>PreOrden</option>
+                                <option>InOrden</option>
+                                <option>PostOrden</option>
+                                <option>Objeto</option>
+                            </select>
+                        </td>
+                        <td>
                             <button className="btn btn-success" id="Guardar"
                                 onClick={this.handleClick}> Guardar
                             </button>
@@ -141,7 +159,7 @@ class hashA extends React.Component {
                     </table>
                 </nav>
                 <div>
-                    {hash(this.hash.dotG())}
+                    {arbolB()}
                 </div>
                 <nav className="Sub_bar">
                     <table>
@@ -150,23 +168,20 @@ class hashA extends React.Component {
                             defaultValue={this.state.velocidad} width="100"/>
                         </td>
                         <td>
-                            <form id="input">
-                                <input type="number" min="0" style={{width: "55px"}} placeholder="Tam"
-                                onChange={this.handleTamaño}/>
-                            </form>
-                        </td>
-                        <td>
-                            <select multiple="" onChange={this.handleMetodo} style={{height: "30px"}} >
-                                <option>Simple</option>
-                                <option>Division</option>
-                                <option>Multiplicacion</option>
+                            <select multiple="" onChange={this.handleOrden} style={{height: "30px"}}>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                                <option>6</option>
+                                <option>7</option>
                             </select>
                         </td>
                         <td>
-                            <select multiple="" onChange={this.handleTipo} style={{height: "30px"}} >
-                                <option>Integer</option>
-                                <option>String</option>
-                            </select>
+                            <label>
+                                <input type="checkbox" onChange={this.handleRepeticion}
+                                    defaultChecked={this.state.repeticion}/>
+                                Repeticiones
+                            </label>
                         </td>
                         <td>
                             <button className="btn btn-danger" id="Nuevo"
@@ -178,6 +193,7 @@ class hashA extends React.Component {
             </div>
         )
     }
+
 }
 
-export default hashA
+export default pArbolB

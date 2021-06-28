@@ -1,28 +1,28 @@
-//Pagina para graficar  Enlazadas Dobles y Circulares Dobles
+//Pagina para graficar Arbol Binario y AVL
 import React from 'react'
 
-import EnlazadaD from '../../Estructuras/lineales/Doble'
-import CircularD from '../../Estructuras/lineales/CircularDoble'
+import Binario from '../../Estructuras/arborea/Binario'
+import AVL from '../../Estructuras/arborea/AVL'
 
 import Funciones from '../../Estructuras/Funciones.js'
 
-import doble from '../../animaciones/dobles'
+import arbol from '../../animaciones/arborea/gArbol'
 
 import '../styles/Grafica.css'
 
-
-class Dobles extends React.Component {
+class pArbol extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
           repeticion: true,
-          ingreso: "Final",
           velocidad: 5,
           entrada: "",
+          orden: 3,
+          tipo: "PreOrden",
           nuevo: "",
           path: this.props.location.pathname,
         }
-        this.lista = this.setLista(this.state.path, this.state.repeticion, this.state.ingreso)
+        this.arbol = this.setarbol(this.state.path, this.state.repeticion)
       }
     
     handleEntrada = e => {
@@ -37,10 +37,10 @@ class Dobles extends React.Component {
         this.setState({ repeticion: !this.state.repeticion })
     }
 
-    handleIngreso = e => {
-        this.setState({ ingreso: e.target.value })
+    handleTipo = e => {
+        this.setState({ tipo: e.target.value })
     }
-
+    
     handleVelocidad = e => {
         this.setState({ velocidad: e.target.value })
     }
@@ -51,8 +51,8 @@ class Dobles extends React.Component {
         reader.onload = e =>{
             const json = JSON.parse(e.target.result)
             this.setState({ velocidad: json.animaicon })
-            this.lista = this.setLista(this.state.path, json.repeticion, json.posicion)
-            this.lista.cargar(json.valores)
+            this.arbol = this.setarbol(this.state.path, json.repeticion)
+            this.arbol.cargar(json.valores)
         }
         reader.readAsText(files[0])
     }
@@ -60,29 +60,30 @@ class Dobles extends React.Component {
     handleClick = e => {
         const id = e.target.id
         if(this.state.entrada === "" && id !== "Nuevo" && id !== "Guardar") alert("Ingrese un valor")
-        
+
         else{
-            if(id === "Agregar") this.lista.agregar(this.state.entrada)
+            if(id === "Agregar") this.arbol.agregar(this.state.entrada)
             
-            else if(id === "Eliminar") this.lista.eliminar(this.state.entrada)
+            else if(id === "Eliminar") this.arbol.eliminar(this.state.entrada)
             
             else if(id === "Buscar"){
-                var aux = this.lista.buscar(this.state.entrada)
+                var aux = this.arbol.buscar(this.state.entrada)
                 if(aux) alert("Se encontro el valor")
                 else alert("No se encontro el valor")
             }
             else if(id === "Actualizar"){
                 if(this.state.nuevo === "") alert("Ingrese el Nuevo valor")
-                else this.lista.actualizar(this.state.entrada, this.state.nuevo)
+                
+                else this.arbol.actualizar(this.state.entrada, this.state.nuevo)
             } 
                 
-            else if(id === "Nuevo") this.lista = this.setLista(this.state.path,this.state.repeticion, this.state.ingreso)
+            else if(id === "Nuevo") this.arbol = this.setarbol(this.state.path, this.state.repeticion)
             
             else if(id === "Guardar"){
-                var output = this.lista.guardar()
+                var output = this.arbol.guardar(this.state.tipo)
                 Funciones(output.nombre, output.text)
             }
-            
+
             document.getElementById("input").reset()
             document.getElementById("nuevo").reset()
             this.setState({
@@ -92,15 +93,16 @@ class Dobles extends React.Component {
         }
     }
 
-    setLista = (path, repeticion, ingreso) => {
-        if(path.includes("EnlazadaDoble")) return new EnlazadaD(ingreso, repeticion)
+    setarbol = (path, repeticion) => {
+        if(path.includes("ArbolBinario")) return new Binario(repeticion)
         
-        else if(path.includes("CircularDoble")) return new CircularD(ingreso, repeticion)
+        else if(path.includes("AVL")) return new AVL(repeticion)
     }
 
     render(){
         return (
             <div>
+                {console.log(this.arbol.dotG().nodes)}
                 <nav className="Bar">
                     <table>
                         <td>
@@ -136,6 +138,13 @@ class Dobles extends React.Component {
                             </button>
                         </td>
                         <td>
+                            <select multiple="" onChange={this.handleTipo} style={{height: "30px"}}>
+                                <option>PreOrden</option>
+                                <option>InOrden</option>
+                                <option>PostOrden</option>
+                            </select>
+                        </td>
+                        <td>
                             <button className="btn btn-success" id="Guardar"
                                 onClick={this.handleClick}> Guardar
                             </button>
@@ -147,20 +156,13 @@ class Dobles extends React.Component {
                     </table>
                 </nav>
                 <div>
-                    {doble(this.lista.dotG())}
+                    {arbol(this.arbol.dotG())}
                 </div>
                 <nav className="Sub_bar">
                     <table>
                         <td>
                             <input type="range"  min="0" max="10" step="1"  onChange={this.handleVelocidad}
                             defaultValue={this.state.velocidad} width="100"/>
-                        </td>
-                        <td>
-                            <select multiple="" onChange={this.handleIngreso} >
-                                <option>Final</option>
-                                <option>Inicio</option>
-                                <option>Orden</option>
-                            </select>
                         </td>
                         <td>
                             <label>
@@ -179,7 +181,6 @@ class Dobles extends React.Component {
             </div>
         )
     }
-
 }
 
-export default Dobles
+export default pArbol

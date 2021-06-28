@@ -1,32 +1,34 @@
-//Pagina para graficar Arbol Binario y AVL
-import React from 'react'
+//Pagina para graficar Cola de Prioridad
+import React from 'react';
 
-import Binario from '../../Estructuras/Arboreas/Binario'
-import AVL from '../../Estructuras/Arboreas/AVL'
+import ColaP from '../../Estructuras/lineal/ColaPrioridad'
 
-import Funciones from '../../Estructuras/Funciones.js'
+import Funciones from '../../Estructuras/Funciones'
 
-import three from '../../animaciones/gArbol'
+import lineal from '../../animaciones/lineal/gLineal'
 
 import '../styles/Grafica.css'
 
-class Arboles extends React.Component {
+class pColaPrioridad extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
           repeticion: true,
           velocidad: 5,
           entrada: "",
-          orden: 3,
-          tipo: "PreOrden",
+          prioridad: 1,
           nuevo: "",
           path: this.props.location.pathname,
         }
-        this.arbol = this.setarbol(this.state.path, this.state.repeticion)
+        this.cola = new ColaP(this.state.repeticion)
       }
     
     handleEntrada = e => {
         this.setState({ entrada: e.target.value })
+    }
+
+    handlePrioridad = e => {
+        this.setState({ prioridad: e.target.value })
     }
 
     handleNuevo = e => {
@@ -34,11 +36,7 @@ class Arboles extends React.Component {
     }
 
     handleRepeticion = () => {
-        this.setState({ repeticion: !this.state.repeticion })
-    }
-
-    handleTipo = e => {
-        this.setState({ tipo: e.target.value })
+        this.setState({ repeticion: !this.state.repeticion  })
     }
     
     handleVelocidad = e => {
@@ -51,58 +49,53 @@ class Arboles extends React.Component {
         reader.onload = e =>{
             const json = JSON.parse(e.target.result)
             this.setState({ velocidad: json.animaicon })
-            this.arbol = this.setarbol(this.state.path, json.repeticion)
-            this.arbol.cargar(json.valores)
+            this.cola = new ColaP(json.repeticion)
+            this.cola.cargar(json.valores)
         }
         reader.readAsText(files[0])
     }
 
     handleClick = e => {
         const id = e.target.id
-        if(this.state.entrada === "" && id !== "Nuevo" && id !== "Guardar") alert("Ingrese un valor")
-
+        if(this.state.entrada === "" && id === "Agregar" && id === "Buscar" && id === "Actualizar"){
+            alert("Ingrese un valor")
+        } 
         else{
-            if(id === "Agregar") this.arbol.agregar(this.state.entrada)
-            
-            else if(id === "Eliminar") this.arbol.eliminar(this.state.entrada)
+            if(id === "Agregar") this.cola.agregar(this.state.entrada, this.state.prioridad)
+               
+            else if(id === "Eliminar") this.cola.eliminar()
             
             else if(id === "Buscar"){
-                var aux = this.arbol.buscar(this.state.entrada)
+                var aux = this.cola.buscar(this.state.entrada)
                 if(aux) alert("Se encontro el valor")
                 else alert("No se encontro el valor")
             }
             else if(id === "Actualizar"){
-                if(this.state.nuevo === "") alert("Ingrese el Nuevo valor")
-                
-                else this.arbol.actualizar(this.state.entrada, this.state.nuevo)
-            } 
-                
-            else if(id === "Nuevo") this.arbol = this.setarbol(this.state.path, this.state.repeticion)
-            
-            else if(id === "Guardar"){
-                var output = this.arbol.guardar(this.state.tipo)
-                Funciones(output.nombre, output.text)
+                if(this.state.nuevo === "") alert("Ingrese Nuevo Valor")
+
+                else this.cola.actualizar(this.state.entrada, this.state.nuevo)
             }
+            else if(id === "Guardar"){
+                var output = this.cola.guardar()
+                Funciones(output.nombre, output.text)
+            } 
+    
+            else if(id === "Nuevo") this.cola = new ColaP(this.state.repeticion)
 
             document.getElementById("input").reset()
             document.getElementById("nuevo").reset()
             this.setState({
                 entrada: "",
-                nuevo: ""
+                nuevo: "",
+                prioridad: 0
             })
         }
     }
 
-    setarbol = (path, repeticion) => {
-        if(path.includes("ArbolBinario")) return new Binario(repeticion)
-        
-        else if(path.includes("AVL")) return new AVL(repeticion)
-    }
-
     render(){
         return (
+        
             <div>
-                {console.log(this.arbol.dotG().nodes)}
                 <nav className="Bar">
                     <table>
                         <td>
@@ -112,9 +105,18 @@ class Arboles extends React.Component {
                             </form>
                         </td>
                         <td>
-                            <button className="btn Boton" id="Agregar" 
-                                onClick={this.handleClick}> Agregar
-                            </button> 
+                            <select multiple="" onChange={this.handlePrioridad} style={{height: "30px"}} >
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                            </select>
+                        </td>
+                        <td>
+                        <button className="btn Boton" id="Agregar"
+                            onClick={this.handleClick}> Agregar
+                        </button> 
                         </td>
                         <td>
                             <button className="btn Boton" id="Eliminar"
@@ -138,25 +140,19 @@ class Arboles extends React.Component {
                             </button>
                         </td>
                         <td>
-                            <select multiple="" onChange={this.handleTipo} style={{height: "30px"}}>
-                                <option>PreOrden</option>
-                                <option>InOrden</option>
-                                <option>PostOrden</option>
-                            </select>
-                        </td>
-                        <td>
                             <button className="btn btn-success" id="Guardar"
                                 onClick={this.handleClick}> Guardar
                             </button>
                         </td>
                         <td>
-                            <input type="file" multiple={false} accept=".json"
+                            <input type="file" multiple={false} accept=".json" 
                             onChange={this.handleFiles} />
                         </td>
                     </table>
                 </nav>
                 <div>
-                    {three(this.arbol.dotG())}
+                    {lineal(this.cola.dotG())}
+                   
                 </div>
                 <nav className="Sub_bar">
                     <table>
@@ -183,4 +179,4 @@ class Arboles extends React.Component {
     }
 }
 
-export default Arboles
+export default pColaPrioridad
