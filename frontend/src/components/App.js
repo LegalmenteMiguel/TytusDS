@@ -26,6 +26,7 @@ import HashA from '../pages/noLineal/pHashA'
 //Codificacion
 import Hamming from '../pages/cadificacion/pHamming'
 import Huffman from '../pages/cadificacion/pHuffman'
+import LZW from '../pages/cadificacion/pLZW'
 
 function  App(){
     return (
@@ -60,6 +61,7 @@ function  App(){
             {/*Codificacion*/}
             <Route exact path="/TytusDS/frontend/build/Codificacion/Hamming" component={Hamming} />
             <Route exact path="/TytusDS/frontend/build/Codificacion/Huffman" component={Huffman} />
+            <Route exact path="/TytusDS/frontend/build/Codificacion/LZW" component={LZW} />
             <Route component={NotFound} />
           </Switch>
         </Layout>

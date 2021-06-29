@@ -3,7 +3,7 @@ import React from 'react'
 
 import Huffman from '../../Estructuras/codificacion/Huffman'
 
-import Funciones from '../../Estructuras/Funciones.js'
+import Descarga from '../../Estructuras/DescargaTXT'
 
 import huffman from '../../animaciones/codificacion/gHuffman'
 
@@ -47,8 +47,8 @@ class pHuffman extends React.Component {
             if(id === "Calcular"){ this.huffman.calcular(this.state.entrada) }
             
             else if(id === "Guardar"){
-                var output = this.hash.guardar(this.state.tipo)
-                Funciones(output.nombre, output.text)
+                var output = this.huffman.guardar()
+                Descarga(output.nombre, output.text)
             }
             this.setState({ entrada: "" })
             document.getElementById("input").reset()

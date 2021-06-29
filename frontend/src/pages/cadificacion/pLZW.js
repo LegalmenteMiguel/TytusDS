@@ -1,13 +1,13 @@
-//Pagina para graficar Hamming
+//Pagina para graficar Huffman
 import React from 'react'
 
-import Hamming from '../../Estructuras/codificacion/Hamming'
+import LZW from '../../Estructuras/codificacion/LZW'
 
 import Descarga from '../../Estructuras/DescargaTXT'
 
 import '../styles/Grafica.css'
 
-class pHamming extends React.Component {
+class pLZW extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -15,7 +15,7 @@ class pHamming extends React.Component {
             salida: "",
             velocidad: 5
         }
-        this.Hamming= new Hamming()
+        this.lzw= new LZW()
       }
     
     handleEntrada = e => {
@@ -44,15 +44,16 @@ class pHamming extends React.Component {
 
         else{
             if(id === "Calcular"){ 
-                var salida = this.Hamming.calcular(this.state.entrada)
-                this.setState({ salida: salida })
-                document.getElementById("Resultado").value = salida
+                var aux = this.lzw.calcular(this.state.entrada) 
+                document.getElementById("Resultado").value = aux
             }
             
             else if(id === "Guardar"){
-                var output = this.Hamming.guardar()
+                var output = this.lzw.guardar()
                 Descarga(output.nombre, output.text)
             }
+            this.setState({ entrada: "" })
+            document.getElementById("input").reset()
         }
     }
 
@@ -63,7 +64,7 @@ class pHamming extends React.Component {
                     <table>
                         <td>
                             <form id="input">
-                                <input type="text" style={{width: "300px"}} placeholder="Entrada" id="Entrada"
+                                <input type="text" style={{width: "300px"}} placeholder="Frase" id="Entrada"
                                 onChange={this.handleEntrada}/>
                             </form>
                         </td>
@@ -71,12 +72,6 @@ class pHamming extends React.Component {
                             <button className="btn Boton" id="Calcular" 
                                 onClick={this.handleClick}> Calcular
                             </button> 
-                        </td>
-                        <td>
-                            <form id="output">
-                                <input type="text" style={{width: "300px"}} placeholder="Resultado" id="Resultado"
-                                readonly="readonly" />
-                            </form>
                         </td>
                         <td>
                             <button className="btn btn-success" id="Guardar"
@@ -90,7 +85,7 @@ class pHamming extends React.Component {
                     </table>
                 </nav>
                 <div>
-                    {/*Aqui iria la grafica*/}
+                    <textarea disabled cols="30" rows="30" placeholder="Resultado" id="Resultado" ></textarea>
                 </div>
                 <nav className="Sub_bar">
                     <table>
@@ -105,4 +100,4 @@ class pHamming extends React.Component {
     }
 }
 
-export default pHamming
+export default pLZW

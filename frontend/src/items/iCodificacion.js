@@ -19,9 +19,9 @@ const ItemCodificacion = [
     },
     {
         title: "Algoritmo",
-        name: "Codificacion/LZW",
+        name: "LZW",
         logo: Working,
-        path: "AlgoritmoLZW",
+        path: "Codificacion/LZW",
         header: "",
         class: "Button Button_left1"
     },

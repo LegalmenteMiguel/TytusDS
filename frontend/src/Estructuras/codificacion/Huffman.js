@@ -10,7 +10,8 @@ class Huffman{
     constructor(){
         this.raiz = null
         this.letras = null
-        this.codes = {}
+        this.temp = null
+        this.salida = ""
     }
 
     calcular(cadena){
@@ -35,8 +36,8 @@ class Huffman{
         }
         this.letras = burbujaP(this.letras)
         this.construir()
-        var temp = this.ordenar(this.letras)
-        this.raiz = this.generarArbol(temp, new Nodo("0"))
+        this.temp = this.ordenar(this.letras)
+        this.raiz = this.generarArbol(this.temp, new Nodo("0"))
     }
 
     construir(){
@@ -84,6 +85,22 @@ class Huffman{
         else{
             nodo.izquierdo = new Nodo(valor)
             return nodo.izquierdo
+        }
+    }
+
+    guardar(){
+        this.salida = "Codigo:\n\n"
+        this.generarText(this.temp, "")
+        return {nombre: "Huffman.txt", text: this.salida}
+    }
+
+    generarText(vector, text){
+        if(typeof(vector) == 'string'){
+            this.salida += vector + ":\t" + text + "\n"
+        }
+        else{
+            this.generarText(vector[0], text+"0")
+            this.generarText(vector[1], text+"1")
         }
     }
 

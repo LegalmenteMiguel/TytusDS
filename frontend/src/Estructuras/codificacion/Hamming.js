@@ -4,6 +4,7 @@ class Hamming{
         this.tamaño = null
         this.p = null
         this.vector = null
+        this.salida = null
     }
 
     calcular(valor){
@@ -15,7 +16,8 @@ class Hamming{
         }
         this.generar()
         this.llenar()
-        return this.resultado()
+        this.resultado()
+        return this.salida
     }
 
     generar(){
@@ -45,11 +47,15 @@ class Hamming{
     }
 
     resultado(){
-        var aux = ""
+        this.salida = ""
         for(var i = 1; i < this.vector.length; i++){
-            aux += this.vector[i]
+            this.salida += this.vector[i]
         }
-        return aux
+    }
+    
+    guardar(){
+        var txt = "Codigo:\n\n" + this.salida
+        return {nombre: "Hamming.txt", text: txt}
     }
 }
 
