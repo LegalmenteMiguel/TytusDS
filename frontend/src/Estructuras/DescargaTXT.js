@@ -1,6 +1,6 @@
 function descarga(nombre, text) {
     var element = document.createElement('a');
-    element.setAttribute('href','data:txt;charset=utf-8, ' + encodeURIComponent(text));
+    element.setAttribute('href','data:text/plain;charset=utf-8, ' + encodeURIComponent(text));
     element.setAttribute('download', nombre);
     document.body.appendChild(element);
     element.click();

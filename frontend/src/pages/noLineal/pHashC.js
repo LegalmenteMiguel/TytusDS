@@ -16,14 +16,14 @@ class pHashC extends React.Component {
             entrada: "",
             nuevo: "",
             tamaño: 29,
-            minimo: 20,
-            maximo: 80,
+            min: 20,
+            max: 80,
             metodo: "Division",
             resolucion: "Lineal",
             tipo: "Integer",
             velocidad: 5
         }
-        this.hash = new HashC(this.state.tamaño, this.state.min, this.state.maximo, this.state.metodo, this.state.resolucion, this.state.tipo)
+        this.hash = new HashC(this.state.tamaño, this.state.min, this.state.max, this.state.metodo, this.state.resolucion, this.state.tipo)
       }
     
     handleEntrada = e => {
@@ -43,11 +43,11 @@ class pHashC extends React.Component {
     }
 
     handleMinimo = e => {
-        this.setState({ minimo: parseInt(e.target.value)})
+        this.setState({ min: parseInt(e.target.value)})
     }
 
     handleMaximo = e => {
-        this.setState({ maximo: parseInt(e.target.value)})
+        this.setState({ max: parseInt(e.target.value) })
     }
 
     handleTipo = e => {
@@ -91,7 +91,7 @@ class pHashC extends React.Component {
                 else this.hash.actualizar(this.state.entrada, this.state.nuevo)
             } 
                 
-            else if(id === "Nuevo") this.hash = new HashC(this.state.tamaño, this.state.min, this.state.maximo, this.state.metodo, this.state.resolucion, this.state.tipo)
+            else if(id === "Nuevo") this.hash = new HashC(this.state.tamaño, this.state.min, this.state.max, this.state.metodo, this.state.resolucion, this.state.tipo)
 
             else if(id === "Guardar"){
                 var output = this.hash.guardar(this.state.tipo)
@@ -166,20 +166,20 @@ class pHashC extends React.Component {
                         </td>
                         <td>
                             <form id="input">
-                                <input type="number" min="2" style={{width: "55px"}} placeholder="Tam"
+                                <input type="number" min="2" style={{width: "55px"}} placeholder="Tam" id="Tam"
+                                onChange={this.handleTamaño}/>
+                            </form>
+                        </td>
+                        <td>
+                            <form id="input">
+                                <input type="number" min="1" style={{width: "55px"}} placeholder="Min" id="Min"
                                 onChange={this.handleMinimo}/>
                             </form>
                         </td>
                         <td>
                             <form id="input">
-                                <input type="number" min="1" style={{width: "55px"}} placeholder="Min"
+                                <input type="number" min="2" style={{width: "55px"}} placeholder="Max" id="Max"
                                 onChange={this.handleMaximo}/>
-                            </form>
-                        </td>
-                        <td>
-                            <form id="input">
-                                <input type="number" min="2" style={{width: "55px"}} placeholder="Max"
-                                onChange={this.handleTamaño}/>
                             </form>
                         </td>
                         <td>
