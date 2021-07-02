@@ -8,6 +8,7 @@ class HashCerrado{
         this.max = max
         this.vector = llenar(this.tamaño)
         this.tipo = tipo
+        this.hashings = 0
     }
 
     agregar(valor){
@@ -56,22 +57,42 @@ class HashCerrado{
     }
 
     guardar(){
-        /*const json = {
-            categoria: "Tabla Hash Cerrada",
-
-        }*/
+        var aux = []
+        for(var i in this.vector){
+            if(this.vector[i] === "< >"){
+                aux.push({indice: i, valor: ""})
+            }
+            else{
+                aux.push({indice: i, valor: this.vector[i]})
+            }
+        }
+        const json = {
+            categoria: "Hash Cerrado",
+            tamaño: this.tamaño,
+            minimo: this.min,
+            maximo: this.max,
+            rehashings: this.hashings,
+            funcion: this.metodo,
+            prueba: this.resolucion,
+            tipo: this.tipo,
+            valores: aux
+        }
+        const txt = JSON.stringify(json, null, '   ')
+        return {nombre: "Hash Cerrado.json", text: txt}
     }
 
     cargar(lista){
         for(var i in lista){
+            
             this.agregar(lista[i])
         }
     }
 
     rehashing(){
         if((this.contador*100)/this.tamaño >= this.max){
+            this.hashings++
             var aux = this.vector
-            this.tamaño = (this.contador*100)/this.min
+            this.tamaño = Math.round((this.contador*100)/this.min)
             this.contador = 0
             this.vector = llenar(this.tamaño)
             for(var i in aux){
@@ -100,7 +121,7 @@ class HashCerrado{
         var l = 1
         var aux = 0
         for(var i in this.vector){
-            if(l%10 === 1){
+            if(l%15 === 1){
                 l = 1
                 aux++
             }
@@ -120,14 +141,16 @@ function llenar(m){
     return aux
 }
 //Metodos
-function simple(tamaño){ return (0.1625277911 * tamaño) }
+function simple(tamaño){ return Math.trunc(0.1625277911 * tamaño) }
 function division(valor, tamaño){ return (valor % tamaño) }
 function multiplicacion(valor, tamaño){ return Math.trunc(tamaño * ((valor * 0.1625277911) % 1)) }
 
 //Resoluciones    
 function lineal(valor, tamaño, i){ return ((valor + i) % tamaño) }
 function cuadratica(valor, tamaño, i){ return ((valor + (i*i)) % tamaño) }
-//function doble(valor, tamaño, i){ return ((valor%tamaño)+i*(valor%(tamaño"< >")))%tamaño }
+//function doble(valor, tamaño, i){ return (division(valor, tamaño) + i*division(valor, tamaño)) }
+
+//function h2(valor, tamaño){ return ( valor - (tamaño % valor)) }
 
 function ascii(txt){
     var sum = 0

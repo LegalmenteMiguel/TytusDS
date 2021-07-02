@@ -66,7 +66,10 @@ class pHashC extends React.Component {
         let files = e.target.files
         let reader = new FileReader()
         reader.onload = e =>{
-            
+            const json = JSON.parse(e.target.result)
+            this.setState({ velocidad: json.animaicon })
+            this.hash = new HashC(parseInt(json.m), parseInt(json.minimo), parseInt(json.maximo), json.funcion, json.prueba, this.state.tipo)
+            this.hash.cargar(json.valores)
         }
         reader.readAsText(files[0])
     }

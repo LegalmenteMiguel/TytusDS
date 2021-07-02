@@ -33,7 +33,7 @@ class HashAbierto{
 
     actualizar(valor, nuevo){
         if(this.buscar(valor)){
-            this.elimina(valor)
+            this.eliminar(valor)
             this.agregar(nuevo)
         }
     }
@@ -44,9 +44,26 @@ class HashAbierto{
         }
     }
 
-    guarda(){
-        
+    guardar(){
+        var aux = []
+        for(var i in this.vector){
+            var temp = []
+            for(var j in this.vector[i]){
+                temp.push({posicion: j, valor: this.vector[i][j]})
+            }
+            aux.push({indice: i, valores: temp})
+        }
+        const json = {
+            categoria: "Hash Abierto",
+            tamaño: this.tamaño,
+            funcion: this.metodo,
+            tipo: this.tipo,
+            valores: aux
+        }
+        const txt = JSON.stringify(json, null, '   ')
+        return {nombre: "Hash Abierto.json", text: txt}
     }
+
     dotG(){
         var nodos = []
         var relaciones = []
@@ -57,13 +74,13 @@ class HashAbierto{
     }
 
     _metodo(valor){
-        if(this.metodo === "Simple") return simple(this.tamaño)
+        if(this.metodo === "Simple") return simple(valor, this.tamaño)
         else if(this.metodo === "Division") return division(valor, this.tamaño)
         else if(this.metodo === "Multiplicacion") return multiplicacion(valor, this.tamaño)
     }
 }
 //Metodos
-function simple(tamaño){ return (0.1625277911 * tamaño) }
+function simple(valor, tamaño){ return Math.trunc(0.1625277911 * tamaño) }
 function division(valor, tamaño){ return (valor % tamaño) }
 function multiplicacion(valor, tamaño){ return Math.trunc(tamaño * ((valor * 0.1625277911) % 1)) }
 
@@ -92,8 +109,8 @@ function llenarNodos(nodos, vector){
     }
     for(var k in vector){
         for(var j in vector[k]){
-            var a = "l" + k.toString() + j.toString()
-            nodos.push({id: a, label: vector[k][j].toString(), level: parseInt(j)+1})
+            var a = vector[k][j] + k.toString() + j.toString()
+            nodos.push({id: a, label: vector[k][j], level: parseInt(j)+1})
         }
     }
     return nodos
@@ -104,13 +121,13 @@ function llenarRelaciones(relaciones, vector){
         relaciones.push({from: i, to: parseInt(i)+1})
     }
     for(var j in vector){
-        var a = "l" + j.toString() + "0"
+        var a = vector[j][0] + j.toString() + "0"
         relaciones.push({from: j, to: a})
     }
     for(var k in vector){
         for(var x = 0; x < vector[k].length-1; x++){
-            var b = "l" + k.toString() + x.toString()
-            var c = "l" + k.toString() + (x+1).toString()
+            var b = vector[k][x] + k.toString() + x.toString()
+            var c = vector[k][parseInt(x)+1] + k.toString() + (x+1).toString()
             relaciones.push({from: b, to: c})
         }
     }

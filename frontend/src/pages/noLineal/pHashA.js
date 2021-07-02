@@ -51,7 +51,10 @@ class pHashA extends React.Component {
         let files = e.target.files
         let reader = new FileReader()
         reader.onload = e =>{
-            
+            const json = JSON.parse(e.target.result)
+            this.setState({ velocidad: json.animaicon })
+            this.hash = new HashA(parseInt(json.m), json.funcion, this.state.tipo)
+            this.hash.carga(json.valores)
         }
         reader.readAsText(files[0])
     }
@@ -79,7 +82,7 @@ class pHashA extends React.Component {
             else if(id === "Nuevo") this.hash = new HashA(this.state.tamaño, this.state.metodo, this.state.tipo)
 
             else if(id === "Guardar"){
-                var output = this.hash.guardar(this.state.tipo)
+                var output = this.hash.guardar()
                 Funciones(output.nombre, output.text)
             }
 
