@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/TytusDS/frontend/build/static/css/main.0873e596.chunk.css",
-    "main.js": "/TytusDS/frontend/build/static/js/main.76db5abe.chunk.js",
-    "main.js.map": "/TytusDS/frontend/build/static/js/main.76db5abe.chunk.js.map",
+    "main.css": "/TytusDS/frontend/build/static/css/main.8be69e70.chunk.css",
+    "main.js": "/TytusDS/frontend/build/static/js/main.904a898e.chunk.js",
+    "main.js.map": "/TytusDS/frontend/build/static/js/main.904a898e.chunk.js.map",
     "runtime-main.js": "/TytusDS/frontend/build/static/js/runtime-main.fcb03de4.js",
     "runtime-main.js.map": "/TytusDS/frontend/build/static/js/runtime-main.fcb03de4.js.map",
     "static/css/2.8a10c6cc.chunk.css": "/TytusDS/frontend/build/static/css/2.8a10c6cc.chunk.css",
-    "static/js/2.ae888dd1.chunk.js": "/TytusDS/frontend/build/static/js/2.ae888dd1.chunk.js",
-    "static/js/2.ae888dd1.chunk.js.map": "/TytusDS/frontend/build/static/js/2.ae888dd1.chunk.js.map",
+    "static/js/2.b9216507.chunk.js": "/TytusDS/frontend/build/static/js/2.b9216507.chunk.js",
+    "static/js/2.b9216507.chunk.js.map": "/TytusDS/frontend/build/static/js/2.b9216507.chunk.js.map",
     "index.html": "/TytusDS/frontend/build/index.html",
     "static/css/2.8a10c6cc.chunk.css.map": "/TytusDS/frontend/build/static/css/2.8a10c6cc.chunk.css.map",
-    "static/css/main.0873e596.chunk.css.map": "/TytusDS/frontend/build/static/css/main.0873e596.chunk.css.map",
-    "static/js/2.ae888dd1.chunk.js.LICENSE.txt": "/TytusDS/frontend/build/static/js/2.ae888dd1.chunk.js.LICENSE.txt",
+    "static/css/main.8be69e70.chunk.css.map": "/TytusDS/frontend/build/static/css/main.8be69e70.chunk.css.map",
+    "static/js/2.b9216507.chunk.js.LICENSE.txt": "/TytusDS/frontend/build/static/js/2.b9216507.chunk.js.LICENSE.txt",
     "static/media/AVL.99f1f4e3.png": "/TytusDS/frontend/build/static/media/AVL.99f1f4e3.png",
     "static/media/Arborea.de42e94f.png": "/TytusDS/frontend/build/static/media/Arborea.de42e94f.png",
     "static/media/B.d5cafe5b.png": "/TytusDS/frontend/build/static/media/B.d5cafe5b.png",
@@ -27,8 +27,8 @@
   "entrypoints": [
     "static/js/runtime-main.fcb03de4.js",
     "static/css/2.8a10c6cc.chunk.css",
-    "static/js/2.ae888dd1.chunk.js",
-    "static/css/main.0873e596.chunk.css",
-    "static/js/main.76db5abe.chunk.js"
+    "static/js/2.b9216507.chunk.js",
+    "static/css/main.8be69e70.chunk.css",
+    "static/js/main.904a898e.chunk.js"
   ]
 }
