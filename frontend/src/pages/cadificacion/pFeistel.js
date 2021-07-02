@@ -1,25 +1,35 @@
-//Pagina para graficar Huffman
+//Pagina para graficar Hamming
 import React from 'react'
 
-import LZW from '../../Estructuras/codificacion/LZW'
+import Feistel from '../../Estructuras/codificacion/Feistel'
 
 import Descarga from '../../Estructuras/DescargaTXT'
 
 import '../styles/Grafica.css'
 
-class pLZW extends React.Component {
+class pFeistel extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
             entrada: "",
+            llave: "",
+            iteraciones: 1,
             salida: "",
             velocidad: 5
         }
-        this.lzw= new LZW()
+        this.feistel= new Feistel()
       }
     
     handleEntrada = e => {
         this.setState({ entrada: e.target.value })
+    }
+
+    handleLlave = e => {
+        this.setState({ llave: e.target.value })
+    }
+
+    handleIteracion = e => {
+        this.setState({ iteraciones: parseInt(e.target.value)})
     }
 
     handleVelocidad = e => {
@@ -44,12 +54,13 @@ class pLZW extends React.Component {
 
         else{
             if(id === "Calcular"){ 
-                var aux = this.lzw.calcular(this.state.entrada) 
-                document.getElementById("Resultado").value = aux
+                var salida = this.feistel.calcular(this.state.entrada, this.state.llave, this.state.iteraciones)
+                this.setState({ salida: salida })
+                document.getElementById("Resultado").value = salida
             }
             
             else if(id === "Guardar"){
-                var output = this.lzw.guardar()
+                var output = this.feistel.guardar()
                 Descarga(output.nombre, output.text)
             }
         }
@@ -60,6 +71,10 @@ class pLZW extends React.Component {
             <div>
                 <nav className="Bar">
                     <table>
+                        <td>
+                            <input type="number"  min="1" placeholder="Iteraciones" 
+                            onChange={this.handleIteracion}/>
+                        </td>
                         <td>
                             <button className="btn Boton" id="Calcular" 
                                 onClick={this.handleClick}> Calcular
@@ -78,9 +93,13 @@ class pLZW extends React.Component {
                 </nav>
                 <div>
                     <div>
-                    <textarea cols="124" rows="3" placeholder="Frase" id="Entrada" ></textarea>
+                        <label>Frase</label>
+                        <textarea cols="124" rows="3" placeholder="Frase" id="Entrada" onChange={this.handleEntrada}></textarea>
+                        <label>Llave</label>
+                        <textarea cols="124" rows="3" placeholder="Llave" id="Llave" onChange={this.handleLlave}></textarea>
+                        <label>Resultado</label>
+                        <textarea disabled cols="124" rows="6" placeholder="Resultado" id="Resultado" ></textarea>
                     </div>
-                    <textarea disabled cols="30" rows="28" placeholder="Resultado" id="Resultado" ></textarea>
                 </div>
                 <nav className="Sub_bar">
                     <table>
@@ -95,4 +114,4 @@ class pLZW extends React.Component {
     }
 }
 
-export default pLZW
+export default pFeistel

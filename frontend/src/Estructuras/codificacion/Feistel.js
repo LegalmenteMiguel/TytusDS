@@ -8,9 +8,10 @@ class Feistel{
         this.hexT = null
         this.fraseC = null
         this.hexC = null
+        this.resultado = null
     }
 
-    calcualar(frase, key, iteraciones){
+    calcular(frase, key, iteraciones){
         if((frase.length)/2 === key.length){
             this.fraseT = frase
             var size = frase.length
@@ -22,10 +23,11 @@ class Feistel{
             for(var i = 0; i < iteraciones; i++){
                 this._calcular()
             }
-            return this.salida()
+            this.salida()
+            return this.resultado 
         }
         else{
-            alert("La clave no cumple con los requisitos")
+            return "La Llave no comple con los requisitos"
         }
     }
 
@@ -33,8 +35,7 @@ class Feistel{
         this.hexT = hexa(this.fraseT)
         this.fraseC = texto(this.izquierda) + texto(this.derecha)
         this.hexC = hexa(this.fraseC)
-        var salida = "Criptograma\n\nSimbolo: " + this.fraseC + "\nHex: " + this.hexC
-        return salida
+        this.resultado = "Criptograma\n\nSimbolo: " + this.fraseC + "\nHex: " + this.hexC
     }
 
     _calcular(){
@@ -60,6 +61,10 @@ class Feistel{
             aux += this.key[i].toString(2) + " "
         }
         return llenar(aux)
+    }
+
+    guardar(){
+        return {nombre: "Feistel.txt", text: this.resultado}
     }
 }
 

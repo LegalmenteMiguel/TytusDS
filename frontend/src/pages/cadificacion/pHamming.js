@@ -62,21 +62,9 @@ class pHamming extends React.Component {
                 <nav className="Bar">
                     <table>
                         <td>
-                            <form id="input">
-                                <input type="text" style={{width: "300px"}} placeholder="Entrada" id="Entrada"
-                                onChange={this.handleEntrada}/>
-                            </form>
-                        </td>
-                        <td>
                             <button className="btn Boton" id="Calcular" 
                                 onClick={this.handleClick}> Calcular
                             </button> 
-                        </td>
-                        <td>
-                            <form id="output">
-                                <input type="text" style={{width: "300px"}} placeholder="Resultado" id="Resultado"
-                                readonly="readonly" />
-                            </form>
                         </td>
                         <td>
                             <button className="btn btn-success" id="Guardar"
@@ -90,7 +78,10 @@ class pHamming extends React.Component {
                     </table>
                 </nav>
                 <div>
-                    {/*Aqui iria la grafica*/}
+                    <div>
+                    <textarea cols="124" rows="3" placeholder="Frase" id="Entrada" onChange={this.handleEntrada}></textarea>
+                    <textarea disabled cols="124" rows="3" placeholder="Resultado" id="Resultado" ></textarea>
+                    </div>
                 </div>
                 <nav className="Sub_bar">
                     <table>

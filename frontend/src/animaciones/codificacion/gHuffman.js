@@ -34,7 +34,7 @@ const options = {
 
 function gHuffman(info){
     return (
-        <div style={{ height: "750px", width: "1200 px", border: "1px" }}>
+        <div style={{ height: "675px", width: "1200 px", border: "1px" }}>
             <VisNetwork data= {info} options = {options} />
         </div>
     );

@@ -50,8 +50,6 @@ class pHuffman extends React.Component {
                 var output = this.huffman.guardar()
                 Descarga(output.nombre, output.text)
             }
-            this.setState({ entrada: "" })
-            document.getElementById("input").reset()
         }
     }
 
@@ -60,12 +58,6 @@ class pHuffman extends React.Component {
             <div>
                 <nav className="Bar">
                     <table>
-                        <td>
-                            <form id="input">
-                                <input type="text" style={{width: "300px"}} placeholder="Frase" id="Entrada"
-                                onChange={this.handleEntrada}/>
-                            </form>
-                        </td>
                         <td>
                             <button className="btn Boton" id="Calcular" 
                                 onClick={this.handleClick}> Calcular
@@ -83,6 +75,8 @@ class pHuffman extends React.Component {
                     </table>
                 </nav>
                 <div>
+                    <textarea cols="125" rows="3" placeholder="Frase" id="Entrada" 
+                    onChange={this.handleEntrada}></textarea>
                     {huffman(this.huffman.dotG())}
                 </div>
                 <nav className="Sub_bar">

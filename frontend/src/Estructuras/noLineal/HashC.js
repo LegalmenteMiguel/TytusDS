@@ -40,11 +40,10 @@ class HashCerrado{
 
     buscar(valor){
         for(var i in this.vector){
-            for(var j in this.vector[i]){
-                if(this.vector[i][j] === valor){
-                    return true
-                }
+            if(this.vector[i] === valor){
+                return true
             }
+            
         }   
         return false     
     }
@@ -148,9 +147,9 @@ function multiplicacion(valor, tamaño){ return Math.trunc(tamaño * ((valor * 0
 //Resoluciones    
 function lineal(valor, tamaño, i){ return ((valor + i) % tamaño) }
 function cuadratica(valor, tamaño, i){ return ((valor + (i*i)) % tamaño) }
-//function doble(valor, tamaño, i){ return (division(valor, tamaño) + i*division(valor, tamaño)) }
+function doble(valor, tamaño, i){ return (division(valor, tamaño) + i*h2(valor, tamaño)) }
 
-//function h2(valor, tamaño){ return ( valor - (tamaño % valor)) }
+function h2(valor, tamaño){ return ( valor - (tamaño % valor)) }
 
 function ascii(txt){
     var sum = 0
