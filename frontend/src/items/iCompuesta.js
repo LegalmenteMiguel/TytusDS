@@ -5,7 +5,7 @@ const ItemCompuesta = [
         title: "Matriz",
         name: "Dispersa",
         logo: Working,
-        path: "MatrizDispersa",
+        path: "Compuestas/MatrizDispersa",
         header: "",
         class: "Button Button_right1"
     },
@@ -13,7 +13,7 @@ const ItemCompuesta = [
         title: "",
         name: "Row-Major",
         logo: Working,
-        path: "RowMajor",
+        path: "Compuestas/RowMajor",
         header: "Header_empty",
         class: "Button Button_1"
     },
@@ -21,7 +21,7 @@ const ItemCompuesta = [
         title: "",
         name: "Col-Major",
         logo: Working,
-        path: "ColMajor",
+        path: "Compuestas/ColMajor",
         header: "Header_empty",
         class: "Button Button_left1"
     },
@@ -29,7 +29,7 @@ const ItemCompuesta = [
         title: "Construcción de",
         name: "Estructuras Compuestas",
         logo: Working,
-        path: "CifradoFeistel",
+        path: "Compuestas/Construccion",
         header: "",
         class: "Button Top_button1"
     }

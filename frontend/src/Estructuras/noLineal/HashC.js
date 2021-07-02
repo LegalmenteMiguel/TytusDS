@@ -69,9 +69,6 @@ class HashCerrado{
     }
 
     rehashing(){
-        console.log((this.contador*100)/this.tamaño)
-        console.log(this.max)
-        console.log((this.contador*100)/this.tamaño >= this.max)
         if((this.contador*100)/this.tamaño >= this.max){
             var aux = this.vector
             this.tamaño = (this.contador*100)/this.min

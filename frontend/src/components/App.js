@@ -27,6 +27,9 @@ import HashA from '../pages/noLineal/pHashA'
 import Hamming from '../pages/cadificacion/pHamming'
 import Huffman from '../pages/cadificacion/pHuffman'
 import LZW from '../pages/cadificacion/pLZW'
+//import Feistel from '../pages/cadificacion/pFeistel'
+//Compuesta
+import RCMajor from '../pages/compuesta/pRCMayor'
 
 function  App(){
     return (
@@ -62,6 +65,10 @@ function  App(){
             <Route exact path="/TytusDS/frontend/build/Codificacion/Hamming" component={Hamming} />
             <Route exact path="/TytusDS/frontend/build/Codificacion/Huffman" component={Huffman} />
             <Route exact path="/TytusDS/frontend/build/Codificacion/LZW" component={LZW} />
+            <Route exact path="/TytusDS/frontend/build/Codificacion/LZW" component={LZW} />
+            {/*Compuestas*/}
+            <Route exact path="/TytusDS/frontend/build/Compuestas/RowMajor" component={RCMajor} />
+            <Route exact path="/TytusDS/frontend/build/Compuestas/ColMajor" component={RCMajor} />
             <Route component={NotFound} />
           </Switch>
         </Layout>
