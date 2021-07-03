@@ -1,9 +1,9 @@
 class HashCerrado{
-    constructor(tamaño, min, max, metodo, resolucion, tipo){
+    constructor(tamaño, min, max, funcion, prueba, tipo){
         this.tamaño = tamaño
         this.contador = 0
-        this.metodo = metodo
-        this.resolucion = resolucion
+        this.funcion = funcion
+        this.prueba = prueba
         this.min = min
         this.max = max
         this.vector = llenar(this.tamaño)
@@ -12,25 +12,36 @@ class HashCerrado{
     }
 
     agregar(valor){
-        var i = this._metodo(ascii(valor))
+        var i = this._funcion(ascii(valor))
         var aux = i
         var j = 1
+        var bool = true
+        var temp = []
         while(this.vector[aux] !== "< >"){
-            aux = this._resolucion(i, j)
+            aux = this._prueba(i, j)
+            temp.push(aux)
             j++
+            if(j-5>this.tamaño){
+                bool = !bool
+                console.log("SALE")
+                console.log(valor, this.tamaño, i, temp)
+                break
+            }
         }
-        this.vector[aux] = valor
-        this.contador++
-        this.rehashing()
+        if(bool){
+            this.vector[aux] = valor
+            this.contador++
+            this.rehashing()
+        }
     }
 
     eliminar(valor){
         if(this.buscar(valor)){
-            var i = this._metodo(ascii(valor))
+            var i = this._funcion(ascii(valor))
             var aux = i
             var j = 1
             while(this.vector[aux] !== valor){
-                aux = this._resolucion(i, j)
+                aux = this._prueba(i, j)
                 j++
             }
             this.vector[aux] = "< >"
@@ -71,8 +82,8 @@ class HashCerrado{
             minimo: this.min,
             maximo: this.max,
             rehashings: this.hashings,
-            funcion: this.metodo,
-            prueba: this.resolucion,
+            funcion: this.funcion,
+            prueba: this.prueba,
             tipo: this.tipo,
             valores: aux
         }
@@ -82,7 +93,6 @@ class HashCerrado{
 
     cargar(lista){
         for(var i in lista){
-            
             this.agregar(lista[i])
         }
     }
@@ -102,16 +112,16 @@ class HashCerrado{
         }
     }
 
-    _metodo(valor){
-        if(this.metodo === "Simple") return simple(this.tamaño)
-        else if(this.metodo === "Division") return division(valor, this.tamaño)
-        else if(this.metodo === "Multiplicacion") return multiplicacion(valor, this.tamaño)
+    _funcion(valor){
+        if(this.funcion === "Simple") return simple(this.tamaño)
+        else if(this.funcion === "Division") return division(valor, this.tamaño)
+        else if(this.funcion === "Multiplicacion") return multiplicacion(valor, this.tamaño)
     }
 
-    _resolucion(valor, i){
-        if(this.resolucion === "Lineal") return lineal(valor, this.tamaño, i)
-        else if(this.resolucion === "Cuadratica") return cuadratica(valor, this.tamaño, i)
-        else if(this.resolucion === "Doble") return //doble(valor, this.tamaño, i)
+    _prueba(valor, i){
+        if(this.prueba === "Lineal") return lineal(valor, this.tamaño, i)
+        else if(this.prueba === "Cuadratica") return cuadratica(valor, this.tamaño, i)
+        else if(this.prueba === "Doble") return doble(valor, this.tamaño, i)
     }
 
     dotG(){
@@ -139,17 +149,35 @@ function llenar(m){
     }
     return aux
 }
-//Metodos
-function simple(tamaño){ return Math.trunc(0.1625277911 * tamaño) }
-function division(valor, tamaño){ return (valor % tamaño) }
-function multiplicacion(valor, tamaño){ return Math.trunc(tamaño * ((valor * 0.1625277911) % 1)) }
+//funcions
+function simple(tamaño){ 
+    return Math.trunc(0.1625277911 * tamaño) 
+}
 
-//Resoluciones    
-function lineal(valor, tamaño, i){ return ((valor + i) % tamaño) }
-function cuadratica(valor, tamaño, i){ return ((valor + (i*i)) % tamaño) }
-function doble(valor, tamaño, i){ return (division(valor, tamaño) + i*h2(valor, tamaño)) }
+function division(valor, tamaño){ 
+    return (valor % tamaño) 
+}
 
-function h2(valor, tamaño){ return ( valor - (tamaño % valor)) }
+function multiplicacion(valor, tamaño){ 
+    return Math.trunc(tamaño * ((valor * 0.1625277911) % 1))
+ }
+
+//pruebaes    
+function lineal(valor, tamaño, i){ 
+    return ((valor + i) % tamaño) 
+}
+
+function cuadratica(valor, tamaño, i){ 
+    return ((valor + (i*i)) % tamaño) 
+}
+
+function doble(valor, tamaño, i){ 
+    var a = division(valor, tamaño)
+    var b = h2(valor, tamaño)
+    return ((a+(i*b))%tamaño)
+}
+
+function h2(valor, tamaño){ return (1 + (valor % (tamaño - 1))) }
 
 function ascii(txt){
     var sum = 0

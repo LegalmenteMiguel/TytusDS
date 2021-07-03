@@ -72,7 +72,7 @@ class pRCMajor extends React.Component {
                     </table>
                 </nav>
                 <div>
-                    <textarea disabled cols="93" rows="32" placeholder="Resultado" id="Resultado" ></textarea>    
+                    <textarea disabled cols="124" rows="31" placeholder="Resultado" id="Resultado" ></textarea>    
                 </div>
                 <nav className="Sub_bar">
                     <table>
