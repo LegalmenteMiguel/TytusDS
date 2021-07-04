@@ -21,7 +21,7 @@ class Lista{
             if(aux.valor < nodo.valor){
                 aux = aux.siguiente
             } else {
-                if(aux == this.primero){
+                if(aux === this.primero){
                     nodo.siguiente = aux
                     aux.anterior = nodo
                     this.primero = nodo
@@ -42,7 +42,7 @@ class Lista{
     //Agregar nodo a la lista
     insertar(valor){
         let nodo = new Nodo(valor,null)
-        if(this.primero == null){
+        if(this.primero === null){
             this.primero = this.ultimo = nodo
             return;
         }
@@ -52,7 +52,7 @@ class Lista{
     busqueda(valor){
         let temp = this.primero
         while(temp !== null){
-            if(temp.valor == valor) return temp
+            if(temp.valor === valor) return temp
             temp = temp.siguiente
         }
         return null
@@ -99,7 +99,7 @@ class ListaD{
                 break;
             }
         }
-        if(agregado == false){
+        if(agregado === false){
             aux = nodo_y.derecha
             while(aux.derecha != null){
                 aux = aux.derecha
@@ -176,8 +176,8 @@ class ListaD{
         let cabecera = this.lista_vertical.primero
         let aux
         while(cabecera != null){
-            if(cabecera.valor == valor){
-                if(cabecera == this.lista_vertical.primero){
+            if(cabecera.valor === valor){
+                if(cabecera === this.lista_vertical.primero){
                     if(this.lista_vertical.primero === this.lista_vertical.ultimo){
                         this.lista_vertical.primero = this.lista_vertical.ultimo = null
                     }
@@ -187,7 +187,7 @@ class ListaD{
             }
             aux = cabecera.derecha
             while(aux !== null){
-                if(aux.valor == valor){
+                if(aux.valor === valor){
                     aux.izquierda.derecha = aux.derecha
                 }
                 aux = aux.derecha
@@ -199,7 +199,7 @@ class ListaD{
     actualizar(valor, nuevo){
         let cabecera = this.lista_vertical.primero
         while(cabecera != null){
-            if(cabecera.valor == valor){
+            if(cabecera.valor === valor){
                 cabecera.valor = nuevo
                 return
             }
@@ -250,7 +250,7 @@ class ListaD{
                 camino.push(temp)
             }
             let cabecera = this.lista_vertical.busqueda(temp)
-            if(temp == valor){
+            if(temp === valor){
                 let result = camino[0]
                 for(let i = 1; i<camino.length;i++){
                     result += " -> "+camino[i]
@@ -319,7 +319,7 @@ class ListaD{
             var temp = recorrido.shift()
             camino.push(temp)
             let cabecera = this.lista_vertical.busqueda(temp)
-            if(temp == valor){
+            if(temp === valor){
                 let result = camino[0]
                 for(let i = 1; i < camino.length;i++){
                     result += " -> "+camino[i]
@@ -360,12 +360,12 @@ class ListaD{
                 camino.push(temp)
             }
             let cabecera = this.lista_vertical.busqueda(temp.valor)
-            if(temp.valor == valor){
+            if(temp.valor === valor){
                 var cont = 0
                 let result = camino[0].valor + ": " + camino[0].peso
                 for(let i = 1; i<camino.length;i++){
                     result += " -> "+camino[i].valor + ": " + camino[i].peso
-                    if(camino[i].valor == valor) {
+                    if(camino[i].valor === valor) {
                         cont = camino[i].peso
                     }
                 }
@@ -381,12 +381,12 @@ class ListaD{
                         var repetido
                         var acumulado = parseInt(aux.peso) + parseInt(temp.peso)
                         for(var i in camino){
-                            if(aux.valor == camino[i].valor && temp.valor !== inicio){
+                            if(aux.valor === camino[i].valor && temp.valor !== inicio){
                                 repetido = true
                                 break
                             }else repetido = false
                         }
-                        if(repetido == false){
+                        if(repetido === false){
                             recorrido.push({valor:aux.valor,peso:acumulado})
                         }
                     }
@@ -415,15 +415,15 @@ class ListaD{
             if(temp.valor!== '') {
                 let bandera
                 for(var j = 0; j < camino.length;j++){
-                    if(camino.length == 0) {
+                    if(camino.length === 0) {
                         bandera = false 
                         break
-                    } else if(temp.valor == camino[j].valor){
+                    } else if(temp.valor === camino[j].valor){
                         bandera = true
                         break
                     } else bandera = false
                 }
-                if(camino.length == 0) {
+                if(camino.length === 0) {
                     bandera = false 
                 }
                 if(bandera === false) camino.push(temp)
@@ -449,12 +449,12 @@ class ListaD{
                         var repetido
                         var acumulado = parseInt(aux.peso) + parseInt(temp.peso)
                         for(var i in camino){
-                            if(aux.valor == camino[i].valor && temp.valor !== inicio){
+                            if(aux.valor === camino[i].valor && temp.valor !== inicio){
                                 repetido = true
                                 break
                             }else repetido = false
                         }
-                        if(repetido == false){
+                        if(repetido === false){
                             recorrido.push({valor:aux.valor,peso:acumulado})
                         }
                     }

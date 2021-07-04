@@ -1,10 +1,14 @@
-import Working from '../images/Working.png'
+import Minimo from '../images/noLineal/minimo.png'
+import Hash from '../images/noLineal/hash.png'
+import Costo from '../images/noLineal/costo.png'
+import Grafo from '../images/noLineal/grafo.png'
+import Grafo1 from '../images/noLineal/grafo1.png'
 
 const ItemNoLineal = [
     {
         title: "Tabla Hash",
         name: "Abierta",
-        logo: Working,
+        logo: Hash,
         path: "NoLineales/HashAbierta",
         header: "",
         class: "Button Button_right1"
@@ -12,7 +16,7 @@ const ItemNoLineal = [
     {
         title: "Tabla Hash",
         name: "Cerrada",
-        logo: Working,
+        logo: Hash,
         path: "NoLineales/HashCerrada",
         header: "",
         class: "Button Button_1"
@@ -20,7 +24,7 @@ const ItemNoLineal = [
     {
         title: "Recorrido y Búsqueda",
         name: "Por Anchura",
-        logo: Working,
+        logo: Grafo,
         path: "NoLineales/AnchuraDeGrafos",
         header: "",
         class: "Button Button_left1"
@@ -28,7 +32,7 @@ const ItemNoLineal = [
     {
         title: "Recorrido y Búsqueda",
         name: "Por Profundidad",
-        logo: Working,
+        logo: Grafo1,
         path: "NoLineales/ProfundidadDeGrafos",
         header: "",
         class: "Button Top_right1"
@@ -36,7 +40,7 @@ const ItemNoLineal = [
     {
         title: "Algoritmo de",
         name: "Costo Uniforme",
-        logo: Working,
+        logo: Costo,
         path: "NoLineales/CostoUniforme",
         header: "",
         class: "Button Top_button1"
@@ -44,7 +48,7 @@ const ItemNoLineal = [
     {
         title: "Árbol de",
         name: "Recubrimiento Mínimo",
-        logo: Working,
+        logo: Minimo,
         path: "NoLineales/RecubrimientoMinimo",
         header: "",
         class: "Button Top_left1"

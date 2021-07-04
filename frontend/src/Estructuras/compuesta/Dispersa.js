@@ -24,7 +24,7 @@ class Lista{
             if(aux.valor < nodo.valor){
                 aux = aux.siguiente
             } else {
-                if(aux == this.primero){
+                if(aux === this.primero){
                     nodo.siguiente = aux
                     aux.anterior = nodo
                     this.primero = nodo
@@ -45,7 +45,7 @@ class Lista{
     //Agrega nodo a la lista
     insertar(valor){
         let nodo = new Nodo(valor,null,null)
-        if(this.primero == null){
+        if(this.primero === null){
             this.primero = this.ultimo = nodo
             return;
         }
@@ -55,7 +55,7 @@ class Lista{
     busqueda(valor){
         let temp = this.primero;
         while(temp !== null){
-            if(temp.valor == valor) return temp
+            if(temp.valor === valor) return temp
             temp = temp.siguiente
         }
         return null
@@ -72,11 +72,11 @@ class MatrizD{
         let nodo_x = this.lista_horizontal.busqueda(x)
         let nodo_y = this.lista_vertical.busqueda(y)
 
-        if (nodo_x == null && nodo_y == null){
+        if (nodo_x === null && nodo_y === null){
             this.caso1(valor,x,y)
-        } else if(nodo_x == null && nodo_y != null){
+        } else if(nodo_x === null && nodo_y != null){
             this.caso2(valor, x, y)
-        }else if(nodo_x != null && nodo_y == null){
+        }else if(nodo_x != null && nodo_y === null){
             this.caso3(valor,x,y)
         }else{
             this.caso4(valor,x,y)
@@ -124,7 +124,7 @@ class MatrizD{
             }
         }
 
-        if(agregado == false){
+        if(agregado === false){
             aux = nodo_y.derecha
             while(aux.derecha != null){
                 aux = aux.derecha
@@ -196,7 +196,7 @@ class MatrizD{
                 break;
             }
         }
-        if(agregado == false){
+        if(agregado === false){
             aux = nodo_y.derecha
             while(aux.derecha != null){
                 aux = aux.derecha
@@ -208,7 +208,7 @@ class MatrizD{
         aux = nodo_x.abajo
         cabecera = 0
 
-        while(aux != null && !agregado){
+        while(aux !== null && !agregado){
             cabecera = aux.y
             if(cabecera < y){
                 aux = aux.abajo
@@ -296,8 +296,8 @@ class MatrizD{
         //Vertical
         let cont = 0
         while(cabeceraV !== null){
-            nodos.push({id:"v"+cabeceraV.valor, label:cabeceraV.valor.toString(),x:-150, y: cont*150})
-            piv.push({id:"v"+cabeceraV.valor, label:cabeceraV.valor.toString(),tipo:"v",y: cont*150})
+            nodos.push({id:"v"+cabeceraV.valor, label:cabeceraV.valor.toString(),x:-150, y: cont*100})
+            piv.push({id:"v"+cabeceraV.valor, label:cabeceraV.valor.toString(),tipo:"v",y: cont*100})
             if(cabeceraV.siguiente !== null){
                 direccion.push({to:"v"+cabeceraV.valor,from:"v"+(cabeceraV.siguiente.valor)})
             }
@@ -307,7 +307,7 @@ class MatrizD{
         //Horizontal
         let conteo = 0
         while(cabeceraH !== null){
-            nodos.push({id:"h"+cabeceraH.valor,label:cabeceraH.valor.toString(),x:conteo*150,y:-150})
+            nodos.push({id:"h"+cabeceraH.valor,label:cabeceraH.valor.toString(),x:conteo*150,y:-100})
             if(cabeceraH.siguiente !== null){
                 direccion.push({to:"h"+cabeceraH.valor, from:"h"+cabeceraH.siguiente.valor})
             }
@@ -324,7 +324,7 @@ class MatrizD{
         while(cabecera !== null){
             aux = cabecera.derecha
             while(aux !== null){
-                nodos.push({id:"I"+aux.valor+aux.x+aux.y,label:aux.valor,x:aux.x*150,y:aux.y*150})
+                nodos.push({id:"I"+aux.valor+aux.x+aux.y,label:aux.valor,x:aux.x*150,y:aux.y*100})
                 if(aux.izquierda === cabecera){
                     direccion.push({to:"v"+aux.izquierda.valor,from:"I"+aux.valor+aux.x+aux.y})
                 }
@@ -340,7 +340,7 @@ class MatrizD{
             aux2 = cabH.abajo
             while(aux2 !== null){
         
-                if(aux2 == cabH.abajo){
+                if(aux2 === cabH.abajo){
                     direccion.push({to:"h"+aux2.arriba.valor,from:"I"+aux2.valor+aux2.x+aux2.y})
                 }
                 else{
@@ -375,7 +375,7 @@ class MatrizD{
         while(cabeceraH !== null){
             aux = cabeceraH.abajo
             while(aux !== null){
-                nodos.push({id:"h"+aux.valor+aux.x+aux.y,label:aux.valor,x:aux.x*150,y:aux.y*150})
+                nodos.push({id:"h"+aux.valor+aux.x+aux.y,label:aux.valor,x:aux.x*150,y:aux.y*100})
                 if(aux.abajo !== null){
                     direccion.push({to:"h"+aux.valor+aux.x+aux.y,from:"h"+aux.abajo.valor+aux.abajo.x+aux.abajo.y})
                 }

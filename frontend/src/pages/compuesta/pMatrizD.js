@@ -63,7 +63,9 @@ class mDispersa extends React.Component {
 
     handleClick = e => {
         const id = e.target.id
-        if(this.state.entrada === "" && id !== "Nuevo" && id !== "Guardar") alert("Ingrese un valor")
+        if(this.state.entrada === "" && id !== "Nuevo" && id !== "Guardar" && this.state.x !== "" && this.state.y !== ""){
+            alert("Ingrese un valor")
+        }
         else{
             if(id === "Agregar") {
                 this.matriz.insertar(this.state.entrada,this.state.x,this.state.y)

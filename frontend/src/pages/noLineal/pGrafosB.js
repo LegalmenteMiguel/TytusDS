@@ -15,10 +15,11 @@ class grafoAncho extends React.Component {
             peso: "",
             precede: "",
             nuevo: "",
-            metodo: "Anchura",
+            path: this.props.location.pathname,
             tipo: "Lista",
             velocidad: 5
         }
+        this.metodo = this.setMetodo(this.state.path)
         this.grafo = new ListaD()
         this.resultado = ''
         this.camino = ''
@@ -44,9 +45,6 @@ class grafoAncho extends React.Component {
         this.setState({ velocidad: e.target.value })
     }
 
-    handleMetodo = e => {
-        this.setState({metodo: e.target.value})
-    }
     handleTipo = e => {
         this.setState({tipo: e.target.value})
     }
@@ -64,9 +62,19 @@ class grafoAncho extends React.Component {
         reader.readAsText(files[0])
     }
 
+    setMetodo(path){
+        if(path.includes("AnchuraDeGrafos")) return "Anchura"
+        
+        else if(path.includes("ProfundidadDeGrafos")) return "Profundidad"
+
+        else if(path.includes("CostoUniforme")) return "Costo uniforme"
+
+        else if(path.includes("RecubrimientoMinimo")) return "Recubrimiento minimo"
+    }
+
     handleClick = e => {
         const id = e.target.id
-        if(this.state.entrada === "" && id !== "Nuevo" && id !== "Guardar") alert("Ingrese un valor")
+        if(this.state.entrada === "" && id !== "Nuevo" && id !== "Guardar" && id !== "Recorrer") alert("Ingrese un valor")
 
         else{
             if(id === "Agregar") {
@@ -79,44 +87,54 @@ class grafoAncho extends React.Component {
             
             else if(id === "Buscar"){
                 
-                if(this.state.metodo === "Anchura"){
-                    var aux = this.grafo.busquedaAnchura(this.state.entrada,this.state.precede)
-                    if(aux) alert("Se encontro el valor")
-                    else alert("No se encontro el valor")
-                    this.resultado = "Busqueda por anchura: "+aux
+                if(this.metodo === "Anchura"){
+                    if(this.state.entrada !== "" && this.state.precede !== ""){
+                        var aux = this.grafo.busquedaAnchura(this.state.entrada,this.state.precede)
+                        if(aux) alert("Se encontro el valor")
+                        else alert("No se encontro el valor")
+                        this.resultado = "Busqueda por anchura: "+aux
+                    }
                 }
-                else if(this.state.metodo === "Profundidad"){
-                    var aux = this.grafo.busquedaProf(this.state.entrada,this.state.precede)
-                    if(aux) alert("Se encontro el valor")
-                    else alert("No se encontro el valor")
-                    this.resultado = "Busqueda por profundidad: "+aux
+                else if(this.metodo === "Profundidad"){
+                    if(this.state.entrada !== "" && this.state.precede !== ""){
+                        var aux = this.grafo.busquedaProf(this.state.entrada,this.state.precede)
+                        if(aux) alert("Se encontro el valor")
+                        else alert("No se encontro el valor")
+                        this.resultado = "Busqueda por profundidad: "+aux
+                    }
                 }
-                else if(this.state.metodo === "Costo uniforme"){
-                    var aux = this.grafo.costoU(this.state.entrada,this.state.precede)
-                    if(aux) alert("Se encontro el valor")
-                    else alert("No se encontro el valor")
-                    this.resultado = "Busqueda por Costo uniforme: "+aux
+                else if(this.metodo === "Costo uniforme"){
+                    if(this.state.entrada !== "" && this.state.precede !== ""){
+                        var aux = this.grafo.costoU(this.state.entrada,this.state.precede)
+                        if(aux) alert("Se encontro el valor")
+                        else alert("No se encontro el valor")
+                        this.resultado = "Busqueda por Costo uniforme: "+aux
+                    }
                 }
-                else if(this.state.metodo === "Recubrimiento minimo"){
-                    var aux = this.grafo.busquedaProf(this.state.entrada)
-                    if(aux) alert("Se encontro el valor")
-                    else alert("No se encontro el valor")
-                    this.resultado = "Busqueda por Recubrimiento minimo: "+aux
+                else if(this.metodo === "Recubrimiento minimo"){
+                    if(this.state.entrada !== ""){
+                        var aux = this.grafo.busquedaProf(this.state.entrada)
+                        if(aux) alert("Se encontro el valor")
+                        else alert("No se encontro el valor")
+                        this.resultado = "Busqueda por Recubrimiento minimo: "+aux
+                    }
                 }
             }
             else if(id === "Recorrer"){
                 
-                if(this.state.metodo === "Anchura"){
+                if(this.metodo === "Anchura"){
                     var aux = this.grafo.recorridoAnchura()
                     this.camino = "Recorrido por anchura: "+aux
                 }
-                else if(this.state.metodo === "Profundidad"){
+                else if(this.metodo === "Profundidad"){
                     var aux = this.grafo.recorridoProf()
                     this.camino = "Recorrido por profundidad: "+aux
                 }
-                else if(this.state.metodo === "Recubrimiento minimo"){
-                    var aux = this.grafo.recMin(this.state.entrada)
-                    this.camino = "Recorrido por Recubrimiento minimo: "+aux
+                else if(this.metodo === "Recubrimiento minimo"){
+                    if(this.state.entrada !== ""){
+                        var aux = this.grafo.recMin(this.state.entrada)
+                        this.camino = "Recorrido por Recubrimiento minimo: "+aux
+                    }
                 }
             }
             else if(id === "Actualizar"){
@@ -230,15 +248,6 @@ class grafoAncho extends React.Component {
                         <td>
                             <input type="range"  min="0" max="10" step="1"  onChange={this.handleVelocidad}
                             defaultValue={this.state.velocidad} width="100"/>
-                        </td>
-                       
-                        <td>
-                            <select multiple="" onChange={this.handleMetodo} style={{height: "30px"}} >
-                                <option>Anchura</option>
-                                <option>Profundidad</option>
-                                <option>Costo uniforme</option>
-                                <option>Recubrimiento minimo</option>
-                            </select>
                         </td>
                         <td>
                             <select multiple="" onChange={this.handleTipo} style={{height: "30px"}} >

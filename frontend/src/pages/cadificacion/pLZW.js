@@ -78,7 +78,7 @@ class pLZW extends React.Component {
                 </nav>
                 <div>
                     <div>
-                    <textarea cols="124" rows="3" placeholder="Frase" id="Entrada" ></textarea>
+                    <textarea cols="189" rows="3" placeholder="Frase" id="Entrada" ></textarea>
                     </div>
                     <textarea disabled cols="30" rows="28" placeholder="Resultado" id="Resultado" ></textarea>
                 </div>

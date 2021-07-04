@@ -75,7 +75,7 @@ class pHuffman extends React.Component {
                     </table>
                 </nav>
                 <div>
-                    <textarea cols="125" rows="3" placeholder="Frase" id="Entrada" 
+                    <textarea cols="189" rows="3" placeholder="Frase" id="Entrada" 
                     onChange={this.handleEntrada}></textarea>
                     {huffman(this.huffman.dotG())}
                 </div>

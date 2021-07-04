@@ -1,10 +1,10 @@
-import Working from '../images/Working.png'
+import Compuesta from '../images/compuestas.png'
 
 const ItemCompuesta = [
     {
         title: "Matriz",
         name: "Dispersa",
-        logo: Working,
+        logo: Compuesta,
         path: "Compuestas/MatrizDispersa",
         header: "",
         class: "Button Button_right1"
@@ -12,7 +12,7 @@ const ItemCompuesta = [
     {
         title: "",
         name: "Row-Major",
-        logo: Working,
+        logo: Compuesta,
         path: "Compuestas/RowMajor",
         header: "Header_empty",
         class: "Button Button_1"
@@ -20,7 +20,7 @@ const ItemCompuesta = [
     {
         title: "",
         name: "Col-Major",
-        logo: Working,
+        logo: Compuesta,
         path: "Compuestas/ColMajor",
         header: "Header_empty",
         class: "Button Button_left1"
@@ -28,7 +28,7 @@ const ItemCompuesta = [
     {
         title: "Construcción de",
         name: "Estructuras Compuestas",
-        logo: Working,
+        logo: Compuesta,
         path: "Compuestas/Construccion",
         header: "",
         class: "Button Top_button1"

@@ -65,6 +65,9 @@ function  App(){
             <Route exact path="/TytusDS/frontend/build/NoLineales/HashCerrada" component={HashC} />
             <Route exact path="/TytusDS/frontend/build/NoLineales/HashAbierta" component={HashA} />
             <Route exact path="/TytusDS/frontend/build/NoLineales/AnchuraDeGrafos" component={grafoB} />
+            <Route exact path="/TytusDS/frontend/build/NoLineales/ProfundidadDeGrafos" component={grafoB} />
+            <Route exact path="/TytusDS/frontend/build/NoLineales/CostoUniforme" component={grafoB} />
+            <Route exact path="/TytusDS/frontend/build/NoLineales/RecubrimientoMinimo" component={grafoB} />
             {/*Codificacion*/}
             <Route exact path="/TytusDS/frontend/build/Codificacion/Hamming" component={Hamming} />
             <Route exact path="/TytusDS/frontend/build/Codificacion/Huffman" component={Huffman} />

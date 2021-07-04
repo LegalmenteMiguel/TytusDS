@@ -19,8 +19,8 @@ class HashCerrado{
         var temp = []
         while(this.vector[aux] !== "< >"){
             aux = this._prueba(i, j)
-            temp.push(aux)
             j++
+            temp.push(aux)
             if(j-5>this.tamaño){
                 bool = !bool
                 console.log("SALE")

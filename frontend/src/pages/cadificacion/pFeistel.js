@@ -94,11 +94,11 @@ class pFeistel extends React.Component {
                 <div>
                     <div>
                         <label>Frase</label>
-                        <textarea cols="124" rows="3" placeholder="Frase" id="Entrada" onChange={this.handleEntrada}></textarea>
+                        <textarea cols="189" rows="3" placeholder="Frase" id="Entrada" onChange={this.handleEntrada}></textarea>
                         <label>Llave</label>
-                        <textarea cols="124" rows="3" placeholder="Llave" id="Llave" onChange={this.handleLlave}></textarea>
+                        <textarea cols="189" rows="3" placeholder="Llave" id="Llave" onChange={this.handleLlave}></textarea>
                         <label>Resultado</label>
-                        <textarea disabled cols="124" rows="6" placeholder="Resultado" id="Resultado" ></textarea>
+                        <textarea disabled cols="189" rows="6" placeholder="Resultado" id="Resultado" ></textarea>
                     </div>
                 </div>
                 <nav className="Sub_bar">
