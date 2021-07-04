@@ -23,6 +23,7 @@ import ArbolB from '../pages/arborea/pArbolB'
 //No Lineales
 import HashC from '../pages/noLineal/pHashC'
 import HashA from '../pages/noLineal/pHashA'
+import grafoB from '../pages/noLineal/pGrafosB'
 //Codificacion
 import Hamming from '../pages/cadificacion/pHamming'
 import Huffman from '../pages/cadificacion/pHuffman'
@@ -31,6 +32,7 @@ import Feistel from '../pages/cadificacion/pFeistel'
 //import Feistel from '../pages/cadificacion/pFeistel'
 //Compuesta
 import RCMajor from '../pages/compuesta/pRCMayor'
+import mDispersa from '../pages/compuesta/pMatrizD'
 
 function  App(){
     return (
@@ -62,6 +64,7 @@ function  App(){
             {/*No Lineales*/}
             <Route exact path="/TytusDS/frontend/build/NoLineales/HashCerrada" component={HashC} />
             <Route exact path="/TytusDS/frontend/build/NoLineales/HashAbierta" component={HashA} />
+            <Route exact path="/TytusDS/frontend/build/NoLineales/AnchuraDeGrafos" component={grafoB} />
             {/*Codificacion*/}
             <Route exact path="/TytusDS/frontend/build/Codificacion/Hamming" component={Hamming} />
             <Route exact path="/TytusDS/frontend/build/Codificacion/Huffman" component={Huffman} />
@@ -70,6 +73,7 @@ function  App(){
             {/*Compuestas*/}
             <Route exact path="/TytusDS/frontend/build/Compuestas/RowMajor" component={RCMajor} />
             <Route exact path="/TytusDS/frontend/build/Compuestas/ColMajor" component={RCMajor} />
+            <Route exact path="/TytusDS/frontend/build/Compuestas/MatrizDispersa" component={mDispersa} />
             <Route component={NotFound} />
           </Switch>
         </Layout>

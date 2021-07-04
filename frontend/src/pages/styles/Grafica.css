@@ -17,3 +17,16 @@
   textarea {
     resize: none;
   }
+
+  .Result{
+    display: flex;
+    width: 100%;
+  }
+
+  .der{
+    width: 85%;
+  }
+
+  .izq{
+    width: 15;
+  }
