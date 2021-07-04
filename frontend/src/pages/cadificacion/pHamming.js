@@ -79,8 +79,8 @@ class pHamming extends React.Component {
                 </nav>
                 <div>
                     <div>
-                    <textarea cols="124" rows="3" placeholder="Frase" id="Entrada" onChange={this.handleEntrada}></textarea>
-                    <textarea disabled cols="124" rows="3" placeholder="Resultado" id="Resultado" ></textarea>
+                    <textarea cols="189" rows="3" placeholder="Frase" id="Entrada" onChange={this.handleEntrada}></textarea>
+                    <textarea disabled cols="189" rows="3" placeholder="Resultado" id="Resultado" ></textarea>
                     </div>
                 </div>
                 <nav className="Sub_bar">

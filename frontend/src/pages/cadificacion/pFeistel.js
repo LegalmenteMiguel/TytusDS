@@ -50,7 +50,7 @@ class pFeistel extends React.Component {
 
     handleClick = e => {
         const id = e.target.id
-        if(this.state.entrada === "" && id === "Calcular") alert("Ingrese una frase")
+        if(this.state.entrada === "" && this.state.key === "" && this.state.iteraciones < 1 && id === "Calcular") alert("Ingrese una frase")
 
         else{
             if(id === "Calcular"){ 
