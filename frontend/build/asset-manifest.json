@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/TytusDS/frontend/build/static/css/main.3fd8f8d7.chunk.css",
-    "main.js": "/TytusDS/frontend/build/static/js/main.81a86b02.chunk.js",
-    "main.js.map": "/TytusDS/frontend/build/static/js/main.81a86b02.chunk.js.map",
+    "main.js": "/TytusDS/frontend/build/static/js/main.2778dc5f.chunk.js",
+    "main.js.map": "/TytusDS/frontend/build/static/js/main.2778dc5f.chunk.js.map",
     "runtime-main.js": "/TytusDS/frontend/build/static/js/runtime-main.fcb03de4.js",
     "runtime-main.js.map": "/TytusDS/frontend/build/static/js/runtime-main.fcb03de4.js.map",
     "static/css/2.8a10c6cc.chunk.css": "/TytusDS/frontend/build/static/css/2.8a10c6cc.chunk.css",
@@ -36,6 +36,6 @@
     "static/css/2.8a10c6cc.chunk.css",
     "static/js/2.6c1d7ae1.chunk.js",
     "static/css/main.3fd8f8d7.chunk.css",
-    "static/js/main.81a86b02.chunk.js"
+    "static/js/main.2778dc5f.chunk.js"
   ]
 }
