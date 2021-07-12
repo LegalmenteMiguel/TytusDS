@@ -6,14 +6,14 @@ import './styles/NavBar.css';
 class Navbar extends React.Component {
   render() {
     return (
-      <div className="Navbar">
+      <nav className="Navbar">
         <div className="container-fluid">
-        <Link className="Navbar_text" to="/TytusDS/frontend/build/">
+          <Link className="Navbar_text" to="/TytusDS/">
             <span className="font-weight-light">TytusDS</span>
           </Link>
         </div>
-      </div>
-    );
+      </nav>
+    )
   }
 }
 

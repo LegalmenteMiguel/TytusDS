@@ -72,10 +72,11 @@ function XOR(a, b){
     for(var i in a){
         var aux = []
         var temp = ""
-        for(var j in a[i]){
+        var j 
+        for(j in a[i]){
             aux.push(a[i][j])
         }
-        for(var j in b[i]){
+        for(j in b[i]){
             temp += aux[j] ^ b[i][j]
         }
         a[i] = temp

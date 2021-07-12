@@ -6,7 +6,7 @@ import CircularD from '../../Estructuras/lineal/CircularDoble'
 
 import Funciones from '../../Estructuras/Funciones.js'
 
-import doble from '../../animaciones/lineal/gCircular'
+import circulares from '../../animaciones/lineal/gCircular'
 
 import '../styles/Grafica.css'
 
@@ -14,89 +14,83 @@ import '../styles/Grafica.css'
 class pCirculares extends React.Component {
     constructor(props) {
         super(props)
+        this.reader = new FileReader()
+        this.path = this.props.location.pathname
+
         this.state = {
-          repeticion: true,
-          ingreso: "Final",
-          velocidad: 5,
-          entrada: "",
-          nuevo: "",
-          path: this.props.location.pathname,
+            entrada: '',
+            nuevo: '',
+            repeticion: true,
+            ingreso: "Final",
+            velocidad: '5'
         }
-        this.lista = this.setLista(this.state.path, this.state.repeticion, this.state.ingreso)
+
+        this.lista = this.setLista()
       }
     
-    handleEntrada = e => {
-        this.setState({ entrada: e.target.value })
+    handleChange = e => {
+        this.setState({ [e.target.id]: e.target.value })
     }
 
-    handleNuevo = e => {
-        this.setState({ nuevo: e.target.value })
-    }
-
-    handleRepeticion = () => {
+    handleCheck = e => {
         this.setState({ repeticion: !this.state.repeticion })
-    }
-
-    handleIngreso = e => {
-        this.setState({ ingreso: e.target.value })
-    }
-
-    handleVelocidad = e => {
-        this.setState({ velocidad: e.target.value })
     }
 
     handleFiles = e => {
         let files = e.target.files
-        let reader = new FileReader()
-        reader.onload = e =>{
+        this.reader.onload = e =>{
             const json = JSON.parse(e.target.result)
-            this.setState({ velocidad: json.animaicon })
-            this.lista = this.setLista(this.state.path, json.repeticion, json.posicion)
+
+            this.setState({ 
+                velocidad: json.animacion,
+                repeticion: json.repeticion,
+                ingreso: json.posicion 
+            })
+            
+            this.lista = this.setLista()
             this.lista.cargar(json.valores)
+            setTimeout(() => {
+                this.setState({})
+            }, parseInt(this.state.velocidad)*1000)
         }
-        reader.readAsText(files[0])
+        this.reader.readAsText(files[0])
     }
 
     handleClick = e => {
         const id = e.target.id
-        if(this.state.entrada === "" && id !== "Nuevo" && id !== "Guardar") alert("Ingrese un valor")
+        if(id === "Agregar") this.lista.agregar(this.state.entrada)
+
+        else if(id === "Eliminar") this.lista.eliminar(this.state.entrada)
         
-        else{
-            if(id === "Agregar") this.lista.agregar(this.state.entrada)
-            
-            else if(id === "Eliminar") this.lista.eliminar(this.state.entrada)
-            
-            else if(id === "Buscar"){
-                var aux = this.lista.buscar(this.state.entrada)
-                if(aux) alert("Se encontro el valor")
-                else alert("No se encontro el valor")
-            }
-            else if(id === "Actualizar"){
-                if(this.state.nuevo === "") alert("Ingrese el Nuevo valor")
-                else this.lista.actualizar(this.state.entrada, this.state.nuevo)
-            } 
-                
-            else if(id === "Nuevo") this.lista = this.setLista(this.state.path,this.state.repeticion, this.state.ingreso)
-            
-            else if(id === "Guardar"){
-                var output = this.lista.guardar()
-                Funciones(output.nombre, output.text)
-            }
-            
-            document.getElementById("input").reset()
-            document.getElementById("nuevo").reset()
-            this.setState({
-                entrada: "",
-                nuevo: ""
-            })
+        else if(id === "Buscar"){
+            var aux = this.lista.buscar(this.state.entrada)
+            if(aux) alert("Se encontro el valor")
+            else alert("No se encontro el valor")
         }
+
+        else if(id === "Actualizar") this.lista.actualizar(this.state.entrada, this.state.nuevo)
+            
+        else if(id === "Nuevo") this.lista = this.setLista()
+        
+        else if(id === "Guardar"){
+            var output = this.lista.guardar()
+            Funciones(output.nombre, output.text)
+        }
+            
+        document.getElementById("input").reset()
+        document.getElementById("new").reset()
+        setTimeout(() => {
+            this.setState({})
+        }, parseInt(this.state.velocidad)*500);
+        
     }
 
-    setLista = (path, repeticion, ingreso) => {
-        if(path.includes("CircularSimple")) return new CircularS(ingreso, repeticion)
+    setLista = () => {
+        if(this.path.includes("CircularSimple")) return new CircularS(this.state.ingreso, this.state.repeticion)
         
-        else if(path.includes("CircularDoble")) return new CircularD(ingreso, repeticion)
+        else if(this.path.includes("CircularDoble")) return new CircularD(this.state.ingreso, this.state.repeticion)
     }
+
 
     render(){
         return (
@@ -106,7 +100,7 @@ class pCirculares extends React.Component {
                         <td>
                             <form id="input">
                                 <input type="text" style={{width: "100px"}} placeholder="Valor"
-                                onChange={this.handleEntrada}/>
+                                id="entrada" onChange={this.handleChange}/>
                             </form>
                         </td>
                         <td>
@@ -125,9 +119,9 @@ class pCirculares extends React.Component {
                             </button>
                         </td>
                         <td>
-                            <form id="nuevo">
+                            <form id="new">
                                 <input type="txt" style={{width: "100px"}} placeholder="Nuevo Valor"
-                                onChange={this.handleNuevo}/>
+                                id="nuevo" onChange={this.handleChange}/>
                             </form>
                         </td>
                         <td>
@@ -147,16 +141,18 @@ class pCirculares extends React.Component {
                     </table>
                 </nav>
                 <div>
-                    {doble(this.lista.dotG(0))}
+                    {circulares(this.lista.dotG(0))}
                 </div>
                 <nav className="Sub_bar">
                     <table>
                         <td>
-                            <input type="range"  min="0" max="10" step="1"  onChange={this.handleVelocidad}
-                            defaultValue={this.state.velocidad} width="100"/>
+                            <input type="range"  min="0" max="10" step="1" 
+                            defaultValue={this.state.velocidad} width="100"
+                            id="velocidad" onChange={this.handleChange}/>
                         </td>
                         <td>
-                            <select multiple="" onChange={this.handleIngreso} >
+                            <select id="ingreso" onChange={this.handleChange}
+                            defaultValue={this.state.ingreso}>
                                 <option>Final</option>
                                 <option>Inicio</option>
                                 <option>Orden</option>
@@ -164,7 +160,7 @@ class pCirculares extends React.Component {
                         </td>
                         <td>
                             <label>
-                                <input type="checkbox" onChange={this.handleRepeticion}
+                                <input type="checkbox" id="repeticion" onChange={this.handleCheck}
                                     defaultChecked={this.state.repeticion}/>
                                 Repeticiones
                             </label>
@@ -179,7 +175,6 @@ class pCirculares extends React.Component {
             </div>
         )
     }
-
 }
 
 export default pCirculares

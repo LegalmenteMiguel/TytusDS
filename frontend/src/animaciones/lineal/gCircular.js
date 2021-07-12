@@ -5,13 +5,6 @@ const options = {
     autoResize: true,
     edges:{
         color: "010101",
-        arrows:{
-            to:{
-                enabled:true
-            }           
-        },
-        
-        shadow: true
     },
     nodes:{
         widthConstraint:100,
@@ -23,9 +16,7 @@ const options = {
     interaction: {
         dragNodes :true
     },
-    physics: {
-        enabled: true
-    }
+    physics: false
 };
 
 function circular(info){

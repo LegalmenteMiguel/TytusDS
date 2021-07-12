@@ -41,44 +41,44 @@ function  App(){
         <Layout>
           <Switch>
             {/*Menus*/}
-            <Route exact path="/TytusDS/frontend/build/" component={Home} />
-            <Route exact path="/TytusDS/frontend/build/Lineales" component={Lineal} />
-            <Route exact path="/TytusDS/frontend/build/Arboreas" component={Arborea} />
-            <Route exact path="/TytusDS/frontend/build/NoLineales" component={NoLineal} />
-            <Route exact path="/TytusDS/frontend/build/Codificacion" component={Codificacion} />
-            <Route exact path="/TytusDS/frontend/build/Compuestas" component={Compuesta} />
+            <Route exact path="/TytusDS/" component={Home} />
+            <Route exact path="/TytusDS/Lineales" component={Lineal} />
+            <Route exact path="/TytusDS/Arboreas" component={Arborea} />
+            <Route exact path="/TytusDS/NoLineales" component={NoLineal} />
+            <Route exact path="/TytusDS/Codificacion" component={Codificacion} />
+            <Route exact path="/TytusDS/Compuestas" component={Compuesta} />
             {/*Lineales*/}
-            <Route exact path="/TytusDS/frontend/build/Lineales/EnlazadaSimple" component={Enlazadas} />
-            <Route exact path="/TytusDS/frontend/build/Lineales/EnlazadaDoble" component={Enlazadas} />
-            <Route exact path="/TytusDS/frontend/build/Lineales/CircularSimple" component={Circulares} />
-            <Route exact path="/TytusDS/frontend/build/Lineales/CircularDoble" component={Circulares} />
-            <Route exact path="/TytusDS/frontend/build/Lineales/Pila" component={PilaCola} />
-            <Route exact path="/TytusDS/frontend/build/Lineales/Cola" component={PilaCola} />
-            <Route exact path="/TytusDS/frontend/build/Lineales/ColaPrioridad" component={ColaPrioridad} />
+            <Route exact path="/TytusDS/Lineales/EnlazadaSimple" component={Enlazadas} />
+            <Route exact path="/TytusDS/Lineales/EnlazadaDoble" component={Enlazadas} />
+            <Route exact path="/TytusDS/Lineales/CircularSimple" component={Circulares} />
+            <Route exact path="/TytusDS/Lineales/CircularDoble" component={Circulares} />
+            <Route exact path="/TytusDS/Lineales/Pila" component={PilaCola} />
+            <Route exact path="/TytusDS/Lineales/Cola" component={PilaCola} />
+            <Route exact path="/TytusDS/Lineales/ColaPrioridad" component={ColaPrioridad} />
             {/*Ordenamientos*/}
-            <Route exact path="/TytusDS/frontend/build/Ordenamientos" component={Ordenamiento} />
+            <Route exact path="/TytusDS/Ordenamientos" component={Ordenamiento} />
             {/*Arboreas*/}
-            <Route exact path="/TytusDS/frontend/build/Arboreas/ArbolBinario" component={Arboles} />
-            <Route exact path="/TytusDS/frontend/build/Arboreas/AVL" component={Arboles} />
-            <Route exact path="/TytusDS/frontend/build/Arboreas/ArbolB" component={ArbolB} />
-            <Route exact path="/TytusDS/frontend/build/Arboreas/ArbolB+" component={ArbolB} />
+            <Route exact path="/TytusDS/Arboreas/ArbolBinario" component={Arboles} />
+            <Route exact path="/TytusDS/Arboreas/AVL" component={Arboles} />
+            <Route exact path="/TytusDS/Arboreas/ArbolB" component={ArbolB} />
+            <Route exact path="/TytusDS/Arboreas/ArbolB+" component={ArbolB} />
             {/*No Lineales*/}
-            <Route exact path="/TytusDS/frontend/build/NoLineales/HashCerrada" component={HashC} />
-            <Route exact path="/TytusDS/frontend/build/NoLineales/HashAbierta" component={HashA} />
-            <Route exact path="/TytusDS/frontend/build/NoLineales/AnchuraDeGrafos" component={grafoB} />
-            <Route exact path="/TytusDS/frontend/build/NoLineales/ProfundidadDeGrafos" component={grafoB} />
-            <Route exact path="/TytusDS/frontend/build/NoLineales/CostoUniforme" component={grafoB} />
-            <Route exact path="/TytusDS/frontend/build/NoLineales/RecubrimientoMinimo" component={grafoB} />
+            <Route exact path="/TytusDS/NoLineales/HashCerrada" component={HashC} />
+            <Route exact path="/TytusDS/NoLineales/HashAbierta" component={HashA} />
+            <Route exact path="/TytusDS/NoLineales/AnchuraDeGrafos" component={grafoB} />
+            <Route exact path="/TytusDS/NoLineales/ProfundidadDeGrafos" component={grafoB} />
+            <Route exact path="/TytusDS/NoLineales/CostoUniforme" component={grafoB} />
+            <Route exact path="/TytusDS/NoLineales/RecubrimientoMinimo" component={grafoB} />
             {/*Codificacion*/}
-            <Route exact path="/TytusDS/frontend/build/Codificacion/Hamming" component={Hamming} />
-            <Route exact path="/TytusDS/frontend/build/Codificacion/Huffman" component={Huffman} />
-            <Route exact path="/TytusDS/frontend/build/Codificacion/LZW" component={LZW} />
-            <Route exact path="/TytusDS/frontend/build/Codificacion/Feistel" component={Feistel} />
+            <Route exact path="/TytusDS/Codificacion/Hamming" component={Hamming} />
+            <Route exact path="/TytusDS/Codificacion/Huffman" component={Huffman} />
+            <Route exact path="/TytusDS/Codificacion/LZW" component={LZW} />
+            <Route exact path="/TytusDS/Codificacion/Feistel" component={Feistel} />
             {/*Compuestas*/}
-            <Route exact path="/TytusDS/frontend/build/Compuestas/RowMajor" component={RCMajor} />
-            <Route exact path="/TytusDS/frontend/build/Compuestas/ColMajor" component={RCMajor} />
-            <Route exact path="/TytusDS/frontend/build/Compuestas/MatrizDispersa" component={mDispersa} />
-            <Route exact path="/TytusDS/frontend/build/Compuestas/Construccion" component={Construccion} />
+            <Route exact path="/TytusDS/Compuestas/RowMajor" component={RCMajor} />
+            <Route exact path="/TytusDS/Compuestas/ColMajor" component={RCMajor} />
+            <Route exact path="/TytusDS/Compuestas/MatrizDispersa" component={mDispersa} />
+            <Route exact path="/TytusDS/Compuestas/Construccion" component={Construccion} />
             <Route component={NotFound} />
           </Switch>
         </Layout>

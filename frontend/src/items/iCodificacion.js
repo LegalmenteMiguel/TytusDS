@@ -31,15 +31,7 @@ const ItemCodificacion = [
         logo: Working,
         path: "Codificacion/Feistel",
         header: "",
-        class: "Button Top_right1"
-    },
-    {
-        title: "Cifrado",
-        name: "RSA",
-        logo: Working,
-        path: "Codificacion/RSA",
-        header: "",
-        class: "Button Top_left1"
+        class: "Button Top_button1"
     }
 ]
 

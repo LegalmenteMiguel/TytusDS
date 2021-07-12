@@ -170,6 +170,12 @@ class CircularDoble {
             }
             while(nodo !== this.raiz)
         }
+        nodos = nodos.map((node, index, arr) => {
+            const angle = 2 * Math.PI * (index / arr.length + 0.75)
+            node.x = 80 * Math.cos(angle) * (arr.length/3)
+            node.y = 40 * Math.sin(angle) * (arr.length/3)
+            return node
+          })
         return nodos
     }
 

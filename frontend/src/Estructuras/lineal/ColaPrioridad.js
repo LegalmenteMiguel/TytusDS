@@ -14,7 +14,6 @@ class ColaPrioridad{
     }
     // Agregar item
     agregar(valor, prioridad){
-        if(parseInt(prioridad) < 5 || parseInt(prioridad) > 1){
             const nodo = new Nodo(valor, prioridad)
             if(this.primero === null){
                 this.primero = this.ultimo = nodo
@@ -29,9 +28,6 @@ class ColaPrioridad{
                     alert("No se puede ingresar el valor")
                 }
             }
-        }
-
-        else alert("La Prioridad esta fuera de rango")
     }
     //Eliminar item
     eliminar(){
@@ -78,7 +74,7 @@ class ColaPrioridad{
         return false
     }
     //Actualiza valor
-    actualizar(valor,nuevo){
+    actualizar(valor, nuevo){
         if(this.repeticion || !(this.buscar(nuevo))){
 		    var nodo = this.primero
 		    while(nodo != null){

@@ -76,7 +76,6 @@ class CircularSimple{
         var aux = this.raiz
         var temp = null
         do{
-            console.log(aux)
             if(ascii(nodo.valor) <= ascii(aux.valor)){
                 if(aux === this.raiz){
                     temp = this.getUltimo()
@@ -184,9 +183,10 @@ class CircularSimple{
     }
     // Circular
     dotG(indice){
-        var nodos = [ {id:0+"l"+indice, label: "RAIZ"} ]
+        var nodos = [{id:0+"l"+indice, label: "RAIZ"}]
         var relaciones = []
         nodos = this.llenarN(nodos, 1, indice)
+        //nodos.push()
         relaciones = this.llenarR(relaciones, 0, indice)
         return { nodes: nodos, edges: relaciones} 
     }
@@ -201,6 +201,12 @@ class CircularSimple{
             }
             while(nodo !== this.raiz)
         }
+        nodos = nodos.map((node, index, arr) => {
+            const angle = 2 * Math.PI * (index / arr.length + 0.75)
+            node.x = 80 * Math.cos(angle) * (arr.length/3)
+            node.y = 40 * Math.sin(angle) * (arr.length/3)
+            return node
+          })
         return nodos
     }
 
